@@ -89,6 +89,9 @@ button{ font:inherit; color:inherit; cursor:pointer; }
   font-family:var(--serif); font-style:italic; font-size:1.1rem;
   padding:8px 24px 8px 10px; text-align:center; text-align-last:center; cursor:pointer;
 }
+.cellf label, .cellf select{ line-height:1.5; box-sizing:border-box; }
+.cellf select{ min-height:calc(1.1rem*1.5 + 17px); }
+.cellf input{ flex:1; }
 .cellf:focus-within{ outline:3px solid var(--curve); outline-offset:1px; position:relative; z-index:1; }
 .cellf input:focus-visible, .cellf select:focus-visible{ outline:none; }
 .linkbtn{ background:none; border:0; padding:0; color:var(--curve); text-decoration:underline; text-underline-offset:3px; margin-top:14px; }
@@ -126,6 +129,23 @@ table{ width:100%; border-collapse:collapse; margin-top:10px; font-size:.92rem; 
 th,td{ text-align:right; padding:6px 10px; border-bottom:1px solid var(--line); }
 th{ font-weight:500; color:var(--muted); }
 @media (prefers-reduced-motion: reduce){ *{ transition:none !important; } }
+
+.subhead{ font-weight:600; margin-top:18px; font-size:.95rem; }
+.tscroll{ overflow-x:auto; margin-top:12px; }
+table.dt{ width:auto; border-collapse:collapse; margin:0; }
+.dt th, .dt td{ border:1px solid var(--line); padding:0; text-align:center; }
+.dt th{ background:var(--cell); font-family:var(--serif); font-style:italic; font-size:1.05rem; font-weight:500; color:var(--ink); padding:8px 12px; min-width:96px; }
+.dt th.in{ padding:0; }
+.dt td input, .dt th input{ width:100%; min-width:88px; border:0; background:transparent; color:var(--ink); font:inherit; text-align:center; padding:10px 8px; font-variant-numeric:tabular-nums; }
+.dt th input{ font-family:var(--serif); font-style:italic; font-size:1.05rem; }
+.dt td:focus-within, .dt th:focus-within{ outline:3px solid var(--curve); outline-offset:-3px; }
+.dt input:focus-visible{ outline:none; }
+table.rt{ width:auto; min-width:min(100%,420px); margin-top:0; }
+.rt th, .rt td{ text-align:center; padding:8px 14px; border:1px solid var(--line); }
+.rt th{ background:var(--cell); color:var(--ink); font-family:var(--serif); font-style:italic; font-weight:500; }
+.rt tr.tot td, .rt tr.tot th{ font-weight:600; border-top:2px solid var(--muted); }
+.dt td.dv{ padding:10px 8px; background:var(--paper); min-width:88px; font-variant-numeric:tabular-nums; }
+.dt th.corner{ min-width:120px; }
 </style>
 </head>
 <body>
@@ -139,6 +159,9 @@ th{ font-weight:500; color:var(--muted); }
       <button class="menu-btn" data-go="mean"><span class="name">Inferencia para el promedio poblacional</span><span class="soon"></span></button>
       <button class="menu-btn" data-go="var"><span class="name">Inferencia para el desvío o varianza poblacional</span><span class="soon"></span></button>
       <button class="menu-btn" data-go="prop"><span class="name">Inferencia para la proporción poblacional</span><span class="soon"></span></button>
+      <button class="menu-btn" data-go="np"><span class="name">Pruebas no paramétricas</span><span class="soon"></span></button>
+      <button class="menu-btn" data-go="comp"><span class="name">Comparación de poblaciones</span><span class="soon"></span></button>
+      <button class="menu-btn" data-go="reg"><span class="name">Regresión lineal simple</span><span class="soon">Próximamente</span></button>
     </div>
   </section>
 
@@ -166,7 +189,7 @@ th{ font-weight:500; color:var(--muted); }
 
     <div class="datapanel">
       <div class="datarow">
-        <div class="grp"><div class="cellf"><label for="mi_a">α intervalo</label><input id="mi_a" inputmode="decimal" autocomplete="off"></div></div>
+        <div class="grp"><div class="cellf"><label for="mi_a">α</label><input id="mi_a" inputmode="decimal" autocomplete="off"></div></div>
         <div class="grp">
           <div class="cellf"><label for="mi_n">n</label><input id="mi_n" inputmode="numeric" autocomplete="off"></div>
           <div class="cellf"><label for="mi_x">x̄</label><input id="mi_x" inputmode="decimal" autocomplete="off"></div>
@@ -222,7 +245,7 @@ th{ font-weight:500; color:var(--muted); }
 
     <div class="datapanel">
       <div class="datarow">
-        <div class="grp"><div class="cellf"><label for="mt_a">α test</label><input id="mt_a" inputmode="decimal" autocomplete="off"></div></div>
+        <div class="grp"><div class="cellf"><label for="mt_a">α</label><input id="mt_a" inputmode="decimal" autocomplete="off"></div></div>
         <div class="grp">
           <div class="cellf"><label for="mt_n">n</label><input id="mt_n" inputmode="numeric" autocomplete="off"></div>
           <div class="cellf"><label for="mt_x">x̄</label><input id="mt_x" inputmode="decimal" autocomplete="off"></div>
@@ -292,7 +315,7 @@ th{ font-weight:500; color:var(--muted); }
 
     <div class="datapanel">
       <div class="datarow">
-        <div class="grp"><div class="cellf"><label for="pi_a">α intervalo</label><input id="pi_a" inputmode="decimal" autocomplete="off"></div></div>
+        <div class="grp"><div class="cellf"><label for="pi_a">α</label><input id="pi_a" inputmode="decimal" autocomplete="off"></div></div>
         <div class="grp">
           <div class="cellf"><label for="pi_n">n</label><input id="pi_n" inputmode="numeric" autocomplete="off"></div>
           <div class="cellf sel">
@@ -345,7 +368,7 @@ th{ font-weight:500; color:var(--muted); }
 
     <div class="datapanel">
       <div class="datarow">
-        <div class="grp"><div class="cellf"><label for="pt_a">α test</label><input id="pt_a" inputmode="decimal" autocomplete="off"></div></div>
+        <div class="grp"><div class="cellf"><label for="pt_a">α</label><input id="pt_a" inputmode="decimal" autocomplete="off"></div></div>
         <div class="grp">
           <div class="cellf"><label for="pt_n">n</label><input id="pt_n" inputmode="numeric" autocomplete="off"></div>
           <div class="cellf sel">
@@ -392,6 +415,78 @@ th{ font-weight:500; color:var(--muted); }
         </div>
         <div id="pt-n"></div>
       </div>
+    </div>
+  </section>
+
+  <!-- PRUEBAS NO PARAMÉTRICAS: submenú -->
+  <section id="view-np" hidden>
+    <button class="back" data-go="home">← Volver al inicio</button>
+    <h2>Pruebas no paramétricas</h2>
+    <div class="menu">
+      <button class="menu-btn" data-go="gof"><span class="name">Bondad de ajuste</span><span class="soon"></span></button>
+      <button class="menu-btn" data-go="ind"><span class="name">Pruebas de independencia</span><span class="soon"></span></button>
+    </div>
+  </section>
+
+  <!-- BONDAD DE AJUSTE -->
+  <section id="view-gof" hidden>
+    <button class="back" data-go="np">← Volver</button>
+    <h2>Bondad de ajuste</h2>
+
+    <div class="datapanel">
+      <div class="datarow">
+        <div class="grp">
+          <div class="cellf"><label for="g_k">Categorías</label><input id="g_k" inputmode="numeric" autocomplete="off"></div>
+          <div class="cellf"><label for="g_a">α</label><input id="g_a" inputmode="decimal" autocomplete="off"></div>
+        </div>
+      </div>
+      <div id="g_table"></div>
+      <button type="button" class="linkbtn" id="g_ejemplo">Cargar un ejemplo</button>
+    </div>
+
+    <div class="results" aria-live="polite">
+      <div class="block" id="g_block" hidden>
+        <h3>Test de bondad de ajuste</h3>
+        <div id="g_out"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRUEBA DE INDEPENDENCIA -->
+  <section id="view-ind" hidden>
+    <button class="back" data-go="np">← Volver</button>
+    <h2>Pruebas de independencia</h2>
+
+    <div class="datapanel">
+      <div class="datarow">
+        <div class="grp">
+          <div class="cellf"><label for="i_x">x (filas)</label><input id="i_x" inputmode="numeric" autocomplete="off"></div>
+          <div class="cellf"><label for="i_y">y (columnas)</label><input id="i_y" inputmode="numeric" autocomplete="off"></div>
+        </div>
+        <div class="grp"><div class="cellf"><label for="i_a">α</label><input id="i_a" inputmode="decimal" autocomplete="off"></div></div>
+      </div>
+      <div id="i_table"></div>
+      <button type="button" class="linkbtn" id="i_ejemplo">Cargar un ejemplo</button>
+    </div>
+
+    <div class="results" aria-live="polite">
+      <div class="block" id="i_block" hidden>
+        <h3>Test de independencia</h3>
+        <div id="i_out"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMPARACIÓN DE POBLACIONES: submenú -->
+  <section id="view-comp" hidden>
+    <button class="back" data-go="home">← Volver al inicio</button>
+    <h2>Comparación de poblaciones</h2>
+    <div class="menu">
+      <button class="menu-btn" data-go="cF"><span class="name">Comparación de desvíos poblacionales</span><span class="soon"></span></button>
+      <button class="menu-btn" data-go="cZ"><span class="name">Comparación de promedios poblacionales conocidos los desvíos poblacionales</span><span class="soon"></span></button>
+      <button class="menu-btn" data-go="cT1"><span class="name">Comparación de promedios poblacionales desconocidos los desvíos poblacionales pero supuestos iguales</span><span class="soon"></span></button>
+      <button class="menu-btn" data-go="cT2"><span class="name">Comparación de promedios poblacionales desconocidos los desvíos poblacionales pero diferentes</span><span class="soon"></span></button>
+      <button class="menu-btn" data-go="cP"><span class="name">Comparación de promedios poblacionales. Muestras apareadas.</span><span class="soon"></span></button>
     </div>
   </section>
 
@@ -573,10 +668,11 @@ const errP = msg => `<p class="err">${msg}</p>`;
 /* =====================================================================
    Navegación
    ===================================================================== */
-const views = { home:'#view-home', soon:'#view-soon', mean:'#view-mean', mint:'#view-mint', mtest:'#view-mtest', prop:'#view-prop', pint:'#view-pint', ptest:'#view-ptest', var:'#view-var' };
-const soonNames = { prop:'Inferencia para la proporción poblacional' };
+const views = { home:'#view-home', soon:'#view-soon', mean:'#view-mean', mint:'#view-mint', mtest:'#view-mtest', prop:'#view-prop', pint:'#view-pint', ptest:'#view-ptest', np:'#view-np', gof:'#view-gof', ind:'#view-ind', comp:'#view-comp', var:'#view-var' };
+const soonNames = { reg:'Regresión lineal simple' };
 function go(dest){
   let target = dest;
+  if (soonNames[dest]){ target='soon'; $('#soon-title').textContent = soonNames[dest]; }
   Object.entries(views).forEach(([k,sel]) => { $(sel).hidden = (k !== target); });
   window.scrollTo(0,0);
 }
@@ -655,7 +751,7 @@ function renderMI(a,n,xb,d,st){
   const el=$('#mi-out');
   if (typeof st==='string' && st!=='wait'){ el.innerHTML=errP(st); return; }
   if (st==='wait' || a===null){ el.innerHTML=''; return; }
-  if (Number.isNaN(a) || !validAlpha(a)){ el.innerHTML=errP('α intervalo debe estar entre 0 y 1 (por ejemplo 0,05).'); return; }
+  if (Number.isNaN(a) || !validAlpha(a)){ el.innerHTML=errP('α debe estar entre 0 y 1 (por ejemplo 0,05).'); return; }
 
   const useT=d.useT, df=n-1, SE=d.s/Math.sqrt(n);
   const quant = p => useT ? tInv(p,df) : zInv(p);
@@ -689,7 +785,7 @@ function renderMIrec(a,n,d){
   let E1=null;
   if (kind==='pct'){
     if (a===null || !nOK){ el.innerHTML=''; return; }
-    if (Number.isNaN(a) || !validAlpha(a)){ el.innerHTML=errP('α intervalo debe estar entre 0 y 1 (por ejemplo 0,05).'); return; }
+    if (Number.isNaN(a) || !validAlpha(a)){ el.innerHTML=errP('α debe estar entre 0 y 1 (por ejemplo 0,05).'); return; }
     const q = useT ? tInv(pT,n-1) : zInv(pT);
     E1 = q*s/Math.sqrt(n)*(1-ev/100);
   } else {
@@ -698,7 +794,7 @@ function renderMIrec(a,n,d){
 
   if (MI.calc==='n'){
     if (a===null){ el.innerHTML=''; return; }
-    if (Number.isNaN(a) || !validAlpha(a)){ el.innerHTML=errP('α intervalo debe estar entre 0 y 1 (por ejemplo 0,05).'); return; }
+    if (Number.isNaN(a) || !validAlpha(a)){ el.innerHTML=errP('α debe estar entre 0 y 1 (por ejemplo 0,05).'); return; }
     const res = solveN(df => useT && df!==null ? tInv(pT,df) : zInv(pT), s/E1, useT);
     if (res.err){ el.innerHTML=errP(res.err); return; }
     const boxes = box('n′', String(res.n)) + (kind==='pct' ? box('E', fmt(E1)) : '');
@@ -742,7 +838,7 @@ function renderMT(){
   if (m0===null && st===null) st='wait';
   if (typeof st==='string' && st!=='wait'){ el.innerHTML=errP(st); return; }
   if (st==='wait' || a===null){ el.innerHTML=''; return; }
-  if (Number.isNaN(a) || !validAlpha(a)){ el.innerHTML=errP('α test debe estar entre 0 y 1 (por ejemplo 0,05).'); return; }
+  if (Number.isNaN(a) || !validAlpha(a)){ el.innerHTML=errP('α debe estar entre 0 y 1 (por ejemplo 0,05).'); return; }
 
   const useT=d.useT, df=n-1, SE=d.s/Math.sqrt(n);
   const quant = p => useT ? tInv(p,df) : zInv(p);
@@ -806,7 +902,7 @@ function renderMTn(){
   if (Number.isNaN(pv) || pv<=0 || pv>=1){ el.innerHTML=errP((pk==='beta'?'β':'1 − β')+' debe estar entre 0 y 1.'); return; }
   if (d!==null && Number.isNaN(d)){ el.innerHTML=errP(`${dl} debe ser un número positivo.`); return; }
   if (a===null || m0===null || m1===null || d===null){ el.innerHTML=''; return; }
-  if (Number.isNaN(a) || !validAlpha(a)){ el.innerHTML=errP('α test debe estar entre 0 y 1 (por ejemplo 0,05).'); return; }
+  if (Number.isNaN(a) || !validAlpha(a)){ el.innerHTML=errP('α debe estar entre 0 y 1 (por ejemplo 0,05).'); return; }
   if (Number.isNaN(m0) || Number.isNaN(m1)){ el.innerHTML=errP('μ₀ y μ₁ deben ser números.'); return; }
   if (m1===m0){ el.innerHTML=errP('μ₁ debe ser distinto de μ₀.'); return; }
   if (MT.cola==='right' && m1<m0){ el.innerHTML=errP('Para la cola derecha, μ₁ debe ser mayor que μ₀.'); return; }
@@ -869,13 +965,16 @@ function chartMean(o){
     s += `<text x="${clampX(c).toFixed(1)}" y="${base+17}" text-anchor="middle" font-size="13" fill="var(--reject)" font-family="var(--sans)">${fmt(c,dg)}</text>`;
   });
   // ticks y etiquetas de μ₀ y μ₁ (o p₀ y p₁)
-  const close = o.mu1!==null && Math.abs(sx(o.mu1)-sx(o.mu0))<90;
+  // Si los centros quedan cerca, cada etiqueta se abre hacia su lado (la de la izquierda hacia la izquierda y la de la derecha hacia la derecha), sin importar cuál es μ₀ y cuál μ₁
+  const close = o.mu1!==null && Math.abs(sx(o.mu1)-sx(o.mu0))<110;
+  const zeroLeft = o.mu1===null || sx(o.mu0)<=sx(o.mu1);
   const tick = (v,label,color,anchor) => {
-    s += `<line x1="${sx(v).toFixed(1)}" y1="${base}" x2="${sx(v).toFixed(1)}" y2="${base+5}" stroke="${color}" stroke-width="1.6"/>`;
-    s += `<text x="${sx(v).toFixed(1)}" y="${base+36}" text-anchor="${anchor}" font-size="13" fill="${color}" font-family="var(--sans)">${label} = ${fmt(v,dg)}</text>`;
+    const dx = anchor==='end' ? -5 : (anchor==='start' ? 5 : 0);
+    s += `<line x1="${sx(v).toFixed(1)}" y1="${base}" x2="${sx(v).toFixed(1)}" y2="${base+(close?24:5)}" stroke="${color}" stroke-width="1.6"/>`;
+    s += `<text x="${(sx(v)+dx).toFixed(1)}" y="${base+36}" text-anchor="${anchor}" font-size="13" fill="${color}" font-family="var(--sans)">${label} = ${fmt(v,dg)}</text>`;
   };
-  tick(o.mu0,lab0,'var(--curve)', close ? 'end' : 'middle');
-  if (o.mu1!==null) tick(o.mu1,lab1,'var(--beta)', close ? 'start' : 'middle');
+  tick(o.mu0,lab0,'var(--curve)', close ? (zeroLeft ? 'end' : 'start') : 'middle');
+  if (o.mu1!==null) tick(o.mu1,lab1,'var(--beta)', close ? (zeroLeft ? 'start' : 'end') : 'middle');
   s += `<line x1="${sx(o.xbar).toFixed(1)}" y1="${m.t-4}" x2="${sx(o.xbar).toFixed(1)}" y2="${base}" stroke="var(--ink)" stroke-width="2.6"/>`;
   s += `<circle cx="${sx(o.xbar).toFixed(1)}" cy="${m.t-4}" r="4" fill="var(--ink)"/>`;
   s += `<text x="${clampX(o.xbar,44).toFixed(1)}" y="${m.t-12}" text-anchor="middle" font-size="14" font-weight="600" fill="var(--ink)" font-family="var(--sans)">${xlab} = ${fmt(o.xbar,dg)}</text>`;
@@ -949,7 +1048,7 @@ function renderPI(a, g){
   const el=$('#pi-out');
   if (g.err){ el.innerHTML=errP(g.err); return; }
   if (g.n===null || g.ph===null || a===null){ el.innerHTML=''; return; }
-  if (Number.isNaN(a) || !validAlpha(a)){ el.innerHTML=errP('α intervalo debe estar entre 0 y 1 (por ejemplo 0,05).'); return; }
+  if (Number.isNaN(a) || !validAlpha(a)){ el.innerHTML=errP('α debe estar entre 0 y 1 (por ejemplo 0,05).'); return; }
 
   const { n, ph } = g, SE = Math.sqrt(ph*(1-ph)/n);
   let main, qbox, q;
@@ -975,7 +1074,7 @@ function renderPIrec(a, g){
   if (g.err){ el.innerHTML=errP(g.err); return; }
   const full = (PI.inter==='full');
   const alphaOK = a!==null && !Number.isNaN(a) && validAlpha(a);
-  if (a!==null && !alphaOK){ el.innerHTML=errP('α intervalo debe estar entre 0 y 1 (por ejemplo 0,05).'); return; }
+  if (a!==null && !alphaOK){ el.innerHTML=errP('α debe estar entre 0 y 1 (por ejemplo 0,05).'); return; }
   const pT = alphaOK ? (full ? 1-a/2 : 1-a) : null;
   const ph = g.ph, n = g.n;
 
@@ -1032,7 +1131,7 @@ function renderPT(){
   if (g.err){ el.innerHTML=errP(g.err); return; }
   if (p0!==null && !inUnit(p0)){ el.innerHTML=errP('p₀ debe estar entre 0 y 1.'); return; }
   if (g.n===null || g.ph===null || a===null || p0===null){ el.innerHTML=''; return; }
-  if (Number.isNaN(a) || !validAlpha(a)){ el.innerHTML=errP('α test debe estar entre 0 y 1 (por ejemplo 0,05).'); return; }
+  if (Number.isNaN(a) || !validAlpha(a)){ el.innerHTML=errP('α debe estar entre 0 y 1 (por ejemplo 0,05).'); return; }
 
   const { n, ph } = g;
   const SE0 = Math.sqrt(p0*(1-p0)/n);
@@ -1093,7 +1192,7 @@ function renderPTn(){
   if (bv===null){ el.innerHTML=''; return; }
   if (Number.isNaN(bv) || bv<=0 || bv>=1){ el.innerHTML=errP((bk==='beta'?'β':'1 − β')+' debe estar entre 0 y 1.'); return; }
   if (a===null || p0===null || p1===null){ el.innerHTML=''; return; }
-  if (Number.isNaN(a) || !validAlpha(a)){ el.innerHTML=errP('α test debe estar entre 0 y 1 (por ejemplo 0,05).'); return; }
+  if (Number.isNaN(a) || !validAlpha(a)){ el.innerHTML=errP('α debe estar entre 0 y 1 (por ejemplo 0,05).'); return; }
   if (!inUnit(p0) || !inUnit(p1)){ el.innerHTML=errP('p₀ y p₁ deben estar entre 0 y 1.'); return; }
   if (p1===p0){ el.innerHTML=errP('p₁ debe ser distinto de p₀.'); return; }
   if (PT.cola==='right' && p1<p0){ el.innerHTML=errP('Para la cola derecha, p₁ debe ser mayor que p₀.'); return; }
@@ -1107,6 +1206,503 @@ function renderPTn(){
   if (!isFinite(nn) || nn>1e9){ el.innerHTML=errP('El n resultante es demasiado grande.'); return; }
   el.innerHTML = `<div class="big-pair">${box('n′', String(nn))}</div>`;
 }
+
+/* =====================================================================
+   Pruebas no paramétricas (chi cuadrado)
+   ===================================================================== */
+const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function parseNum(s, frac){
+  s = String(s==null ? '' : s).trim().replace(',', '.');
+  if (s==='') return null;
+  if (frac && s.includes('/')){
+    const p = s.split('/');
+    if (p.length!==2 || p[0].trim()==='' || p[1].trim()==='') return NaN;
+    const a=Number(p[0]), b=Number(p[1]);
+    if (!Number.isFinite(a) || !Number.isFinite(b) || b===0) return NaN;
+    return a/b;
+  }
+  const v = Number(s);
+  return Number.isFinite(v) ? v : NaN;
+}
+const isCount = v => v!==null && !Number.isNaN(v) && v>=0 && Number.isInteger(v);
+const labOf = (arr, i) => { const v = arr[i]!==undefined ? String(arr[i]).trim() : ''; return v!=='' ? esc(v) : String(i+1); };
+const chiLegend = () => `<div class="legend"><span><i style="background:var(--reject);opacity:.45"></i>Zona de rechazo</span><span><i style="background:var(--curve)"></i>χ² calculado</span></div>`;
+const alphaOk = a => a!==null && !Number.isNaN(a) && validAlpha(a);
+const ERR_A = 'α debe estar entre 0 y 1 (por ejemplo 0,05).';
+const ERR_FO = 'Las frecuencias observadas deben ser números enteros mayores o iguales a 0.';
+
+/* ---------- Bondad de ajuste ---------- */
+const G = { k:null, x:[], fo:[], p0:[] };
+$('#g_k').addEventListener('input', gofRebuild);
+$('#g_a').addEventListener('input', gofCompute);
+$('#g_table').addEventListener('input', e => {
+  const t = e.target;
+  if (t && t.dataset && t.dataset.f){ G[t.dataset.f][Number(t.dataset.i)] = t.value; gofCompute(); }
+});
+$('#g_ejemplo').addEventListener('click', () => {
+  G.x=['1','2','3','4','5','6']; G.fo=['8','12','9','11','6','14']; G.p0=['1/6','1/6','1/6','1/6','1/6','1/6'];
+  $('#g_k').value='6'; $('#g_a').value='0,05';
+  gofRebuild();
+});
+
+function gofRebuild(){
+  const k = read('g_k'), holder = $('#g_table');
+  if (k===null){ G.k=null; holder.innerHTML=''; gofCompute(); return; }
+  if (Number.isNaN(k) || !Number.isInteger(k) || k<2 || k>30){
+    G.k=null; holder.innerHTML=errP('Categorías debe ser un número entero entre 2 y 30.'); gofCompute(); return;
+  }
+  G.k = k;
+  const extra = '<th>p</th>';
+  let body='';
+  for (let i=0;i<k;i++){
+    const xv = G.x[i]!==undefined ? G.x[i] : String(i+1);
+    body += `<tr><td><input data-f="x" data-i="${i}" value="${esc(xv)}" autocomplete="off" aria-label="Categoría ${i+1}"></td>` +
+      `<td><input data-f="fo" data-i="${i}" inputmode="numeric" autocomplete="off" value="${esc(G.fo[i]!==undefined?G.fo[i]:'')}" aria-label="Frecuencia observada ${i+1}"></td>`;
+    body += `<td><input data-f="p0" data-i="${i}" inputmode="text" autocomplete="off" value="${esc(G.p0[i]!==undefined?G.p0[i]:'')}" aria-label="Probabilidad ${i+1}"></td>`;
+    body += `</tr>`;
+  }
+  holder.innerHTML = `<div class="tscroll"><table class="dt"><thead><tr><th>x</th><th>Fo</th>${extra}</tr></thead><tbody>${body}</tbody></table></div>`;
+  gofCompute();
+}
+
+function gofCompute(){
+  const out=$('#g_out'), blk=$('#g_block');
+  const show = html => { out.innerHTML = html; blk.hidden = (html===''); };
+  const k = G.k;
+  if (!k){ show(''); return; }
+  const a = read('g_a');
+  const fo=[]; let missing=false;
+  for (let i=0;i<k;i++){
+    const v = parseNum(G.fo[i]);
+    if (v===null){ missing=true; continue; }
+    if (!isCount(v)){ show(errP(ERR_FO)); return; }
+    fo[i]=v;
+  }
+  if (missing || a===null){ show(''); return; }
+  if (!alphaOk(a)){ show(errP(ERR_A)); return; }
+  const N = fo.reduce((s,v)=>s+v,0);
+  if (N<=0){ show(errP('La suma de las frecuencias observadas debe ser mayor que 0.')); return; }
+
+  const pv=[]; let sumP=0;
+  for (let i=0;i<k;i++){
+    const p = parseNum(G.p0[i], true);
+    if (p===null){ show(''); return; }
+    if (Number.isNaN(p) || p<=0 || p>1){ show(errP('Cada p debe ser mayor que 0 y menor o igual que 1 (por ejemplo 0,25 o 1/4).')); return; }
+    pv[i]=p; sumP+=p;
+  }
+  if (Math.abs(sumP-1)>1e-3){ show(errP(`Las probabilidades p deben sumar 1 (ahora suman ${fmt(sumP)}).`)); return; }
+  const fe = pv.map(p => N*p);
+
+  const contrib = fo.map((o,i) => (o-fe[i])*(o-fe[i])/fe[i]);
+  const stat = contrib.reduce((s,v)=>s+v,0);
+  const df = k-1;
+  const crit = chiInv(1-a, df);
+  const pval = Math.min(1, Math.max(0, 1-chiCdf(stat, df)));
+  const reject = stat>crit;
+  const small = fe.some(v => v<5);
+
+  let rows='';
+  for (let i=0;i<k;i++) rows += `<tr><th>${labOf(G.x,i)}</th><td>${fo[i]}</td><td>${fmt(pv[i])}</td><td>${fmt(fe[i])}</td><td>${fmt(contrib[i])}</td></tr>`;
+  rows += `<tr class="tot"><th>Total</th><td>${N}</td><td>${fmt(sumP)}</td><td>${fmt(fe.reduce((s,v)=>s+v,0))}</td><td>${fmt(stat)}</td></tr>`;
+
+  show(
+    `<p class="hyp">H₀) La variable se ajusta al modelo analizado</p>` +
+    `<p class="hyp" style="margin-top:2px">H₁) La variable no se ajusta al modelo analizado</p>` +
+    `<p class="notes">α = ${fmt(a)}</p>` +
+    `<div class="tscroll"><table class="rt"><thead><tr><th>x</th><th>Fo</th><th>p</th><th>Fe = n·p</th><th>(Fo − Fe)² / Fe</th></tr></thead><tbody>${rows}</tbody></table></div>` +
+    (small ? `<p class="notes">Atención: hay frecuencias esperadas menores que 5; conviene agrupar categorías.</p>` : '') +
+    `<div class="big-pair">${box('χ² calculado', fmt(stat))}${box('χ² crítico', fmt(crit))}${box('V', String(df))}</div>` +
+    `<p class="notes">V = x − 1 = ${df}</p>` +
+    `<div class="verdict ${reject?'rej':''}">${reject?'Se rechaza H₀':'No se rechaza H₀'}` +
+      `<span>${reject ? 'La variable no se ajusta al modelo analizado.' : 'No hay evidencia suficiente para afirmar que la variable no se ajusta al modelo analizado.'}</span>` +
+      `<span>p-valor = ${fmt(pval)}</span></div>` +
+    `<div class="chart-wrap">${chartChi(df, stat, 'right', [crit])}</div>` + chiLegend()
+  );
+}
+
+/* ---------- Pruebas de independencia ---------- */
+const I = { r:null, c:null, rl:[], cl:[], cells:[] };
+$('#i_x').addEventListener('input', indRebuild);
+$('#i_y').addEventListener('input', indRebuild);
+$('#i_a').addEventListener('input', indCompute);
+$('#i_table').addEventListener('input', e => {
+  const t = e.target;
+  if (!t || !t.dataset || !t.dataset.f) return;
+  const f = t.dataset.f, i = Number(t.dataset.i), j = Number(t.dataset.j);
+  if (f==='rl') I.rl[i]=t.value;
+  else if (f==='cl') I.cl[j]=t.value;
+  else { if (!I.cells[i]) I.cells[i]=[]; I.cells[i][j]=t.value; }
+  indCompute();
+});
+$('#i_ejemplo').addEventListener('click', () => {
+  I.rl=['A','B','C']; I.cl=['1','2','3']; I.cells=[['20','15','25'],['30','25','15'],['10','20','40']];
+  $('#i_x').value='3'; $('#i_y').value='3'; $('#i_a').value='0,05';
+  indRebuild();
+});
+
+function indRebuild(){
+  const r = read('i_x'), c = read('i_y'), holder = $('#i_table');
+  const okDim = v => v!==null && !Number.isNaN(v) && Number.isInteger(v) && v>=2 && v<=12;
+  I.r=null; I.c=null;
+  if (r===null || c===null){
+    holder.innerHTML = ''; indCompute(); return;
+  }
+  if (!okDim(r) || !okDim(c)){
+    holder.innerHTML = errP('x e y deben ser números enteros entre 2 y 12.'); indCompute(); return;
+  }
+  I.r=r; I.c=c;
+  let head = `<tr><th class="corner">x \\ y</th>`;
+  for (let j=0;j<c;j++) head += `<th class="in"><input data-f="cl" data-j="${j}" value="${esc(I.cl[j]!==undefined?I.cl[j]:String(j+1))}" autocomplete="off" aria-label="Categoría ${j+1} de y"></th>`;
+  head += `</tr>`;
+  let body='';
+  for (let i=0;i<r;i++){
+    body += `<tr><th class="in"><input data-f="rl" data-i="${i}" value="${esc(I.rl[i]!==undefined?I.rl[i]:String(i+1))}" autocomplete="off" aria-label="Categoría ${i+1} de x"></th>`;
+    for (let j=0;j<c;j++){
+      const v = (I.cells[i] && I.cells[i][j]!==undefined) ? I.cells[i][j] : '';
+      body += `<td><input data-f="c" data-i="${i}" data-j="${j}" inputmode="numeric" autocomplete="off" value="${esc(v)}" aria-label="Frecuencia observada fila ${i+1}, columna ${j+1}"></td>`;
+    }
+    body += `</tr>`;
+  }
+  holder.innerHTML = `<div class="tscroll"><table class="dt"><thead>${head}</thead><tbody>${body}</tbody></table></div>`;
+  indCompute();
+}
+
+function indCompute(){
+  const out=$('#i_out'), blk=$('#i_block');
+  const show = html => { out.innerHTML = html; blk.hidden = (html===''); };
+  const r=I.r, c=I.c;
+  if (!r){ show(''); return; }
+  const a = read('i_a');
+  const O=[]; let missing=false;
+  for (let i=0;i<r;i++){
+    O[i]=[];
+    for (let j=0;j<c;j++){
+      const v = parseNum(I.cells[i] ? I.cells[i][j] : '');
+      if (v===null){ missing=true; continue; }
+      if (!isCount(v)){ show(errP(ERR_FO)); return; }
+      O[i][j]=v;
+    }
+  }
+  if (missing || a===null){ show(''); return; }
+  if (!alphaOk(a)){ show(errP(ERR_A)); return; }
+
+  const R = O.map(row => row.reduce((s,v)=>s+v,0));
+  const C = Array.from({length:c}, (_,j) => O.reduce((s,row)=>s+row[j],0));
+  const N = R.reduce((s,v)=>s+v,0);
+  if (N<=0 || R.some(v=>v===0) || C.some(v=>v===0)){
+    show(errP('Hay filas o columnas con total 0: cargá al menos un dato en cada una.')); return;
+  }
+  const Fe = O.map((row,i) => row.map((_,j) => R[i]*C[j]/N));
+  let stat=0, small=false;
+  for (let i=0;i<r;i++) for (let j=0;j<c;j++){ stat += (O[i][j]-Fe[i][j])**2/Fe[i][j]; if (Fe[i][j]<5) small=true; }
+  const df = (r-1)*(c-1);
+  const crit = chiInv(1-a, df);
+  const pval = Math.min(1, Math.max(0, 1-chiCdf(stat, df)));
+  const reject = stat>crit;
+
+  let head = `<tr><th>x \\ y</th>`;
+  for (let j=0;j<c;j++) head += `<th>${labOf(I.cl,j)}</th>`;
+  head += `<th>Total</th></tr>`;
+  let rows='';
+  for (let i=0;i<r;i++){
+    rows += `<tr><th>${labOf(I.rl,i)}</th>` + Fe[i].map(v => `<td>${fmt(v)}</td>`).join('') + `<td>${R[i]}</td></tr>`;
+  }
+  rows += `<tr class="tot"><th>Total</th>` + C.map(v => `<td>${v}</td>`).join('') + `<td>${N}</td></tr>`;
+
+  show(
+    `<p class="hyp">H₀) La variable x es independiente de la y</p>` +
+    `<p class="hyp" style="margin-top:2px">H₁) La variable x es dependiente de la y</p>` +
+    `<p class="notes">α = ${fmt(a)}</p>` +
+    `<h3 style="margin-top:16px">Frecuencias esperadas (Fe)</h3>` +
+    `<div class="tscroll"><table class="rt"><thead>${head}</thead><tbody>${rows}</tbody></table></div>` +
+    (small ? `<p class="notes">Atención: hay frecuencias esperadas menores que 5; conviene agrupar categorías.</p>` : '') +
+    `<div class="big-pair">${box('χ² calculado', fmt(stat))}${box('χ² crítico', fmt(crit))}${box('V', String(df))}</div>` +
+    `<p class="notes">V = (x − 1)·(y − 1) = ${df}</p>` +
+    `<div class="verdict ${reject?'rej':''}">${reject?'Se rechaza H₀':'No se rechaza H₀'}` +
+      `<span>${reject ? 'La variable x es dependiente de la y.' : 'No hay evidencia suficiente para afirmar que la variable x depende de la y.'}</span>` +
+      `<span>p-valor = ${fmt(pval)}</span></div>` +
+    `<div class="chart-wrap">${chartChi(df, stat, 'right', [crit])}</div>` + chiLegend()
+  );
+}
+
+/* =====================================================================
+   Comparación de poblaciones
+   ===================================================================== */
+// Distribución F
+function fCdf(x,d1,d2){ return x<=0 ? 0 : betaI(d1*x/(d1*x+d2), d1/2, d2/2); }
+function fPdf(x,d1,d2){
+  if (x<=0) return 0;
+  return Math.exp(lgamma((d1+d2)/2)-lgamma(d1/2)-lgamma(d2/2)+(d1/2)*Math.log(d1/d2)+(d1/2-1)*Math.log(x)-((d1+d2)/2)*Math.log(1+d1*x/d2));
+}
+function fInv(p,d1,d2){
+  let lo=0, hi=1;
+  while (fCdf(hi,d1,d2) < p && hi<1e12) hi*=2;
+  for (let i=0;i<200;i++){ const mid=(lo+hi)/2; if (fCdf(mid,d1,d2) < p) lo=mid; else hi=mid; }
+  return (lo+hi)/2;
+}
+
+// Gráfico de la distribución pivotal (z, t o F) con zona de rechazo y valor calculado
+function chartPiv(o){
+  const W=640, H=260, m={l:16,r:16,t:30,b:40};
+  const iw=W-m.l-m.r, ih=H-m.t-m.b, base=m.t+ih;
+  const pdf = x => o.dist==='F' ? fPdf(x,o.df,o.df2) : (o.dist==='t' ? tPdf(x,o.df) : normPdf(x));
+  const inv = p => o.dist==='F' ? fInv(p,o.df,o.df2) : (o.dist==='t' ? tInv(p,o.df) : zInv(p));
+  let xmin, xmax;
+  if (o.dist==='F'){
+    xmin=0; xmax=Math.max(inv(0.999), o.stat*1.1, ...o.crits.map(c=>c*1.1));
+  } else {
+    const r=Math.max(Math.min(inv(0.9995),8), Math.abs(o.stat)*1.15, ...o.crits.map(c=>Math.abs(c)*1.2));
+    xmin=-r; xmax=r;
+  }
+  const sx = x => m.l+(x-xmin)/(xmax-xmin)*iw;
+  const N=400, xs=[];
+  for (let i=0;i<=N;i++){ let x=xmin+(xmax-xmin)*i/N; if (o.dist==='F' && x<=0) x=xmax/4000; xs.push(x); }
+  let peak=0; xs.forEach((x,i) => { if (i>0) peak=Math.max(peak,pdf(x)); });
+  const ymax = (o.dist==='F' && o.df<=2) ? pdf(Math.max(inv(0.1),xmax/4000))*1.6 : peak*1.12;
+  const sy = y => base - Math.min(y,ymax)/ymax*ih;
+  const curve = xs.map((x,i)=>(i?'L':'M')+sx(x).toFixed(1)+' '+sy(pdf(x)).toFixed(1)).join(' ');
+  const seg = (a,b) => {
+    a=Math.max(a,xmin); b=Math.min(b,xmax);
+    if (a>=b) return '';
+    let d=`M${sx(a).toFixed(1)} ${base}`;
+    const M=120;
+    for (let i=0;i<=M;i++){ const x=a+(b-a)*i/M; d+=` L${sx(x).toFixed(1)} ${sy(pdf(o.dist==='F'?Math.max(x,xmax/4000):x)).toFixed(1)}`; }
+    return d+` L${sx(b).toFixed(1)} ${base} Z`;
+  };
+  const regions = o.cola==='two' ? seg(xmin,o.crits[0])+' '+seg(o.crits[1],xmax)
+                : (o.cola==='left' ? seg(xmin,o.crits[0]) : seg(o.crits[0],xmax));
+  const clampX = (x,pad=34) => Math.min(Math.max(sx(x), m.l+pad), W-m.r-pad);
+  const dfTxt = o.dist==='F' ? `v₁ = ${o.df} ; v₂ = ${o.df2}` : (o.dist==='t' ? `v = ${o.df}` : '');
+  let s = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Distribución ${o.dist} con zona de rechazo y valor calculado">`;
+  s += `<path d="${regions}" fill="var(--reject)" fill-opacity="0.35"/>`;
+  s += `<path d="${curve}" fill="none" stroke="var(--curve)" stroke-width="2.4" stroke-linejoin="round"/>`;
+  s += `<line x1="${m.l}" y1="${base}" x2="${W-m.r}" y2="${base}" stroke="var(--muted)" stroke-width="1"/>`;
+  if (o.dist!=='F') s += `<line x1="${sx(0).toFixed(1)}" y1="${base}" x2="${sx(0).toFixed(1)}" y2="${base+5}" stroke="var(--muted)"/><text x="${sx(0).toFixed(1)}" y="${base+18}" text-anchor="middle" font-size="12" fill="var(--muted)" font-family="var(--sans)">0</text>`;
+  o.crits.forEach(c => {
+    s += `<line x1="${sx(c).toFixed(1)}" y1="${m.t}" x2="${sx(c).toFixed(1)}" y2="${base}" stroke="var(--reject)" stroke-width="1.6" stroke-dasharray="5 4"/>`;
+    s += `<text x="${clampX(c).toFixed(1)}" y="${base+18}" text-anchor="middle" font-size="13" fill="var(--reject)" font-family="var(--sans)">${fmt(c,2)}</text>`;
+  });
+  s += `<line x1="${sx(o.stat).toFixed(1)}" y1="${m.t-4}" x2="${sx(o.stat).toFixed(1)}" y2="${base}" stroke="var(--curve)" stroke-width="2.6"/>`;
+  s += `<circle cx="${sx(o.stat).toFixed(1)}" cy="${m.t-4}" r="4" fill="var(--curve)"/>`;
+  s += `<text x="${clampX(o.stat,44).toFixed(1)}" y="${m.t-12}" text-anchor="middle" font-size="14" font-weight="600" fill="var(--curve)" font-family="var(--sans)">${o.name} = ${fmt(o.stat,2)}</text>`;
+  if (dfTxt) s += `<text x="${m.l}" y="${H-6}" font-size="12" fill="var(--muted)" font-family="var(--sans)">${dfTxt}</text>`;
+  return s + `</svg>`;
+}
+
+const hypOf = (sym, cola) =>
+  cola==='two' ? [`${sym}₁ = ${sym}₂`, `${sym}₁ ≠ ${sym}₂`] :
+  (cola==='left' ? [`${sym}₁ ≥ ${sym}₂`, `${sym}₁ &lt; ${sym}₂`] : [`${sym}₁ ≤ ${sym}₂`, `${sym}₁ &gt; ${sym}₂`]);
+
+// Arma todo el resultado de un test sobre la condición pivotal
+function pivotResult(o){
+  const q = p => o.dist==='F' ? fInv(p,o.df,o.df2) : (o.dist==='t' ? tInv(p,o.df) : zInv(p));
+  const cdf = x => o.dist==='F' ? fCdf(x,o.df,o.df2) : (o.dist==='t' ? tCdf(x,o.df) : normCdf(x));
+  const N = o.name, a = o.a;
+  let crits, reject, pval, region, critBox;
+  const F0 = cdf(o.stat);
+  if (o.cola==='two'){
+    const c1=q(a/2), c2=q(1-a/2); crits=[c1,c2];
+    reject = o.stat<c1 || o.stat>c2; pval = 2*Math.min(F0,1-F0);
+    region = `${N} &lt; ${fmt(c1)} o ${N} &gt; ${fmt(c2)}`;
+    critBox = [`${N} críticos`, `${fmt(c1)} ; ${fmt(c2)}`];
+  } else if (o.cola==='left'){
+    const c=q(a); crits=[c]; reject = o.stat<c; pval = F0;
+    region = `${N} &lt; ${fmt(c)}`; critBox = [`${N} crítico`, fmt(c)];
+  } else {
+    const c=q(1-a); crits=[c]; reject = o.stat>c; pval = 1-F0;
+    region = `${N} &gt; ${fmt(c)}`; critBox = [`${N} crítico`, fmt(c)];
+  }
+  pval = Math.min(1, Math.max(0, pval));
+  const [H0,H1] = hypOf(o.sym, o.cola);
+  return `<p class="hyp">H₀: ${H0} &nbsp;·&nbsp; H₁: ${H1} &nbsp;·&nbsp; α = ${fmt(a)}</p>` +
+    (o.pre || '') +
+    `<div class="big-pair">${box(`${N} calculado`, fmt(o.stat))}${box(critBox[0], critBox[1])}${o.extras||''}</div>` +
+    (o.note ? `<p class="notes">${o.note}</p>` : '') +
+    `<p class="notes">Zona de rechazo: ${region}</p>` +
+    `<div class="verdict ${reject?'rej':''}">${reject?'Se rechaza H₀':'No se rechaza H₀'}<span>p-valor = ${fmt(pval)}</span></div>` +
+    `<div class="chart-wrap">${chartPiv({dist:o.dist, df:o.df, df2:o.df2, stat:o.stat, cola:o.cola, crits, name:N})}</div>` +
+    `<div class="legend"><span><i style="background:var(--reject);opacity:.45"></i>Zona de rechazo</span><span><i style="background:var(--curve)"></i>${N} calculado</span></div>`;
+}
+
+const SUB = { 1:'₁', 2:'₂' };
+const colaButtons = sym =>
+  `<button type="button" data-v="two" aria-pressed="true">Bilateral (${sym}₁ ≠ ${sym}₂)</button>` +
+  `<button type="button" data-v="left" aria-pressed="false">Cola izquierda (${sym}₁ &lt; ${sym}₂)</button>` +
+  `<button type="button" data-v="right" aria-pressed="false">Cola derecha (${sym}₁ &gt; ${sym}₂)</button>`;
+function mountSection(key, title, inner){
+  document.querySelector('.wrap').insertAdjacentHTML('beforeend',
+    `<section id="view-${key}" hidden><button class="back" type="button">← Volver</button><h2>${title}</h2>${inner}</section>`);
+  views[key] = '#view-'+key;
+  document.querySelector(`#view-${key} .back`).addEventListener('click', () => go('comp'));
+}
+
+/* ---------- Cuatro tests con dos muestras independientes ---------- */
+function cmpBuild(key, kind, title){
+  const sym = kind==='F' ? 'σ' : 'μ';
+  const hasX = kind!=='F';
+  const dl = kind==='Z' ? 'σ' : 'S';
+  const minN = kind==='Z' ? 1 : 2;
+  const row = i =>
+    `<div class="datarow" style="margin-top:14px"><div class="grp">` +
+      `<div class="cellf"><label for="${key}_n${i}">n${SUB[i]}</label><input id="${key}_n${i}" inputmode="numeric" autocomplete="off"></div>` +
+      (hasX ? `<div class="cellf"><label for="${key}_x${i}">x̄${SUB[i]}</label><input id="${key}_x${i}" inputmode="decimal" autocomplete="off"></div>` : '') +
+      `<div class="cellf sel"><select id="${key}_dt${i}" aria-label="Cargar ${dl}${SUB[i]} o su varianza"><option value="s">${dl}${SUB[i]}</option><option value="v">${dl}${SUB[i]}²</option></select>` +
+      `<input id="${key}_dv${i}" inputmode="decimal" autocomplete="off"></div>` +
+    `</div></div>`;
+  mountSection(key, title,
+    `<div class="datapanel">` +
+      `<div class="datarow"><div class="grp"><div class="cellf"><label for="${key}_a">α</label><input id="${key}_a" inputmode="decimal" autocomplete="off"></div></div></div>` +
+      row(1) + row(2) +
+      `<button type="button" class="linkbtn" id="${key}_ej">Cargar un ejemplo</button>` +
+    `</div>` +
+    `<div class="results" aria-live="polite"><div class="block"><h3>Test de hipótesis</h3>` +
+      `<div class="seg" id="seg-${key}">${colaButtons(sym)}</div><div id="${key}_out"></div></div></div>`);
+
+  const st = { cola:'two' };
+  const nErr = i => `n${SUB[i]} debe ser un número entero ${minN===1 ? 'positivo' : 'mayor o igual a 2'}.`;
+  const readN = id => { const n=read(id); if (n===null) return null; return (Number.isNaN(n)||!Number.isInteger(n)||n<minN) ? NaN : n; };
+  const readVar = i => {
+    const x=read(`${key}_dv${i}`); if (x===null) return null;
+    if (Number.isNaN(x) || x<=0) return NaN;
+    return $(`#${key}_dt${i}`).value==='v' ? x : x*x;
+  };
+
+  function upd(){
+    syncSeg('seg-'+key, st, 'cola');
+    const out=$(`#${key}_out`);
+    const a=read(key+'_a'), n1=readN(key+'_n1'), n2=readN(key+'_n2');
+    const x1=hasX ? read(key+'_x1') : 0, x2=hasX ? read(key+'_x2') : 0;
+    const s1=readVar(1), s2=readVar(2);
+    const dlab = i => dl+SUB[i]+($(`#${key}_dt${i}`).value==='v' ? '²' : '');
+    let err=null;
+    if (n1!==null && Number.isNaN(n1)) err=nErr(1);
+    else if (n2!==null && Number.isNaN(n2)) err=nErr(2);
+    else if (hasX && x1!==null && Number.isNaN(x1)) err='x̄₁ debe ser un número.';
+    else if (hasX && x2!==null && Number.isNaN(x2)) err='x̄₂ debe ser un número.';
+    else if (s1!==null && Number.isNaN(s1)) err=`${dlab(1)} debe ser un número positivo.`;
+    else if (s2!==null && Number.isNaN(s2)) err=`${dlab(2)} debe ser un número positivo.`;
+    else if (a!==null && !validAlpha(a)) err=ERR_A;
+    if (err){ out.innerHTML=errP(err); return; }
+    if ([a,n1,n2,x1,x2,s1,s2].some(v => v===null)){ out.innerHTML=''; return; }
+
+    const o = { sym, cola:st.cola, a };
+    if (kind==='F'){
+      Object.assign(o, { name:'F', dist:'F', stat:s1/s2, df:n1-1, df2:n2-1,
+        note:`v₁ = n₁ − 1 = ${n1-1} &nbsp;·&nbsp; v₂ = n₂ − 1 = ${n2-1}` });
+    } else if (kind==='Z'){
+      Object.assign(o, { name:'z', dist:'z', stat:(x1-x2)/Math.sqrt(s1/n1+s2/n2) });
+    } else if (kind==='T1'){
+      const df=n1+n2-2, sa=Math.sqrt(((n1-1)*s1+(n2-1)*s2)/df);
+      Object.assign(o, { name:'t', dist:'t', df, stat:(x1-x2)/(sa*Math.sqrt(1/n1+1/n2)),
+        extras:box('S<sub>a</sub>', fmt(sa)), note:`v = n₁ + n₂ − 2 = ${df}` });
+    } else {
+      const A=s1/n1, B=s2/n2;
+      const vex=Math.pow(A+B,2)/((1/(n1-1))*A*A+(1/(n2-1))*B*B);
+      const vr=Math.max(1, Math.round(vex));
+      Object.assign(o, { name:'t', dist:'t', df:vr, stat:(x1-x2)/Math.sqrt(A+B),
+        extras:box('v', fmt(vex,4)), note:`El crítico se busca con v redondeado = ${vr}` });
+    }
+    out.innerHTML = pivotResult(o);
+  }
+  bindSeg('seg-'+key, st, 'cola', upd);
+  bindInputs(`#view-${key} input, #view-${key} select`, upd);
+  $(`#${key}_ej`).addEventListener('click', () => {
+    const ex = {
+      F:  { a:'0,05', n1:'15', dv1:'4,2', n2:'20', dv2:'3,1' },
+      Z:  { a:'0,05', n1:'40', x1:'52,3', dv1:'6', n2:'35', x2:'49,8', dv2:'5' },
+      T1: { a:'0,05', n1:'12', x1:'24,5', dv1:'3,2', n2:'15', x2:'21,8', dv2:'3,6' },
+      T2: { a:'0,05', n1:'10', x1:'35,2', dv1:'2,1', n2:'14', x2:'32,9', dv2:'4,8' }
+    }[kind];
+    for (const [k,v] of Object.entries(ex)) $(`#${key}_${k}`).value = v;
+    $(`#${key}_dt1`).value='s'; $(`#${key}_dt2`).value='s';
+    upd();
+  });
+  upd();
+}
+
+/* ---------- Muestras apareadas ---------- */
+function cmpBuildP(){
+  const key='cP';
+  mountSection(key, 'Comparación de promedios poblacionales. Muestras apareadas.',
+    `<div class="datapanel">` +
+      `<div class="datarow"><div class="grp">` +
+        `<div class="cellf"><label for="cP_a">α</label><input id="cP_a" inputmode="decimal" autocomplete="off"></div>` +
+        `<div class="cellf"><label for="cP_n">n</label><input id="cP_n" inputmode="numeric" autocomplete="off"></div>` +
+      `</div></div>` +
+      `<div id="cP_table"></div>` +
+      `<button type="button" class="linkbtn" id="cP_ej">Cargar un ejemplo</button>` +
+    `</div>` +
+    `<div class="results" aria-live="polite"><div class="block"><h3>Test de hipótesis</h3>` +
+      `<div class="seg" id="seg-cP">${colaButtons('μ')}</div><div id="cP_out"></div></div></div>`);
+
+  const P = { n:null, a:[], b:[], cola:'two' };
+  const dText = j => {
+    const a=parseNum(P.a[j]), b=parseNum(P.b[j]);
+    return (a!==null && b!==null && !Number.isNaN(a) && !Number.isNaN(b)) ? fmtInput(a-b) : '';
+  };
+  function refreshD(j){ const c=document.getElementById('cP_d'+j); if (c) c.textContent = dText(j); }
+
+  function rebuild(){
+    const n=read('cP_n'), holder=$('#cP_table');
+    P.n=null;
+    if (n===null){ holder.innerHTML=''; upd(); return; }
+    if (Number.isNaN(n) || !Number.isInteger(n) || n<2 || n>30){
+      holder.innerHTML=errP('n debe ser un número entero entre 2 y 30.'); upd(); return;
+    }
+    P.n=n;
+    let head=`<tr><th class="corner"></th>`, r1=`<tr><th>Muestra 1</th>`, r2=`<tr><th>Muestra 2</th>`, r3=`<tr><th>d = 1 − 2</th>`;
+    for (let j=0;j<n;j++){
+      head += `<th>${j+1}</th>`;
+      r1 += `<td><input data-r="a" data-j="${j}" inputmode="decimal" autocomplete="off" value="${esc(P.a[j]!==undefined?P.a[j]:'')}" aria-label="Muestra 1, individuo ${j+1}"></td>`;
+      r2 += `<td><input data-r="b" data-j="${j}" inputmode="decimal" autocomplete="off" value="${esc(P.b[j]!==undefined?P.b[j]:'')}" aria-label="Muestra 2, individuo ${j+1}"></td>`;
+      r3 += `<td class="dv" id="cP_d${j}">${dText(j)}</td>`;
+    }
+    holder.innerHTML = `<div class="tscroll"><table class="dt"><thead>${head}</tr></thead><tbody>${r1}</tr>${r2}</tr>${r3}</tr></tbody></table></div>`;
+    upd();
+  }
+
+  function upd(){
+    syncSeg('seg-cP', P, 'cola');
+    const out=$('#cP_out'), a=read('cP_a');
+    if (a!==null && (Number.isNaN(a) || !validAlpha(a))){ out.innerHTML=errP(ERR_A); return; }
+    if (!P.n || a===null){ out.innerHTML=''; return; }
+    const d=[]; let missing=false;
+    for (let j=0;j<P.n;j++){
+      const x=parseNum(P.a[j]), y=parseNum(P.b[j]);
+      if ((x!==null && Number.isNaN(x)) || (y!==null && Number.isNaN(y))){ out.innerHTML=errP('Los datos deben ser números.'); return; }
+      if (x===null || y===null){ missing=true; continue; }
+      d[j]=x-y;
+    }
+    if (missing){ out.innerHTML=''; return; }
+    const n=P.n, dbar=d.reduce((s,v)=>s+v,0)/n;
+    const sd=Math.sqrt(d.reduce((s,v)=>s+(v-dbar)*(v-dbar),0)/(n-1));
+    if (!(sd>0)){ out.innerHTML=errP('Todas las diferencias son iguales (S<sub>d</sub> = 0): no se puede calcular t.'); return; }
+    out.innerHTML = pivotResult({ sym:'μ', cola:P.cola, a, name:'t', dist:'t', df:n-1, stat:dbar/(sd/Math.sqrt(n)),
+      extras: box('d̄', fmt(dbar)) + box('S<sub>d</sub>', fmt(sd)), note:`v = n − 1 = ${n-1}` });
+  }
+
+  bindSeg('seg-cP', P, 'cola', upd);
+  $('#cP_a').addEventListener('input', upd);
+  $('#cP_n').addEventListener('input', rebuild);
+  $('#cP_table').addEventListener('input', e => {
+    const t=e.target;
+    if (!t || !t.dataset || !t.dataset.r) return;
+    const j=Number(t.dataset.j);
+    P[t.dataset.r][j]=t.value; refreshD(j); upd();
+  });
+  $('#cP_ej').addEventListener('click', () => {
+    P.a=['12','15','11','14','16','13','12','15']; P.b=['10','14','12','11','13','12','10','13'];
+    $('#cP_a').value='0,05'; $('#cP_n').value='8';
+    rebuild();
+  });
+  upd();
+}
+
+cmpBuild('cF','F','Comparación de desvíos poblacionales');
+cmpBuild('cZ','Z','Comparación de promedios poblacionales conocidos los desvíos poblacionales');
+cmpBuild('cT1','T1','Comparación de promedios poblacionales desconocidos los desvíos poblacionales pero supuestos iguales');
+cmpBuild('cT2','T2','Comparación de promedios poblacionales desconocidos los desvíos poblacionales pero diferentes');
+cmpBuildP();
 
 /* =====================================================================
    Desvío / varianza (chi cuadrado)
