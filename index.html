@@ -483,10 +483,8 @@ table.rt{ width:auto; min-width:min(100%,420px); margin-top:0; }
     <h2>Comparación de poblaciones</h2>
     <div class="menu">
       <button class="menu-btn" data-go="cF"><span class="name">Comparación de desvíos poblacionales</span><span class="soon"></span></button>
-      <button class="menu-btn" data-go="cZ"><span class="name">Comparación de promedios poblacionales conocidos los desvíos poblacionales</span><span class="soon"></span></button>
-      <button class="menu-btn" data-go="cT1"><span class="name">Comparación de promedios poblacionales desconocidos los desvíos poblacionales pero supuestos iguales</span><span class="soon"></span></button>
-      <button class="menu-btn" data-go="cT2"><span class="name">Comparación de promedios poblacionales desconocidos los desvíos poblacionales pero diferentes</span><span class="soon"></span></button>
-      <button class="menu-btn" data-go="cP"><span class="name">Comparación de promedios poblacionales. Muestras apareadas.</span><span class="soon"></span></button>
+      <button class="menu-btn" data-go="cI"><span class="name">Comparación de promedios con muestras independientes</span><span class="soon"></span></button>
+      <button class="menu-btn" data-go="cP"><span class="name">Comparación de promedios con muestras dependientes</span><span class="soon"></span></button>
     </div>
   </section>
 
@@ -879,10 +877,13 @@ function renderMT(){
     probBox = errP('μ₁ debe ser un número.');
   }
 
+  const qUsed = quant(MT.cola==='two' ? 1-a/2 : 1-a);
+  const qNote = `${useT ? 't' : 'z'} utilizado: ${MT.cola==='two' ? '±' : (MT.cola==='left' ? '−' : '')}${fmt(qUsed)}${useT ? ` (v = ${df})` : ''}`;
   el.innerHTML =
     `<p class="hyp">H₀: ${H0} &nbsp;·&nbsp; H₁: ${H1} &nbsp;·&nbsp; α = ${fmt(a)}</p>` +
     `<div class="big-pair">${box(critBox[0], critBox[1])}${betaVal!==null ? probBox : ''}</div>` +
     (betaVal===null ? probBox : '') +
+    `<p class="notes">Valor de ${qNote}</p>` +
     `<p class="notes">Zona de rechazo: ${region}</p>` +
     `<div class="verdict ${reject?'rej':''}">${reject?'Se rechaza H₀':'No se rechaza H₀'}<span>p-valor = ${fmt(pval)}</span></div>` +
     `<div class="chart-wrap">${chartMean({mu0:m0, mu1:m1v, SE, useT, df, cola:MT.cola, crits, xbar:xb, pdisp:MT.pdisp})}</div>` +
@@ -1171,10 +1172,13 @@ function renderPT(){
     probBox = box(PT.pdisp==='beta' ? 'β' : '1 − β', fmt(PT.pdisp==='beta' ? betaVal : 1-betaVal));
   }
 
+  const qUsed = zInv(PT.cola==='two' ? 1-a/2 : 1-a);
+  const qNote = `z utilizado: ${PT.cola==='two' ? '±' : (PT.cola==='left' ? '−' : '')}${fmt(qUsed)}`;
   el.innerHTML =
     `<p class="hyp">H₀: ${H0} &nbsp;·&nbsp; H₁: ${H1} &nbsp;·&nbsp; α = ${fmt(a)}</p>` +
     `<div class="big-pair">${g.derived ? phBox(ph) : ''}${box(critBox[0], critBox[1])}${betaVal!==null ? probBox : ''}</div>` +
     (betaVal===null ? probBox : '') +
+    `<p class="notes">Valor de ${qNote}</p>` +
     `<p class="notes">Zona de rechazo: ${region}</p>` +
     `<div class="verdict ${reject?'rej':''}">${reject?'Se rechaza H₀':'No se rechaza H₀'}<span>p-valor = ${fmt(pval)}</span></div>` +
     `<div class="chart-wrap">${chartMean({mu0:p0, mu1:p1v, SE0, SE1, useT:false, df:null, cola:PT.cola, crits, xbar:ph, pdisp:PT.pdisp, lab0:'p₀', lab1:'p₁', xlab:'p̂', dg:3})}</div>` +
@@ -1620,10 +1624,98 @@ function cmpBuild(key, kind, title){
   upd();
 }
 
+/* ---------- Promedios con muestras independientes (Z, t con Sa o Welch según los datos) ---------- */
+function cmpBuildI(){
+  const key='cI';
+  const opts = i => `<option value="S">S${SUB[i]}</option><option value="S2">S${SUB[i]}²</option><option value="sig">σ${SUB[i]}</option><option value="sig2">σ${SUB[i]}²</option>`;
+  const row = i =>
+    `<div class="datarow" style="margin-top:14px"><div class="grp">` +
+      `<div class="cellf"><label for="cI_n${i}">n${SUB[i]}</label><input id="cI_n${i}" inputmode="numeric" autocomplete="off"></div>` +
+      `<div class="cellf"><label for="cI_x${i}">x̄${SUB[i]}</label><input id="cI_x${i}" inputmode="decimal" autocomplete="off"></div>` +
+      `<div class="cellf sel"><select id="cI_dt${i}" aria-label="Tipo de dato de dispersión de la muestra ${i}">${opts(i)}</select>` +
+      `<input id="cI_dv${i}" inputmode="decimal" autocomplete="off"></div>` +
+    `</div></div>`;
+  mountSection(key, 'Comparación de promedios con muestras independientes',
+    `<div class="datapanel">` +
+      `<div class="datarow"><div class="grp"><div class="cellf"><label for="cI_a">α</label><input id="cI_a" inputmode="decimal" autocomplete="off"></div></div></div>` +
+      row(1) + row(2) +
+      `<div id="cI_eqwrap" hidden><div class="subhead">Desvíos poblacionales</div>` +
+        `<div class="seg" id="seg-cI-eq">` +
+          `<button type="button" data-v="eq" aria-pressed="true">Iguales (σ₁ = σ₂)</button>` +
+          `<button type="button" data-v="ne" aria-pressed="false">Distintos (σ₁ ≠ σ₂)</button>` +
+        `</div></div>` +
+      `<button type="button" class="linkbtn" id="cI_ej">Cargar un ejemplo</button>` +
+    `</div>` +
+    `<div class="results" aria-live="polite"><div class="block"><h3>Test de hipótesis</h3>` +
+      `<div class="seg" id="seg-cI">${colaButtons('μ')}</div><div id="cI_out"></div></div></div>`);
+
+  const st = { cola:'two', eq:'eq' };
+  const isPop = i => { const t=$(`#cI_dt${i}`).value; return t==='sig' || t==='sig2'; };
+  const dlab = i => { const s=$(`#cI_dt${i}`); return s.options[s.selectedIndex].textContent; };
+  const readN = id => { const n=read(id); if (n===null) return null; return (Number.isNaN(n)||!Number.isInteger(n)||n<1) ? NaN : n; };
+  const readVar = i => {
+    const x=read(`cI_dv${i}`); if (x===null) return null;
+    if (Number.isNaN(x) || x<=0) return NaN;
+    const t=$(`#cI_dt${i}`).value;
+    return (t==='S2' || t==='sig2') ? x : x*x;
+  };
+
+  function upd(){
+    syncSeg('seg-cI', st, 'cola'); syncSeg('seg-cI-eq', st, 'eq');
+    const bothS = !isPop(1) && !isPop(2), bothPop = isPop(1) && isPop(2);
+    $('#cI_eqwrap').hidden = !bothS;
+    const out=$('#cI_out');
+    const a=read('cI_a'), n1=readN('cI_n1'), n2=readN('cI_n2'), x1=read('cI_x1'), x2=read('cI_x2');
+    const s1=readVar(1), s2=readVar(2);
+    let err=null;
+    if (n1!==null && Number.isNaN(n1)) err='n₁ debe ser un número entero positivo.';
+    else if (n2!==null && Number.isNaN(n2)) err='n₂ debe ser un número entero positivo.';
+    else if (x1!==null && Number.isNaN(x1)) err='x̄₁ debe ser un número.';
+    else if (x2!==null && Number.isNaN(x2)) err='x̄₂ debe ser un número.';
+    else if (s1!==null && Number.isNaN(s1)) err=`${dlab(1)} debe ser un número positivo.`;
+    else if (s2!==null && Number.isNaN(s2)) err=`${dlab(2)} debe ser un número positivo.`;
+    else if (a!==null && !validAlpha(a)) err=ERR_A;
+    if (err){ out.innerHTML=errP(err); return; }
+    if ([a,n1,n2,x1,x2,s1,s2].some(v => v===null)){ out.innerHTML=''; return; }
+    if (!bothS && !bothPop){ out.innerHTML=errP('Cargá los dos desvíos como poblacionales (σ) o los dos como muestrales (S).'); return; }
+    if (bothS && (n1<2 || n2<2)){ out.innerHTML=errP('Con desvíos muestrales, n₁ y n₂ deben ser mayores o iguales a 2.'); return; }
+
+    const o = { sym:'μ', cola:st.cola, a };
+    if (bothPop){
+      Object.assign(o, { name:'z', dist:'z', stat:(x1-x2)/Math.sqrt(s1/n1+s2/n2),
+        pre:`<p class="notes">Test utilizado: Z (desvíos poblacionales conocidos)</p>` });
+    } else if (st.eq==='eq'){
+      const df=n1+n2-2, sa=Math.sqrt(((n1-1)*s1+(n2-1)*s2)/df);
+      Object.assign(o, { name:'t', dist:'t', df, stat:(x1-x2)/(sa*Math.sqrt(1/n1+1/n2)),
+        pre:`<p class="notes">Test utilizado: t con desvíos poblacionales iguales</p>`,
+        extras:box('S<sub>a</sub>', fmt(sa)), note:`v = n₁ + n₂ − 2 = ${df}` });
+    } else {
+      const A=s1/n1, B=s2/n2;
+      const vex=Math.pow(A+B,2)/((1/(n1-1))*A*A+(1/(n2-1))*B*B);
+      const vr=Math.max(1, Math.round(vex));
+      Object.assign(o, { name:'t', dist:'t', df:vr, stat:(x1-x2)/Math.sqrt(A+B),
+        pre:`<p class="notes">Test utilizado: t de Welch (desvíos poblacionales distintos)</p>`,
+        extras:box('v', fmt(vex,4)), note:`El crítico se busca con v redondeado = ${vr}` });
+    }
+    out.innerHTML = pivotResult(o);
+  }
+  bindSeg('seg-cI', st, 'cola', upd);
+  bindSeg('seg-cI-eq', st, 'eq', upd);
+  bindInputs(`#view-${key} input, #view-${key} select`, upd);
+  $('#cI_ej').addEventListener('click', () => {
+    st.eq='ne';
+    const ex={ a:'0,05', n1:'10', x1:'35,2', dv1:'2,1', n2:'14', x2:'32,9', dv2:'4,8' };
+    for (const [k,v] of Object.entries(ex)) $(`#cI_${k}`).value=v;
+    $('#cI_dt1').value='S'; $('#cI_dt2').value='S';
+    upd();
+  });
+  upd();
+}
+
 /* ---------- Muestras apareadas ---------- */
 function cmpBuildP(){
   const key='cP';
-  mountSection(key, 'Comparación de promedios poblacionales. Muestras apareadas.',
+  mountSection(key, 'Comparación de promedios con muestras dependientes',
     `<div class="datapanel">` +
       `<div class="datarow"><div class="grp">` +
         `<div class="cellf"><label for="cP_a">α</label><input id="cP_a" inputmode="decimal" autocomplete="off"></div>` +
@@ -1699,9 +1791,7 @@ function cmpBuildP(){
 }
 
 cmpBuild('cF','F','Comparación de desvíos poblacionales');
-cmpBuild('cZ','Z','Comparación de promedios poblacionales conocidos los desvíos poblacionales');
-cmpBuild('cT1','T1','Comparación de promedios poblacionales desconocidos los desvíos poblacionales pero supuestos iguales');
-cmpBuild('cT2','T2','Comparación de promedios poblacionales desconocidos los desvíos poblacionales pero diferentes');
+cmpBuildI();
 cmpBuildP();
 
 /* =====================================================================
