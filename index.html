@@ -146,6 +146,17 @@ table.rt{ width:auto; min-width:min(100%,420px); margin-top:0; }
 .rt tr.tot td, .rt tr.tot th{ font-weight:600; border-top:2px solid var(--muted); }
 .dt td.dv{ padding:10px 8px; background:var(--paper); min-width:88px; font-variant-numeric:tabular-nums; }
 .dt th.corner{ min-width:120px; }
+
+:root{ --okbg:#CDEBD8; --badbg:#F8D3DE; --oktxt:#1B5E3F; --badtxt:#A12A55; }
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){ --okbg:#1E4A36; --badbg:#5A2338; --oktxt:#8FE0B5; --badtxt:#FF9DBE; } }
+:root[data-theme="dark"]{ --okbg:#1E4A36; --badbg:#5A2338; --oktxt:#8FE0B5; --badtxt:#FF9DBE; }
+.big.ok{ background:var(--okbg); }
+.big.bad{ background:var(--badbg); }
+.big .tag{ margin-top:2px; font-weight:600; font-size:.98rem; }
+.big.ok .tag{ color:var(--oktxt); }
+.big.bad .tag{ color:var(--badtxt); }
+.big-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:12px; margin-top:4px; }
+.big-grid .big .v{ font-size:1.35rem; }
 </style>
 </head>
 <body>
@@ -161,7 +172,7 @@ table.rt{ width:auto; min-width:min(100%,420px); margin-top:0; }
       <button class="menu-btn" data-go="prop"><span class="name">Inferencia para la proporción poblacional</span><span class="soon"></span></button>
       <button class="menu-btn" data-go="np"><span class="name">Pruebas no paramétricas</span><span class="soon"></span></button>
       <button class="menu-btn" data-go="comp"><span class="name">Comparación de poblaciones</span><span class="soon"></span></button>
-      <button class="menu-btn" data-go="reg"><span class="name">Regresión lineal simple</span><span class="soon">Próximamente</span></button>
+      <button class="menu-btn" data-go="reg"><span class="name">Regresión lineal simple</span><span class="soon"></span></button>
     </div>
   </section>
 
@@ -488,6 +499,16 @@ table.rt{ width:auto; min-width:min(100%,420px); margin-top:0; }
     </div>
   </section>
 
+  <!-- REGRESIÓN LINEAL SIMPLE: submenú -->
+  <section id="view-reg" hidden>
+    <button class="back" data-go="home">← Volver al inicio</button>
+    <h2>Regresión lineal simple</h2>
+    <div class="menu">
+      <button class="menu-btn" data-go="rI"><span class="name">Carga de datos individuales</span><span class="soon"></span></button>
+      <button class="menu-btn" data-go="rP"><span class="name">Carga de datos procesados</span><span class="soon"></span></button>
+    </div>
+  </section>
+
   <!-- DESVÍO / VARIANZA -->
   <section id="view-var" hidden>
     <button class="back" data-go="home">← Volver al inicio</button>
@@ -666,8 +687,8 @@ const errP = msg => `<p class="err">${msg}</p>`;
 /* =====================================================================
    Navegación
    ===================================================================== */
-const views = { home:'#view-home', soon:'#view-soon', mean:'#view-mean', mint:'#view-mint', mtest:'#view-mtest', prop:'#view-prop', pint:'#view-pint', ptest:'#view-ptest', np:'#view-np', gof:'#view-gof', ind:'#view-ind', comp:'#view-comp', var:'#view-var' };
-const soonNames = { reg:'Regresión lineal simple' };
+const views = { home:'#view-home', soon:'#view-soon', mean:'#view-mean', mint:'#view-mint', mtest:'#view-mtest', prop:'#view-prop', pint:'#view-pint', ptest:'#view-ptest', np:'#view-np', gof:'#view-gof', ind:'#view-ind', comp:'#view-comp', reg:'#view-reg', var:'#view-var' };
+const soonNames = {};
 function go(dest){
   let target = dest;
   if (soonNames[dest]){ target='soon'; $('#soon-title').textContent = soonNames[dest]; }
@@ -1451,12 +1472,16 @@ function chartPiv(o){
   const iw=W-m.l-m.r, ih=H-m.t-m.b, base=m.t+ih;
   const pdf = x => o.dist==='F' ? fPdf(x,o.df,o.df2) : (o.dist==='t' ? tPdf(x,o.df) : normPdf(x));
   const inv = p => o.dist==='F' ? fInv(p,o.df,o.df2) : (o.dist==='t' ? tInv(p,o.df) : zInv(p));
-  let xmin, xmax;
+  let xmin, xmax, off=false, statPos=o.stat;
   if (o.dist==='F'){
-    xmin=0; xmax=Math.max(inv(0.999), o.stat*1.1, ...o.crits.map(c=>c*1.1));
+    const base=Math.max(inv(0.999), ...o.crits.map(c=>c*1.1));
+    xmin=0; xmax=(o.stat*1.1 <= base*1.8) ? Math.max(base, o.stat*1.1) : base;
+    if (o.stat > xmax){ off=true; statPos=xmax*0.96; }
   } else {
-    const r=Math.max(Math.min(inv(0.9995),8), Math.abs(o.stat)*1.15, ...o.crits.map(c=>Math.abs(c)*1.2));
+    const base=Math.max(Math.min(inv(0.9995),8), ...o.crits.map(c=>Math.abs(c)*1.2));
+    const r=(Math.abs(o.stat)*1.15 <= base*1.8) ? Math.max(base, Math.abs(o.stat)*1.15) : base;
     xmin=-r; xmax=r;
+    if (Math.abs(o.stat) > r){ off=true; statPos=Math.sign(o.stat)*r*0.96; }
   }
   const sx = x => m.l+(x-xmin)/(xmax-xmin)*iw;
   const N=400, xs=[];
@@ -1486,9 +1511,9 @@ function chartPiv(o){
     s += `<line x1="${sx(c).toFixed(1)}" y1="${m.t}" x2="${sx(c).toFixed(1)}" y2="${base}" stroke="var(--reject)" stroke-width="1.6" stroke-dasharray="5 4"/>`;
     s += `<text x="${clampX(c).toFixed(1)}" y="${base+18}" text-anchor="middle" font-size="13" fill="var(--reject)" font-family="var(--sans)">${fmt(c,2)}</text>`;
   });
-  s += `<line x1="${sx(o.stat).toFixed(1)}" y1="${m.t-4}" x2="${sx(o.stat).toFixed(1)}" y2="${base}" stroke="var(--curve)" stroke-width="2.6"/>`;
-  s += `<circle cx="${sx(o.stat).toFixed(1)}" cy="${m.t-4}" r="4" fill="var(--curve)"/>`;
-  s += `<text x="${clampX(o.stat,44).toFixed(1)}" y="${m.t-12}" text-anchor="middle" font-size="14" font-weight="600" fill="var(--curve)" font-family="var(--sans)">${o.name} = ${fmt(o.stat,2)}</text>`;
+  s += `<line x1="${sx(statPos).toFixed(1)}" y1="${m.t-4}" x2="${sx(statPos).toFixed(1)}" y2="${base}" stroke="var(--curve)" stroke-width="2.6"${off?' stroke-dasharray="7 4"':''}/>`;
+  s += `<circle cx="${sx(statPos).toFixed(1)}" cy="${m.t-4}" r="4" fill="var(--curve)"/>`;
+  s += `<text x="${clampX(statPos,off?56:44).toFixed(1)}" y="${m.t-12}" text-anchor="middle" font-size="14" font-weight="600" fill="var(--curve)" font-family="var(--sans)">${o.name} = ${fmt(o.stat,2)}${off ? (o.stat>0 ? ' →' : ' ←') : ''}</text>`;
   if (dfTxt) s += `<text x="${m.l}" y="${H-6}" font-size="12" fill="var(--muted)" font-family="var(--sans)">${dfTxt}</text>`;
   return s + `</svg>`;
 }
@@ -1518,12 +1543,12 @@ function pivotResult(o){
   }
   pval = Math.min(1, Math.max(0, pval));
   const [H0,H1] = hypOf(o.sym, o.cola);
-  return `<p class="hyp">H₀: ${H0} &nbsp;·&nbsp; H₁: ${H1} &nbsp;·&nbsp; α = ${fmt(a)}</p>` +
+  return (o.hypHtml || `<p class="hyp">H₀: ${H0} &nbsp;·&nbsp; H₁: ${H1} &nbsp;·&nbsp; α = ${fmt(a)}</p>`) +
     (o.pre || '') +
     `<div class="big-pair">${box(`${N} calculado`, fmt(o.stat))}${box(critBox[0], critBox[1])}${o.extras||''}</div>` +
     (o.note ? `<p class="notes">${o.note}</p>` : '') +
     `<p class="notes">Zona de rechazo: ${region}</p>` +
-    `<div class="verdict ${reject?'rej':''}">${reject?'Se rechaza H₀':'No se rechaza H₀'}<span>p-valor = ${fmt(pval)}</span></div>` +
+    `<div class="verdict ${reject?'rej':''}">${reject?'Se rechaza H₀':'No se rechaza H₀'}${o.concl ? `<span>${o.concl(reject)}</span>` : ''}<span>p-valor = ${fmt(pval)}</span></div>` +
     `<div class="chart-wrap">${chartPiv({dist:o.dist, df:o.df, df2:o.df2, stat:o.stat, cola:o.cola, crits, name:N})}</div>` +
     `<div class="legend"><span><i style="background:var(--reject);opacity:.45"></i>Zona de rechazo</span><span><i style="background:var(--curve)"></i>${N} calculado</span></div>`;
 }
@@ -1533,11 +1558,11 @@ const colaButtons = sym =>
   `<button type="button" data-v="two" aria-pressed="true">Bilateral (${sym}₁ ≠ ${sym}₂)</button>` +
   `<button type="button" data-v="left" aria-pressed="false">Cola izquierda (${sym}₁ &lt; ${sym}₂)</button>` +
   `<button type="button" data-v="right" aria-pressed="false">Cola derecha (${sym}₁ &gt; ${sym}₂)</button>`;
-function mountSection(key, title, inner){
+function mountSection(key, title, inner, backTo){
   document.querySelector('.wrap').insertAdjacentHTML('beforeend',
     `<section id="view-${key}" hidden><button class="back" type="button">← Volver</button><h2>${title}</h2>${inner}</section>`);
   views[key] = '#view-'+key;
-  document.querySelector(`#view-${key} .back`).addEventListener('click', () => go('comp'));
+  document.querySelector(`#view-${key} .back`).addEventListener('click', () => go(backTo || 'comp'));
 }
 
 /* ---------- Cuatro tests con dos muestras independientes ---------- */
@@ -1793,6 +1818,239 @@ function cmpBuildP(){
 cmpBuild('cF','F','Comparación de desvíos poblacionales');
 cmpBuildI();
 cmpBuildP();
+
+/* =====================================================================
+   Regresión lineal simple
+   ===================================================================== */
+const boxT = (k,val,cls,tag) => `<div class="big ${cls||''}"><div class="k">${k}</div><div class="v">${val}</div>${tag ? `<div class="tag">${tag}</div>` : ''}</div>`;
+
+function regShell(p, withSummary){
+  return `<div class="results" aria-live="polite">` +
+    (withSummary ? `<div class="block" hidden><h3>Resultados de la muestra</h3><div id="${p}_sum"></div></div>` : '') +
+    `<div class="block" hidden><h3>Ajuste lineal</h3><div id="${p}_fit"></div></div>` +
+    `<div class="block" hidden><h3>Test de significancia</h3><div id="${p}_test"></div></div>` +
+    `<div class="block" hidden><h3>Intervalos de confianza</h3><div id="${p}_ic"></div></div>` +
+  `</div>`;
+}
+function regPut(p, id, html){
+  const el=document.getElementById(`${p}_${id}`);
+  if (!el) return;
+  el.innerHTML = html;
+  el.closest('.block').hidden = (html==='');
+}
+// Interpretación de R según los criterios pedidos
+function classifyR(R){
+  if (R < -0.7) return { cls:'ok', tag:'Relación fuerte e inversa' };
+  if (R > 0.7) return { cls:'ok', tag:'Relación fuerte y directa' };
+  if (R <= -0.0001) return { cls:'bad', tag:'Relación inversa y débil' };
+  if (R >= 0.0001) return { cls:'bad', tag:'Relación directa y débil' };
+  return { cls:'bad', tag:'Sin relación lineal' };
+}
+const REG_EMPTY = { n:null,a:null,b:null,R:null,R2:null,Se:null,Sb:null,xbar:null,Sxx:null,aI:null,aT:null,x0:null };
+
+function regRender(p, D, withSummary){
+  const { n,a,b,R,R2,Se,Sb,xbar,Sxx,aI,aT,x0 } = D;
+  // resumen de lo calculado (solo carga individual)
+  if (withSummary){
+    const all = [n,a,b,R,R2,Se,Sb,xbar,Sxx].every(v => v!==null);
+    regPut(p,'sum', all ?
+      `<div class="big-grid">${box('R',fmt(R))}${box('R²',fmt(R2))}${box('S<sub>e</sub>',fmt(Se))}${box('a',fmt(a))}${box('b',fmt(b))}${box('S<sub>b</sub>',fmt(Sb))}${box('x̄',fmt(xbar))}${box('S<sub>xx</sub>',fmt(Sxx))}</div>` : '');
+  }
+  // recta, R² y R
+  let fit='';
+  if (a!==null && b!==null) fit += `<p class="hyp" style="font-size:1.3rem;margin-top:4px">ŷ = ${fmt(a)} ${b<0?'−':'+'} ${fmt(Math.abs(b))}·x</p>`;
+  const bx=[];
+  if (R2!==null) bx.push(boxT('R²', fmt(R2), R2>0.5 ? 'ok' : '', R2>0.5 ? 'Buen Ajuste' : ''));
+  if (R!==null){ const c=classifyR(R); bx.push(boxT('R', fmt(R), c.cls, c.tag)); }
+  if (bx.length) fit += `<div class="big-pair">${bx.join('')}</div>`;
+  regPut(p,'fit', fit);
+
+  // test de significancia (bilateral, v = n − 2)
+  let test='';
+  if (b!==null && Sb!==null && n!==null && aT!==null){
+    const df=n-2;
+    test = pivotResult({ sym:'β', cola:'two', a:aT, name:'t', dist:'t', df, stat:b/Sb,
+      hypHtml:`<p class="hyp">H₀) β = 0 no existe relación entre las variables</p>` +
+              `<p class="hyp" style="margin-top:2px">H₁) β ≠ 0 existe relación entre las variables</p>` +
+              `<p class="notes">α = ${fmt(aT)}</p>`,
+      note:`v = n − 2 = ${df}`,
+      concl: rej => rej ? 'Existe relación lineal entre las variables.' : 'No hay evidencia suficiente para afirmar que exista relación lineal entre las variables.' });
+  }
+  regPut(p,'test', test);
+
+  // intervalos de confianza (solo completos)
+  let ic='', tUsed=null;
+  if (n!==null && aI!==null){
+    const df=n-2, t=tInv(1-aI/2, df); tUsed=`Valor de t utilizado: ±${fmt(t)} (v = ${df})`;
+    if (b!==null && Sb!==null){
+      ic += `<div class="subhead" style="margin-top:12px">Intervalo para el coeficiente de regresión poblacional</div>` +
+            box('β', `( ${fmt(b-t*Sb)} ; ${fmt(b+t*Sb)} )`, 'wide');
+    }
+    if (a!==null && b!==null && xbar!==null && Sxx!==null && Se!==null && x0!==null){
+      const y0=a+b*x0, q=(x0-xbar)*(x0-xbar)/Sxx;
+      const Sy=Se*Math.sqrt(1/n+q), Syc=Se*Math.sqrt(1+1/n+q);
+      ic += `<div class="subhead">Intervalo para la recta promedio de regresión</div>` +
+            `<div class="big-pair">${box('ŷ', fmt(y0))}${box('S<sub>ŷ</sub>', fmt(Sy))}</div>` +
+            box('μ<sub>y</sub>', `( ${fmt(y0-t*Sy)} ; ${fmt(y0+t*Sy)} )`, 'wide') +
+            `<div class="subhead">Intervalo de predicción</div>` +
+            `<div class="big-pair">${box('S<sub>yc</sub>', fmt(Syc))}</div>` +
+            box('y', `( ${fmt(y0-t*Syc)} ; ${fmt(y0+t*Syc)} )`, 'wide');
+    }
+    if (ic) ic += `<p class="notes">${tUsed}</p>`;
+  }
+  regPut(p,'ic', ic);
+}
+
+const alphaErr = (a, lab) => (a!==null && (Number.isNaN(a) || !validAlpha(a))) ? `${lab} debe estar entre 0 y 1 (por ejemplo 0,05).` : null;
+
+/* ---------- Carga de datos individuales ---------- */
+function regBuildI(){
+  const key='rI';
+  mountSection(key, 'Carga de datos individuales',
+    `<div class="datapanel"><div class="datarow">` +
+      `<div class="grp"><div class="cellf"><label for="rI_aI">α<sub>I</sub></label><input id="rI_aI" inputmode="decimal" autocomplete="off"></div>` +
+        `<div class="cellf"><label for="rI_aT">α<sub>T</sub></label><input id="rI_aT" inputmode="decimal" autocomplete="off"></div></div>` +
+      `<div class="grp"><div class="cellf"><label for="rI_n">n</label><input id="rI_n" inputmode="numeric" autocomplete="off"></div></div>` +
+      `<div class="grp"><div class="cellf"><label for="rI_x0">X₀</label><input id="rI_x0" inputmode="decimal" autocomplete="off"></div></div>` +
+    `</div><div id="rI_table"></div>` +
+    `<button type="button" class="linkbtn" id="rI_ej">Cargar un ejemplo</button></div>` +
+    `<div id="rI_err"></div>` + regShell(key,true), 'reg');
+
+  const S = { n:null, x:[], y:[] };
+  const holder = $('#rI_table'), errEl = $('#rI_err');
+
+  function rebuild(){
+    const n=read('rI_n');
+    S.n=null;
+    if (n===null){ holder.innerHTML=''; upd(); return; }
+    if (Number.isNaN(n) || !Number.isInteger(n) || n<3 || n>50){
+      holder.innerHTML=errP('n debe ser un número entero entre 3 y 50.'); upd(); return;
+    }
+    S.n=n;
+    let rows='';
+    for (let i=0;i<n;i++){
+      rows += `<tr><td><input data-c="x" data-i="${i}" inputmode="decimal" autocomplete="off" value="${esc(S.x[i]!==undefined?S.x[i]:'')}" aria-label="x del par ${i+1}"></td>` +
+              `<td><input data-c="y" data-i="${i}" inputmode="decimal" autocomplete="off" value="${esc(S.y[i]!==undefined?S.y[i]:'')}" aria-label="y del par ${i+1}"></td></tr>`;
+    }
+    holder.innerHTML = `<div class="tscroll"><table class="dt"><thead><tr><th>x</th><th>y</th></tr></thead><tbody>${rows}</tbody></table></div>`;
+    upd();
+  }
+
+  function upd(){
+    const aI=read('rI_aI'), aT=read('rI_aT'), x0=read('rI_x0');
+    let e = alphaErr(aI,'α<sub>I</sub>') || alphaErr(aT,'α<sub>T</sub>') || ((x0!==null && Number.isNaN(x0)) ? 'X₀ debe ser un número.' : null);
+    if (e){ errEl.innerHTML=errP(e); regRender(key, REG_EMPTY, true); return; }
+    errEl.innerHTML='';
+    if (!S.n){ regRender(key, REG_EMPTY, true); return; }
+    const xs=[], ys=[]; let missing=false;
+    for (let i=0;i<S.n;i++){
+      const x=parseNum(S.x[i]), y=parseNum(S.y[i]);
+      if ((x!==null && Number.isNaN(x)) || (y!==null && Number.isNaN(y))){ errEl.innerHTML=errP('Los datos deben ser números.'); regRender(key, REG_EMPTY, true); return; }
+      if (x===null || y===null){ missing=true; continue; }
+      xs.push(x); ys.push(y);
+    }
+    if (missing){ regRender(key, REG_EMPTY, true); return; }
+    const n=S.n, xbar=xs.reduce((s,v)=>s+v,0)/n, ybar=ys.reduce((s,v)=>s+v,0)/n;
+    let Sxx=0, Syy=0, Sxy=0;
+    for (let i=0;i<n;i++){ Sxx+=(xs[i]-xbar)**2; Syy+=(ys[i]-ybar)**2; Sxy+=(xs[i]-xbar)*(ys[i]-ybar); }
+    if (!(Sxx>0)){ errEl.innerHTML=errP('Todos los valores de x son iguales: no se puede ajustar la recta.'); regRender(key, REG_EMPTY, true); return; }
+    if (!(Syy>0)){ errEl.innerHTML=errP('Todos los valores de y son iguales: no se puede calcular R.'); regRender(key, REG_EMPTY, true); return; }
+    const b=Sxy/Sxx, a=ybar-b*xbar, R=Sxy/Math.sqrt(Sxx*Syy);
+    const SSE=Math.max(0, Syy-b*Sxy), Se=Math.sqrt(SSE/(n-2)), Sb=Se/Math.sqrt(Sxx);
+    if (!(Se>1e-12*Math.max(1,Math.abs(ybar)))){ errEl.innerHTML=errP('El ajuste es perfecto (S<sub>e</sub> = 0): no se puede calcular t.'); regRender(key, REG_EMPTY, true); return; }
+    regRender(key, { n,a,b,R,R2:R*R,Se,Sb,xbar,Sxx,aI,aT,x0 }, true);
+  }
+
+  $('#rI_n').addEventListener('input', rebuild);
+  bindInputs('#rI_aI, #rI_aT, #rI_x0', upd);
+  holder.addEventListener('input', e => {
+    const t=e.target;
+    if (t && t.dataset && t.dataset.c){ S[t.dataset.c][Number(t.dataset.i)] = t.value; upd(); }
+  });
+  // Pegar desde Excel: columnas x e y a partir de la celda elegida
+  holder.addEventListener('paste', e => {
+    const t=e.target;
+    if (!t || !t.dataset || !t.dataset.c) return;
+    const cd = e.clipboardData || window.clipboardData;
+    const text = cd ? cd.getData('text') : '';
+    if (!/[\t\n\r;]/.test(text.trim())) return;
+    e.preventDefault();
+    const c0 = t.dataset.c==='x' ? 0 : 1, i0 = Number(t.dataset.i);
+    text.trim().split(/\r?\n/).forEach((line, r) => {
+      line.split(/\t|;/).forEach((v, k) => {
+        const col=c0+k, i=i0+r;
+        if (col>1 || i>=S.n) return;
+        const f = col===0 ? 'x' : 'y';
+        S[f][i]=v.trim();
+        const inp = holder.querySelector(`input[data-c="${f}"][data-i="${i}"]`);
+        if (inp) inp.value=v.trim();
+      });
+    });
+    upd();
+  });
+  $('#rI_ej').addEventListener('click', () => {
+    S.x=['12','15','18','20','23','25','28','30','33','35'];
+    S.y=['40','44','47','52','54','60','63','66','70','73'];
+    $('#rI_aI').value='0,05'; $('#rI_aT').value='0,05'; $('#rI_n').value='10'; $('#rI_x0').value='27';
+    rebuild();
+  });
+  regRender(key, REG_EMPTY, true);
+}
+
+/* ---------- Carga de datos procesados ---------- */
+function regBuildP(){
+  const key='rP';
+  const cell = (id, label) => `<div class="cellf"><label for="rP_${id}">${label}</label><input id="rP_${id}" inputmode="decimal" autocomplete="off"></div>`;
+  mountSection(key, 'Carga de datos procesados',
+    `<div class="datapanel">` +
+      `<div class="datarow">` +
+        `<div class="grp">${cell('aI','α<sub>I</sub>')}${cell('aT','α<sub>T</sub>')}</div>` +
+        `<div class="grp">${cell('n','n')}</div>` +
+        `<div class="grp">${cell('x0','X₀')}</div>` +
+      `</div>` +
+      `<div class="datarow" style="margin-top:14px">` +
+        `<div class="grp">${cell('R','R')}${cell('R2','R²')}${cell('Se','S<sub>e</sub>')}${cell('a','a')}${cell('b','b')}${cell('Sb','S<sub>b</sub>')}</div>` +
+      `</div>` +
+      `<div class="datarow" style="margin-top:14px">` +
+        `<div class="grp">${cell('xbar','x̄')}${cell('Sxx','S<sub>xx</sub>')}</div>` +
+      `</div>` +
+      `<button type="button" class="linkbtn" id="rP_ej">Cargar un ejemplo</button>` +
+    `</div>` +
+    `<div id="rP_err"></div>` + regShell(key,false), 'reg');
+
+  const errEl=$('#rP_err');
+  function upd(){
+    const F = {};
+    for (const k of ['aI','aT','n','x0','R','R2','Se','a','b','Sb','xbar','Sxx']) F[k]=read('rP_'+k);
+    const bad = k => F[k]!==null && Number.isNaN(F[k]);
+    const names = { aI:'α<sub>I</sub>', aT:'α<sub>T</sub>', n:'n', x0:'X₀', R:'R', R2:'R²', Se:'S<sub>e</sub>', a:'a', b:'b', Sb:'S<sub>b</sub>', xbar:'x̄', Sxx:'S<sub>xx</sub>' };
+    let e=null;
+    for (const k of Object.keys(names)){ if (bad(k)){ e=`${names[k]} debe ser un número.`; break; } }
+    if (!e) e = alphaErr(F.aI,'α<sub>I</sub>') || alphaErr(F.aT,'α<sub>T</sub>');
+    if (!e && F.n!==null && (!Number.isInteger(F.n) || F.n<3)) e='n debe ser un número entero mayor o igual a 3.';
+    if (!e && F.R!==null && Math.abs(F.R)>1) e='R debe estar entre −1 y 1.';
+    if (!e && F.R2!==null && (F.R2<0 || F.R2>1)) e='R² debe estar entre 0 y 1.';
+    if (!e) for (const k of ['Se','Sb','Sxx']) if (F[k]!==null && !(F[k]>0)){ e=`${names[k]} debe ser un número positivo.`; break; }
+    if (e){ errEl.innerHTML=errP(e); regRender(key, REG_EMPTY, false); return; }
+    errEl.innerHTML='';
+    // Si falta alguno, se completa a partir de los otros datos cargados
+    let { R, R2, Sb } = F;
+    if (R2===null && R!==null) R2 = R*R;
+    if (R===null && R2!==null && F.b!==null) R = (F.b<0 ? -1 : 1)*Math.sqrt(R2);
+    if (Sb===null && F.Se!==null && F.Sxx!==null) Sb = F.Se/Math.sqrt(F.Sxx);
+    regRender(key, { n:F.n, a:F.a, b:F.b, R, R2, Se:F.Se, Sb, xbar:F.xbar, Sxx:F.Sxx, aI:F.aI, aT:F.aT, x0:F.x0 }, false);
+  }
+  bindInputs(`#view-${key} input`, upd);
+  $('#rP_ej').addEventListener('click', () => {
+    const ex = { aI:'0,05', aT:'0,05', n:'10', x0:'27', R:'0,9968', R2:'0,9936', Se:'0,9593', a:'22,0120', b:'1,4597', Sb:'0,0416', xbar:'23,9', Sxx:'532,9' };
+    for (const [k,v] of Object.entries(ex)) $('#rP_'+k).value=v;
+    upd();
+  });
+  regRender(key, REG_EMPTY, false);
+}
+
+regBuildI();
+regBuildP();
 
 /* =====================================================================
    Desvío / varianza (chi cuadrado)
