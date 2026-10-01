@@ -1,0 +1,2339 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Inferencia estadística</title>
+<link rel="icon" type="image/png" href="data:image/png;base64,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">
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,600;1,400;1,600&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F7F3FB; --surface:#FFFFFF; --cell:#E8D3F3; --cell-strong:#D9B8EC;
+  --ink:#2B1B3A; --muted:#6B5C7B; --line:#CDB8DD;
+  --curve:#4B2E83; --reject:#C0356B; --ok:#2E7D5B; --beta:#1D7A8C;
+  --serif:"Spectral", Georgia, "Times New Roman", serif;
+  --sans:"Instrument Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#1B1226; --surface:#241833; --cell:#2E1F40; --cell-strong:#41295C;
+    --ink:#F1E8F8; --muted:#B5A5C6; --line:#4A3763;
+    --curve:#B79CF0; --reject:#FF6E9E; --ok:#6FD0A0; --beta:#62C5D8;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#1B1226; --surface:#241833; --cell:#2E1F40; --cell-strong:#41295C;
+  --ink:#F1E8F8; --muted:#B5A5C6; --line:#4A3763;
+  --curve:#B79CF0; --reject:#FF6E9E; --ok:#6FD0A0; --beta:#62C5D8;
+}
+html{ scroll-padding-top:env(safe-area-inset-top,0px); }
+*,*::before,*::after{ box-sizing:inherit; }
+body{
+  margin:0; background:var(--paper); color:var(--ink);
+  font-family:var(--sans); font-size:16px; line-height:1.5;
+  font-variant-numeric:tabular-nums;
+}
+.wrap{ max-width:1040px; margin:0 auto; padding:28px 20px 56px; }
+h1,h2,h3{ font-family:var(--serif); font-weight:600; margin:0; line-height:1.15; }
+h1{ font-size:clamp(2rem,5vw,3rem); }
+h2{ font-size:clamp(1.5rem,3.4vw,2rem); }
+h3{ font-size:1.15rem; }
+p{ margin:0; }
+.muted{ color:var(--muted); }
+button{ font:inherit; color:inherit; cursor:pointer; }
+:focus-visible{ outline:3px solid var(--curve); outline-offset:2px; }
+[hidden]{ display:none !important; }
+
+/* Menús */
+.lead{ max-width:52ch; margin-top:10px; color:var(--muted); }
+.menu{ display:grid; gap:12px; margin-top:32px; max-width:720px; }
+.menu-btn{
+  display:grid; grid-template-columns:1fr auto; align-items:center;
+  width:100%; text-align:left; padding:0; border:1px solid var(--line);
+  background:var(--cell); border-radius:6px; overflow:hidden;
+  transition:background .15s, transform .15s;
+}
+.menu-btn:hover{ background:var(--cell-strong); }
+.menu-btn:active{ transform:translateY(1px); }
+.menu-btn .name{ padding:20px 20px; font-weight:500; font-size:1.05rem; }
+.menu-btn .soon{ padding-right:18px; font-size:.85rem; color:var(--muted); }
+
+.back{
+  display:inline-flex; align-items:center; gap:6px; padding:8px 14px; margin-bottom:22px;
+  border:1px solid var(--line); background:transparent; border-radius:999px; color:var(--muted);
+}
+.back:hover{ background:var(--cell); color:var(--ink); }
+
+/* Datos en fila */
+.datapanel{ margin-top:26px; background:var(--surface); border:1px solid var(--line); border-radius:8px; padding:18px 20px; }
+.datarow{ display:flex; flex-wrap:wrap; gap:16px 24px; align-items:flex-end; }
+.grp{ display:flex; }
+.cellf{ display:flex; flex-direction:column; width:118px; border:1px solid var(--line); background:var(--surface); }
+.cellf + .cellf{ border-left:0; }
+.cellf label{
+  background:var(--cell); padding:8px 10px; font-family:var(--serif); font-style:italic;
+  font-size:1.1rem; text-align:center; border-bottom:1px solid var(--line); white-space:nowrap;
+}
+.cellf input{
+  width:100%; min-width:0; border:0; padding:11px 10px; font:inherit; text-align:center;
+  background:transparent; color:var(--ink); font-variant-numeric:tabular-nums;
+}
+.cellf.sel{ position:relative; }
+.cellf.sel.wide{ width:150px; }
+.cellf.sel::after{ content:"▾"; position:absolute; top:9px; right:9px; font-size:.8rem; color:var(--muted); pointer-events:none; }
+.cellf select{
+  appearance:none; -webkit-appearance:none; width:100%; border:0; border-radius:0;
+  border-bottom:1px solid var(--line); background:var(--cell); color:var(--ink);
+  font-family:var(--serif); font-style:italic; font-size:1.1rem;
+  padding:8px 24px 8px 10px; text-align:center; text-align-last:center; cursor:pointer;
+}
+.cellf label, .cellf select{ line-height:1.5; box-sizing:border-box; }
+.cellf select{ min-height:calc(1.1rem*1.5 + 17px); }
+.cellf input{ flex:1; }
+.cellf:focus-within{ outline:3px solid var(--curve); outline-offset:1px; position:relative; z-index:1; }
+.cellf input:focus-visible, .cellf select:focus-visible{ outline:none; }
+.linkbtn{ background:none; border:0; padding:0; color:var(--curve); text-decoration:underline; text-underline-offset:3px; margin-top:14px; }
+
+/* Resultados */
+.results{ display:grid; gap:18px; margin-top:22px; }
+.block{ background:var(--surface); border:1px solid var(--line); border-radius:8px; padding:20px; }
+.seg{ display:flex; flex-wrap:wrap; gap:8px; margin:14px 0 4px; }
+.seg button{ padding:8px 14px; border:1px solid var(--line); background:transparent; border-radius:999px; }
+.seg button:hover{ background:var(--cell); }
+.seg button[aria-pressed="true"]{ background:var(--cell-strong); border-color:var(--curve); font-weight:600; }
+.err{ color:var(--reject); margin-top:12px; font-weight:500; }
+.big-pair{ display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:12px; margin-top:14px; }
+.big{ background:var(--cell); border-radius:6px; padding:14px 16px; text-align:center; }
+.big.wide{ margin-top:12px; }
+.big .k{ font-family:var(--serif); font-style:italic; font-size:1.05rem; color:var(--muted); }
+.big .v{ font-family:var(--serif); font-size:clamp(1.4rem,3.4vw,1.9rem); font-weight:600; margin-top:2px; overflow-wrap:anywhere; }
+.verdict{
+  margin-top:16px; padding:12px 14px; border-radius:6px; font-weight:600;
+  border-left:5px solid var(--ok); background:var(--cell);
+}
+.verdict.rej{ border-left-color:var(--reject); }
+.verdict span{ font-weight:400; display:block; margin-top:2px; color:var(--muted); }
+.hyp{ margin-top:14px; font-family:var(--serif); font-size:1.1rem; }
+.chart-wrap{ margin-top:14px; }
+.chart-wrap svg{ width:100%; height:auto; display:block; }
+.legend{ display:flex; flex-wrap:wrap; gap:16px; margin-top:8px; font-size:.9rem; color:var(--muted); }
+.legend i{ display:inline-block; width:14px; height:14px; border-radius:3px; vertical-align:-2px; margin-right:6px; }
+.legend .ln{ width:22px; height:0; border-radius:0; border-top:3px solid var(--curve); vertical-align:middle; }
+.legend .ln.h1{ border-top:3px dashed var(--beta); }
+.notes{ margin-top:14px; color:var(--muted); }
+details{ margin-top:14px; }
+summary{ cursor:pointer; color:var(--curve); }
+table{ width:100%; border-collapse:collapse; margin-top:10px; font-size:.92rem; }
+th,td{ text-align:right; padding:6px 10px; border-bottom:1px solid var(--line); }
+th{ font-weight:500; color:var(--muted); }
+@media (prefers-reduced-motion: reduce){ *{ transition:none !important; } }
+
+.subhead{ font-weight:600; margin-top:18px; font-size:.95rem; }
+.tscroll{ overflow-x:auto; margin-top:12px; }
+table.dt{ width:auto; border-collapse:collapse; margin:0; }
+.dt th, .dt td{ border:1px solid var(--line); padding:0; text-align:center; }
+.dt th{ background:var(--cell); font-family:var(--serif); font-style:italic; font-size:1.05rem; font-weight:500; color:var(--ink); padding:8px 12px; min-width:96px; }
+.dt th.in{ padding:0; }
+.dt td input, .dt th input{ width:100%; min-width:88px; border:0; background:transparent; color:var(--ink); font:inherit; text-align:center; padding:10px 8px; font-variant-numeric:tabular-nums; }
+.dt th input{ font-family:var(--serif); font-style:italic; font-size:1.05rem; }
+.dt td:focus-within, .dt th:focus-within{ outline:3px solid var(--curve); outline-offset:-3px; }
+.dt input:focus-visible{ outline:none; }
+table.rt{ width:auto; min-width:min(100%,420px); margin-top:0; }
+.rt th, .rt td{ text-align:center; padding:8px 14px; border:1px solid var(--line); }
+.rt th{ background:var(--cell); color:var(--ink); font-family:var(--serif); font-style:italic; font-weight:500; }
+.rt tr.tot td, .rt tr.tot th{ font-weight:600; border-top:2px solid var(--muted); }
+.dt td.dv{ padding:10px 8px; background:var(--paper); min-width:88px; font-variant-numeric:tabular-nums; }
+.dt th.corner{ min-width:120px; }
+
+:root{ --okbg:#CDEBD8; --badbg:#F8D3DE; --oktxt:#1B5E3F; --badtxt:#A12A55; }
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){ --okbg:#1E4A36; --badbg:#5A2338; --oktxt:#8FE0B5; --badtxt:#FF9DBE; } }
+:root[data-theme="dark"]{ --okbg:#1E4A36; --badbg:#5A2338; --oktxt:#8FE0B5; --badtxt:#FF9DBE; }
+.big.ok{ background:var(--okbg); }
+.big.bad{ background:var(--badbg); }
+.big .tag{ margin-top:2px; font-weight:600; font-size:.98rem; }
+.big.ok .tag{ color:var(--oktxt); }
+.big.bad .tag{ color:var(--badtxt); }
+.big-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:12px; margin-top:4px; }
+.big-grid .big .v{ font-size:1.35rem; }
+
+/* logo */
+.topbar{ display:flex; align-items:center; margin:0 0 14px; }
+.brand{ border:0; background:none; padding:0; cursor:pointer; border-radius:10px; line-height:0; }
+.brand img{ height:48px; width:auto; display:block; border-radius:10px; border:1px solid var(--line); background:#FAFBFA; }
+.hero{ display:flex; align-items:center; gap:20px; flex-wrap:wrap; }
+.logo-big{ width:clamp(84px,22vw,128px); height:auto; display:block; border-radius:16px; border:1px solid var(--line); background:#FAFBFA; }
+/* celdas alineadas aunque tengan subíndices o superíndices */
+.cellf label{ height:44px; display:flex; align-items:center; justify-content:center; padding:0 10px; line-height:1; }
+.cellf label sub, .cellf label sup, .selface sub, .selface sup{ line-height:0; }
+.cellf select{ height:44px; min-height:0; }
+.cellf input{ height:46px; }
+.cellf.sel select{ color:transparent; }
+.cellf.sel select option{ color:var(--ink); background:var(--surface); font-style:normal; }
+.selface{ position:absolute; top:0; left:0; right:0; height:44px; display:flex; align-items:center; justify-content:center; padding:0 22px 0 8px; font-family:var(--serif); font-style:italic; font-size:1.1rem; color:var(--ink); pointer-events:none; line-height:1; z-index:1; }
+.dt td.dv{ font-weight:600; }
+.dt tfoot th, .dt tfoot td{ border-top:2px solid var(--muted); }
+.linkbtn.clearbtn{ margin-left:22px; color:var(--muted); }
+/* p̂ y x̄ dibujados con CSS: el sombrero y la raya quedan centrados sobre la letra */
+.xb, .ph{ position:relative; display:inline-block; line-height:1; }
+.xb::before{ content:""; position:absolute; left:.13em; right:-.01em; top:.17em; border-top:.075em solid currentColor; }
+.ph::before, .ph::after{ content:""; position:absolute; top:.19em; width:.2em; border-top:.075em solid currentColor; }
+.ph::before{ left:.1em; transform:rotate(-40deg); transform-origin:100% 50%; }
+.ph::after{ left:.3em; transform:rotate(40deg); transform-origin:0 50%; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="topbar" id="topbar" hidden>
+    <button class="brand" type="button" data-go="home" aria-label="Ir al menú de inicio"><img data-logo alt="Logo: H₀ y H₁"></button>
+  </header>
+
+  <!-- INICIO -->
+  <section id="view-home">
+    <div class="hero">
+      <img class="logo-big" data-logo alt="Logo: H₀ y H₁">
+      <h1>Inferencia estadística</h1>
+    </div>
+    <div class="menu">
+      <button class="menu-btn" data-go="mean"><span class="name">Inferencia para el promedio poblacional</span><span class="soon"></span></button>
+      <button class="menu-btn" data-go="var"><span class="name">Inferencia para el desvío o varianza poblacional</span><span class="soon"></span></button>
+      <button class="menu-btn" data-go="prop"><span class="name">Inferencia para la proporción poblacional</span><span class="soon"></span></button>
+      <button class="menu-btn" data-go="np"><span class="name">Pruebas no paramétricas</span><span class="soon"></span></button>
+      <button class="menu-btn" data-go="comp"><span class="name">Comparación de poblaciones</span><span class="soon"></span></button>
+      <button class="menu-btn" data-go="reg"><span class="name">Regresión lineal simple</span><span class="soon"></span></button>
+    </div>
+  </section>
+
+  <!-- EN DESARROLLO -->
+  <section id="view-soon" hidden>
+    <button class="back" data-go="home">← Volver al inicio</button>
+    <h2 id="soon-title"></h2>
+    <p class="lead">Esta sección todavía no está armada.</p>
+  </section>
+
+  <!-- PROMEDIO: submenú -->
+  <section id="view-mean" hidden>
+    <button class="back" data-go="home">← Volver al inicio</button>
+    <h2>Inferencia para el promedio poblacional</h2>
+    <div class="menu">
+      <button class="menu-btn" data-go="mint"><span class="name">Intervalos de confianza</span><span class="soon"></span></button>
+      <button class="menu-btn" data-go="mtest"><span class="name">Test de hipótesis</span><span class="soon"></span></button>
+    </div>
+  </section>
+
+  <!-- PROMEDIO: intervalos -->
+  <section id="view-mint" hidden>
+    <button class="back" data-go="mean">← Volver</button>
+    <h2>Intervalos de confianza para el promedio poblacional</h2>
+
+    <div class="datapanel">
+      <div class="datarow">
+        <div class="grp"><div class="cellf"><label for="mi_a">α</label><input id="mi_a" inputmode="decimal" autocomplete="off"></div></div>
+        <div class="grp">
+          <div class="cellf"><label for="mi_n">n</label><input id="mi_n" inputmode="numeric" autocomplete="off"></div>
+          <div class="cellf"><label for="mi_x">x̄</label><input id="mi_x" inputmode="decimal" autocomplete="off"></div>
+        </div>
+        <div class="grp">
+          <div class="cellf sel">
+            <select id="mi_dt" aria-label="Medida de dispersión">
+              <option value="sd">σ</option><option value="var">σ²</option><option value="S">S</option><option value="S2">S²</option>
+            </select>
+            <input id="mi_dv" inputmode="decimal" autocomplete="off" aria-label="Valor de la medida de dispersión">
+          </div>
+        </div>
+      </div>
+      <button type="button" class="linkbtn" id="mi_ejemplo">Cargar un ejemplo</button>
+    </div>
+
+    <div class="results" aria-live="polite">
+      <div class="block">
+        <h3>Intervalo de confianza</h3>
+        <div class="seg" id="seg-mi-int">
+          <button type="button" data-v="full" aria-pressed="true">Intervalo completo</button>
+          <button type="button" data-v="inf" aria-pressed="false">Solo límite inferior</button>
+          <button type="button" data-v="sup" aria-pressed="false">Solo límite superior</button>
+        </div>
+        <div id="mi-out"></div>
+      </div>
+
+      <div class="block">
+        <h3>Recalcular</h3>
+        <div class="seg" id="seg-mi-calc">
+          <button type="button" data-v="n" aria-pressed="true">Tamaño de muestra (n)</button>
+          <button type="button" data-v="conf" aria-pressed="false">Confianza (1 − α)</button>
+        </div>
+        <div class="datarow" style="margin-top:12px">
+          <div class="grp">
+            <div class="cellf sel wide">
+              <select id="mi_ek" aria-label="Tipo de error">
+                <option value="pct">Reducción %</option><option value="E">Error E</option>
+              </select>
+              <input id="mi_ev" inputmode="decimal" autocomplete="off" aria-label="Valor">
+            </div>
+          </div>
+        </div>
+        <div id="mi-rec"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROMEDIO: test -->
+  <section id="view-mtest" hidden>
+    <button class="back" data-go="mean">← Volver</button>
+    <h2>Test de hipótesis para el promedio poblacional</h2>
+
+    <div class="datapanel">
+      <div class="datarow">
+        <div class="grp"><div class="cellf"><label for="mt_a">α</label><input id="mt_a" inputmode="decimal" autocomplete="off"></div></div>
+        <div class="grp">
+          <div class="cellf"><label for="mt_n">n</label><input id="mt_n" inputmode="numeric" autocomplete="off"></div>
+          <div class="cellf"><label for="mt_x">x̄</label><input id="mt_x" inputmode="decimal" autocomplete="off"></div>
+        </div>
+        <div class="grp">
+          <div class="cellf sel">
+            <select id="mt_dt" aria-label="Medida de dispersión">
+              <option value="sd">σ</option><option value="var">σ²</option><option value="S">S</option><option value="S2">S²</option>
+            </select>
+            <input id="mt_dv" inputmode="decimal" autocomplete="off" aria-label="Valor de la medida de dispersión">
+          </div>
+        </div>
+        <div class="grp">
+          <div class="cellf"><label for="mt_m0">μ₀</label><input id="mt_m0" inputmode="decimal" autocomplete="off"></div>
+          <div class="cellf"><label for="mt_m1">μ₁</label><input id="mt_m1" inputmode="decimal" autocomplete="off"></div>
+        </div>
+      </div>
+      <button type="button" class="linkbtn" id="mt_ejemplo">Cargar un ejemplo</button>
+    </div>
+
+    <div class="results" aria-live="polite">
+      <div class="block">
+        <h3>Test de hipótesis</h3>
+        <div class="seg" id="seg-mt-cola">
+          <button type="button" data-v="two" aria-pressed="true">Bilateral (μ ≠ μ₀)</button>
+          <button type="button" data-v="left" aria-pressed="false">Cola izquierda (μ &lt; μ₀)</button>
+          <button type="button" data-v="right" aria-pressed="false">Cola derecha (μ &gt; μ₀)</button>
+        </div>
+        <div class="seg" id="seg-mt-p">
+          <button type="button" data-v="beta" aria-pressed="true">β</button>
+          <button type="button" data-v="pot" aria-pressed="false">1 − β</button>
+        </div>
+        <div id="mt-out"></div>
+      </div>
+
+      <div class="block">
+        <h3>Tamaño de muestra</h3>
+        <div class="datarow" style="margin-top:12px">
+          <div class="grp">
+            <div class="cellf sel">
+              <select id="mt_pk" aria-label="Probabilidad de referencia">
+                <option value="beta">β</option><option value="pot">1 − β</option>
+              </select>
+              <input id="mt_pv" inputmode="decimal" autocomplete="off" aria-label="Valor de la probabilidad">
+            </div>
+          </div>
+        </div>
+        <div id="mt-n"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROPORCIÓN: submenú -->
+  <section id="view-prop" hidden>
+    <button class="back" data-go="home">← Volver al inicio</button>
+    <h2>Inferencia para la proporción poblacional</h2>
+    <div class="menu">
+      <button class="menu-btn" data-go="pint"><span class="name">Intervalos de confianza</span><span class="soon"></span></button>
+      <button class="menu-btn" data-go="ptest"><span class="name">Test de hipótesis</span><span class="soon"></span></button>
+    </div>
+  </section>
+
+  <!-- PROPORCIÓN: intervalos -->
+  <section id="view-pint" hidden>
+    <button class="back" data-go="prop">← Volver</button>
+    <h2>Intervalos de confianza para la proporción poblacional</h2>
+
+    <div class="datapanel">
+      <div class="datarow">
+        <div class="grp"><div class="cellf"><label for="pi_a">α</label><input id="pi_a" inputmode="decimal" autocomplete="off"></div></div>
+        <div class="grp">
+          <div class="cellf"><label for="pi_n">n</label><input id="pi_n" inputmode="numeric" autocomplete="off"></div>
+          <div class="cellf sel">
+            <select id="pi_pt" aria-label="Cargar p̂ (decimal o fracción) o cantidad de éxitos x">
+              <option value="p">p̂</option><option value="x">x</option>
+            </select>
+            <input id="pi_pv" inputmode="text" autocomplete="off" aria-label="Valor de p̂ o de x">
+          </div>
+        </div>
+      </div>
+      <button type="button" class="linkbtn" id="pi_ejemplo">Cargar un ejemplo</button>
+    </div>
+
+    <div class="results" aria-live="polite">
+      <div class="block">
+        <h3>Intervalo de confianza</h3>
+        <div class="seg" id="seg-pi-int">
+          <button type="button" data-v="full" aria-pressed="true">Intervalo completo</button>
+          <button type="button" data-v="inf" aria-pressed="false">Solo límite inferior</button>
+          <button type="button" data-v="sup" aria-pressed="false">Solo límite superior</button>
+        </div>
+        <div id="pi-out"></div>
+      </div>
+
+      <div class="block">
+        <h3>Recalcular</h3>
+        <div class="seg" id="seg-pi-calc">
+          <button type="button" data-v="n" aria-pressed="true">Tamaño de muestra (n)</button>
+          <button type="button" data-v="conf" aria-pressed="false">Confianza (1 − α)</button>
+        </div>
+        <div class="datarow" style="margin-top:12px">
+          <div class="grp">
+            <div class="cellf sel wide">
+              <select id="pi_ek" aria-label="Tipo de error">
+                <option value="pct">Reducción %</option><option value="E">Error E</option>
+              </select>
+              <input id="pi_ev" inputmode="decimal" autocomplete="off" aria-label="Valor">
+            </div>
+          </div>
+        </div>
+        <div id="pi-rec"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROPORCIÓN: test -->
+  <section id="view-ptest" hidden>
+    <button class="back" data-go="prop">← Volver</button>
+    <h2>Test de hipótesis para la proporción poblacional</h2>
+
+    <div class="datapanel">
+      <div class="datarow">
+        <div class="grp"><div class="cellf"><label for="pt_a">α</label><input id="pt_a" inputmode="decimal" autocomplete="off"></div></div>
+        <div class="grp">
+          <div class="cellf"><label for="pt_n">n</label><input id="pt_n" inputmode="numeric" autocomplete="off"></div>
+          <div class="cellf sel">
+            <select id="pt_pt" aria-label="Cargar p̂ (decimal o fracción) o cantidad de éxitos x">
+              <option value="p">p̂</option><option value="x">x</option>
+            </select>
+            <input id="pt_pv" inputmode="text" autocomplete="off" aria-label="Valor de p̂ o de x">
+          </div>
+        </div>
+        <div class="grp">
+          <div class="cellf"><label for="pt_p0">p₀</label><input id="pt_p0" inputmode="decimal" autocomplete="off"></div>
+          <div class="cellf"><label for="pt_p1">p₁</label><input id="pt_p1" inputmode="decimal" autocomplete="off"></div>
+        </div>
+      </div>
+      <button type="button" class="linkbtn" id="pt_ejemplo">Cargar un ejemplo</button>
+    </div>
+
+    <div class="results" aria-live="polite">
+      <div class="block">
+        <h3>Test de hipótesis</h3>
+        <div class="seg" id="seg-pt-cola">
+          <button type="button" data-v="two" aria-pressed="true">Bilateral (p ≠ p₀)</button>
+          <button type="button" data-v="left" aria-pressed="false">Cola izquierda (p &lt; p₀)</button>
+          <button type="button" data-v="right" aria-pressed="false">Cola derecha (p &gt; p₀)</button>
+        </div>
+        <div class="seg" id="seg-pt-p">
+          <button type="button" data-v="beta" aria-pressed="true">β</button>
+          <button type="button" data-v="pot" aria-pressed="false">1 − β</button>
+        </div>
+        <div id="pt-out"></div>
+      </div>
+
+      <div class="block">
+        <h3>Tamaño de muestra</h3>
+        <div class="datarow" style="margin-top:12px">
+          <div class="grp">
+            <div class="cellf sel">
+              <select id="pt_bk" aria-label="Probabilidad de referencia">
+                <option value="beta">β</option><option value="pot">1 − β</option>
+              </select>
+              <input id="pt_bv" inputmode="decimal" autocomplete="off" aria-label="Valor de la probabilidad">
+            </div>
+          </div>
+        </div>
+        <div id="pt-n"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRUEBAS NO PARAMÉTRICAS: submenú -->
+  <section id="view-np" hidden>
+    <button class="back" data-go="home">← Volver al inicio</button>
+    <h2>Pruebas no paramétricas</h2>
+    <div class="menu">
+      <button class="menu-btn" data-go="gof"><span class="name">Bondad de ajuste</span><span class="soon"></span></button>
+      <button class="menu-btn" data-go="ind"><span class="name">Pruebas de independencia</span><span class="soon"></span></button>
+    </div>
+  </section>
+
+  <!-- BONDAD DE AJUSTE -->
+  <section id="view-gof" hidden>
+    <button class="back" data-go="np">← Volver</button>
+    <h2>Bondad de ajuste</h2>
+
+    <div class="datapanel">
+      <div class="datarow">
+        <div class="grp">
+          <div class="cellf"><label for="g_k">Categorías</label><input id="g_k" inputmode="numeric" autocomplete="off"></div>
+          <div class="cellf"><label for="g_a">α</label><input id="g_a" inputmode="decimal" autocomplete="off"></div>
+        </div>
+      </div>
+      <div id="g_table"></div>
+      <button type="button" class="linkbtn" id="g_ejemplo">Cargar un ejemplo</button>
+    </div>
+
+    <div class="results" aria-live="polite">
+      <div class="block" id="g_block" hidden>
+        <h3>Test de bondad de ajuste</h3>
+        <div id="g_out"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRUEBA DE INDEPENDENCIA -->
+  <section id="view-ind" hidden>
+    <button class="back" data-go="np">← Volver</button>
+    <h2>Pruebas de independencia</h2>
+
+    <div class="datapanel">
+      <div class="datarow">
+        <div class="grp">
+          <div class="cellf"><label for="i_x">F (filas)</label><input id="i_x" inputmode="numeric" autocomplete="off"></div>
+          <div class="cellf"><label for="i_y">C (columnas)</label><input id="i_y" inputmode="numeric" autocomplete="off"></div>
+        </div>
+        <div class="grp"><div class="cellf"><label for="i_a">α</label><input id="i_a" inputmode="decimal" autocomplete="off"></div></div>
+      </div>
+      <div id="i_table"></div>
+      <button type="button" class="linkbtn" id="i_ejemplo">Cargar un ejemplo</button>
+    </div>
+
+    <div class="results" aria-live="polite">
+      <div class="block" id="i_block" hidden>
+        <h3>Test de independencia</h3>
+        <div id="i_out"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMPARACIÓN DE POBLACIONES: submenú -->
+  <section id="view-comp" hidden>
+    <button class="back" data-go="home">← Volver al inicio</button>
+    <h2>Comparación de poblaciones</h2>
+    <div class="menu">
+      <button class="menu-btn" data-go="cF"><span class="name">Comparación de desvíos poblacionales</span><span class="soon"></span></button>
+      <button class="menu-btn" data-go="cI"><span class="name">Comparación de promedios con muestras independientes</span><span class="soon"></span></button>
+      <button class="menu-btn" data-go="cP"><span class="name">Comparación de promedios con muestras dependientes</span><span class="soon"></span></button>
+    </div>
+  </section>
+
+  <!-- REGRESIÓN LINEAL SIMPLE: submenú -->
+  <section id="view-reg" hidden>
+    <button class="back" data-go="home">← Volver al inicio</button>
+    <h2>Regresión lineal simple</h2>
+    <div class="menu">
+      <button class="menu-btn" data-go="rI"><span class="name">Carga de datos individuales</span><span class="soon"></span></button>
+      <button class="menu-btn" data-go="rP"><span class="name">Carga de datos procesados</span><span class="soon"></span></button>
+    </div>
+  </section>
+
+  <!-- DESVÍO / VARIANZA -->
+  <section id="view-var" hidden>
+    <button class="back" data-go="home">← Volver al inicio</button>
+    <h2>Inferencia para el desvío o varianza poblacional</h2>
+    <p class="lead">Intervalo de confianza y test de hipótesis con la distribución chi cuadrado.</p>
+
+    <div class="datapanel">
+      <div class="datarow">
+        <div class="grp">
+          <div class="cellf"><label for="aI">α<sub>I</sub></label><input id="aI" inputmode="decimal" autocomplete="off"></div>
+          <div class="cellf"><label for="aT">α<sub>T</sub></label><input id="aT" inputmode="decimal" autocomplete="off"></div>
+        </div>
+        <div class="grp">
+          <div class="cellf sel"><select id="sig_t" aria-label="Cargar σ o σ²"><option value="sd">σ</option><option value="var">σ²</option></select><input id="sig0" inputmode="decimal" autocomplete="off"></div>
+          <div class="cellf sel"><select id="S_t" aria-label="Cargar S o S²"><option value="sd">S</option><option value="var">S²</option></select><input id="S" inputmode="decimal" autocomplete="off"></div>
+        </div>
+        <div class="grp">
+          <div class="cellf"><label for="n">n</label><input id="n" inputmode="numeric" autocomplete="off"></div>
+        </div>
+      </div>
+      <button type="button" class="linkbtn" id="ejemplo">Cargar un ejemplo</button>
+    </div>
+
+    <div class="results" aria-live="polite">
+      <div class="block">
+        <h3>Intervalo de confianza</h3>
+        <div class="seg" id="seg-int">
+          <button type="button" data-v="full" aria-pressed="true">Intervalo completo</button>
+          <button type="button" data-v="inf" aria-pressed="false">Solo límite inferior</button>
+          <button type="button" data-v="sup" aria-pressed="false">Solo límite superior</button>
+        </div>
+        <div id="out-int"></div>
+      </div>
+
+      <div class="block">
+        <h3>Test de hipótesis</h3>
+        <div class="seg" id="seg-cola">
+          <button type="button" data-v="two" aria-pressed="true">Bilateral (σ ≠ σ₀)</button>
+          <button type="button" data-v="left" aria-pressed="false">Cola izquierda (σ &lt; σ₀)</button>
+          <button type="button" data-v="right" aria-pressed="false">Cola derecha (σ &gt; σ₀)</button>
+        </div>
+        <div id="out-test"></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script>
+/* =====================================================================
+   Matemática: gamma, chi cuadrado, normal estándar y t de Student
+   ===================================================================== */
+const LG_G = 7;
+const LG_C = [0.99999999999980993,676.5203681218851,-1259.1392167224028,771.32342877765313,
+  -176.61502916214059,12.507343278686905,-0.13857109526572012,9.9843695780195716e-6,1.5056327351493116e-7];
+function lgamma(z){
+  if (z < 0.5) return Math.log(Math.PI / Math.abs(Math.sin(Math.PI*z))) - lgamma(1-z);
+  z -= 1;
+  let x = LG_C[0];
+  for (let i=1; i<LG_G+2; i++) x += LG_C[i]/(z+i);
+  const t = z + LG_G + 0.5;
+  return 0.5*Math.log(2*Math.PI) + (z+0.5)*Math.log(t) - t + Math.log(x);
+}
+// Gamma incompleta regularizada P(a,x)
+function gammaP(a,x){
+  if (x <= 0) return 0;
+  if (x < a+1){
+    let ap=a, sum=1/a, del=sum;
+    for (let n=0; n<2000; n++){ ap+=1; del*=x/ap; sum+=del; if (Math.abs(del) < Math.abs(sum)*1e-15) break; }
+    return sum*Math.exp(-x + a*Math.log(x) - lgamma(a));
+  }
+  let b=x+1-a, c=1/1e-300, d=1/b, h=d;
+  for (let i=1; i<2000; i++){
+    const an=-i*(i-a); b+=2; d=an*d+b; if (Math.abs(d)<1e-300) d=1e-300;
+    c=b+an/c; if (Math.abs(c)<1e-300) c=1e-300; d=1/d;
+    const del=d*c; h*=del; if (Math.abs(del-1)<1e-15) break;
+  }
+  return 1 - Math.exp(-x + a*Math.log(x) - lgamma(a))*h;
+}
+// Beta incompleta regularizada I_x(a,b)
+function betacf(a,b,x){
+  const FP=1e-300, EPS=3e-16, qab=a+b, qap=a+1, qam=a-1;
+  let c=1, d=1-qab*x/qap; if (Math.abs(d)<FP) d=FP; d=1/d; let h=d;
+  for (let m=1; m<=500; m++){
+    const m2=2*m;
+    let aa=m*(b-m)*x/((qam+m2)*(a+m2));
+    d=1+aa*d; if (Math.abs(d)<FP) d=FP; c=1+aa/c; if (Math.abs(c)<FP) c=FP; d=1/d; h*=d*c;
+    aa=-(a+m)*(qab+m)*x/((a+m2)*(qap+m2));
+    d=1+aa*d; if (Math.abs(d)<FP) d=FP; c=1+aa/c; if (Math.abs(c)<FP) c=FP; d=1/d;
+    const del=d*c; h*=del; if (Math.abs(del-1)<EPS) break;
+  }
+  return h;
+}
+function betaI(x,a,b){
+  if (x<=0) return 0; if (x>=1) return 1;
+  const bt = Math.exp(lgamma(a+b)-lgamma(a)-lgamma(b)+a*Math.log(x)+b*Math.log(1-x));
+  if (x < (a+1)/(a+b+2)) return bt*betacf(a,b,x)/a;
+  return 1 - bt*betacf(b,a,1-x)/b;
+}
+
+// Chi cuadrado
+const chiCdf = (x,k) => gammaP(k/2, x/2);
+function chiPdf(x,k){
+  if (x <= 0) return 0;
+  return Math.exp((k/2-1)*Math.log(x) - x/2 - (k/2)*Math.LN2 - lgamma(k/2));
+}
+function chiInv(p,k){          // valor con área p a la izquierda
+  let lo=0, hi=Math.max(1,k);
+  while (chiCdf(hi,k) < p) hi*=2;
+  for (let i=0; i<200; i++){ const mid=(lo+hi)/2; if (chiCdf(mid,k) < p) lo=mid; else hi=mid; }
+  return (lo+hi)/2;
+}
+
+// Normal estándar
+function normCdf(x){
+  if (x===0) return 0.5;
+  const p = gammaP(0.5, x*x/2);
+  return x>0 ? 0.5+0.5*p : 0.5-0.5*p;
+}
+const normPdf = x => Math.exp(-x*x/2)/Math.sqrt(2*Math.PI);
+function zInv(p){
+  if (p<=0) return -Infinity; if (p>=1) return Infinity;
+  let lo=-40, hi=40;
+  for (let i=0; i<200; i++){ const mid=(lo+hi)/2; if (normCdf(mid) < p) lo=mid; else hi=mid; }
+  return (lo+hi)/2;
+}
+
+// t de Student
+function tCdf(t,v){
+  const x = v/(v+t*t);
+  const p = 0.5*betaI(x, v/2, 0.5);      // P(T > |t|)
+  return t>0 ? 1-p : p;
+}
+function tPdf(t,v){
+  return Math.exp(lgamma((v+1)/2)-lgamma(v/2)) / Math.sqrt(v*Math.PI) * Math.pow(1+t*t/v, -(v+1)/2);
+}
+function tInv(p,v){
+  if (p<=0) return -Infinity; if (p>=1) return Infinity;
+  if (p===0.5) return 0;
+  if (p<0.5) return -tInv(1-p,v);
+  let lo=0, hi=1;
+  while (tCdf(hi,v) < p && hi<1e12) hi*=2;
+  for (let i=0; i<200; i++){ const mid=(lo+hi)/2; if (tCdf(mid,v) < p) lo=mid; else hi=mid; }
+  return (lo+hi)/2;
+}
+
+/* =====================================================================
+   Utilidades
+   ===================================================================== */
+const $ = s => document.querySelector(s);
+const fmt = (x,d=4) => x.toLocaleString('es-AR',{minimumFractionDigits:d, maximumFractionDigits:d, useGrouping:false});
+const fmtInput = x => String(parseFloat(x.toFixed(8))).replace('.', ',');
+const sub = s => String(s).replace(/\d/g, c => '₀₁₂₃₄₅₆₇₈₉'[c]);
+const validAlpha = a => a!==null && a>0 && a<1;
+function read(id){
+  const v = document.getElementById(id).value.trim().replace(',', '.');
+  if (v === '') return null;
+  const x = Number(v);
+  return Number.isFinite(x) ? x : NaN;
+}
+function bindSeg(id, obj, key, fn){
+  document.querySelectorAll('#'+id+' button').forEach(btn => btn.addEventListener('click', () => { obj[key]=btn.dataset.v; fn(); }));
+}
+function syncSeg(id, obj, key){
+  document.querySelectorAll('#'+id+' button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.v===obj[key])));
+}
+function bindInputs(sel, fn){
+  document.querySelectorAll(sel).forEach(el => { el.addEventListener('input', fn); el.addEventListener('change', fn); });
+}
+const box = (k,val,cls='') => `<div class="big ${cls}"><div class="k">${k}</div><div class="v">${val}</div></div>`;
+const errP = msg => `<p class="err">${msg}</p>`;
+
+/* =====================================================================
+   Navegación
+   ===================================================================== */
+const CLEAR = {};
+const views = { home:'#view-home', soon:'#view-soon', mean:'#view-mean', mint:'#view-mint', mtest:'#view-mtest', prop:'#view-prop', pint:'#view-pint', ptest:'#view-ptest', np:'#view-np', gof:'#view-gof', ind:'#view-ind', comp:'#view-comp', reg:'#view-reg', var:'#view-var' };
+const soonNames = {};
+function go(dest){
+  let target = dest;
+  if (soonNames[dest]){ target='soon'; $('#soon-title').textContent = soonNames[dest]; }
+  Object.entries(views).forEach(([k,sel]) => { $(sel).hidden = (k !== target); });
+  $('#topbar').hidden = (target==='home');
+  window.scrollTo(0,0);
+}
+document.querySelectorAll('[data-go]').forEach(b => b.addEventListener('click', () => go(b.dataset.go)));
+
+/* =====================================================================
+   Promedio: piezas comunes
+   ===================================================================== */
+const DISP_LABEL = { sd:'σ', var:'σ²', S:'S', S2:'S²' };
+// Lee la medida de dispersión: null = vacío, NaN = inválido, objeto = {s, useT}
+function readDisp(typeId, valId){
+  const t = $('#'+typeId).value, x = read(valId);
+  if (x===null) return null;
+  if (Number.isNaN(x) || x<=0) return NaN;
+  const s = (t==='sd' || t==='S') ? x : Math.sqrt(x);
+  return { s, useT: (t==='S' || t==='S2') };
+}
+function coreCheck(n, x, d, dl){
+  if (n!==null && (Number.isNaN(n) || !Number.isInteger(n) || n<1)) return 'n debe ser un número entero positivo.';
+  if (x!==null && Number.isNaN(x)) return 'x̄ debe ser un número.';
+  if (d!==null && Number.isNaN(d)) return `${dl} debe ser un número positivo.`;
+  if (n===null || x===null || d===null) return 'wait';
+  if (d.useT && n<2) return 'Con S, n debe ser mayor o igual a 2.';
+  return null;
+}
+// Resuelve n (con iteración cuando se usa t). Qfun(df) devuelve el multiplicador; df=null → normal.
+function solveN(Qfun, f, useT){
+  const z0 = Qfun(null);
+  if (!(z0>0)) return { err:'Con esos valores de α y β no se puede calcular n.' };
+  let n = Math.max(useT?2:1, Math.ceil(Math.pow(z0*f,2)));
+  if (!isFinite(n) || n>1e9) return { err:'El n resultante es demasiado grande.' };
+  if (!useT) return { n, steps:[] };
+  const steps=[], seen=new Set();
+  for (let i=0; i<200; i++){
+    const df=n-1, Q=Qfun(df);
+    const nn = Math.max(2, Math.ceil(Math.pow(Q*f,2)));
+    if (!isFinite(nn) || nn>1e9) return { err:'El n resultante es demasiado grande.' };
+    steps.push({ n, df, Q, nn });
+    if (nn===n) return { n, steps };
+    if (seen.has(nn)) return { n:Math.max(n,nn), steps };
+    seen.add(n); n=nn;
+  }
+  return { n, steps };
+}
+function iterHTML(res, qLabel){
+  if (!res.steps || !res.steps.length) return '';
+  let h = `<details><summary>Ver iteraciones</summary><table><thead><tr><th>Paso</th><th>n</th><th>gl</th><th>${qLabel}</th><th>n calculado</th></tr></thead><tbody>`;
+  res.steps.forEach((s,i) => { h += `<tr><td>${i+1}</td><td>${s.n}</td><td>${s.df}</td><td>${fmt(s.Q)}</td><td>${s.nn}</td></tr>`; });
+  return h + `</tbody></table></details>`;
+}
+
+/* =====================================================================
+   Promedio: intervalos de confianza
+   ===================================================================== */
+const MI = { inter:'full', calc:'n' };
+bindSeg('seg-mi-int', MI, 'inter', updMI);
+bindSeg('seg-mi-calc', MI, 'calc', updMI);
+bindInputs('#view-mint input, #view-mint select', updMI);
+$('#mi_ejemplo').addEventListener('click', () => {
+  $('#mi_a').value='0,05'; $('#mi_n').value='36'; $('#mi_x').value='52,4';
+  $('#mi_dt').value='sd'; $('#mi_dv').value='6';
+  $('#mi_ek').value='pct'; $('#mi_ev').value='20';
+  updMI();
+});
+
+function updMI(){
+  syncSeg('seg-mi-int', MI, 'inter'); syncSeg('seg-mi-calc', MI, 'calc');
+  const a=read('mi_a'), n=read('mi_n'), xb=read('mi_x');
+  const d=readDisp('mi_dt','mi_dv'), dl=DISP_LABEL[$('#mi_dt').value];
+  const st=coreCheck(n,xb,d,dl);
+  renderMI(a,n,xb,d,st);
+  renderMIrec(a,n,d);
+}
+
+function renderMI(a,n,xb,d,st){
+  const el=$('#mi-out');
+  if (typeof st==='string' && st!=='wait'){ el.innerHTML=errP(st); return; }
+  if (st==='wait' || a===null){ el.innerHTML=''; return; }
+  if (Number.isNaN(a) || !validAlpha(a)){ el.innerHTML=errP('α debe estar entre 0 y 1 (por ejemplo 0,05).'); return; }
+
+  const useT=d.useT, df=n-1, SE=d.s/Math.sqrt(n);
+  const quant = p => useT ? tInv(p,df) : zInv(p);
+  const sym = useT ? 't'+sub(df) : 'z';
+  let main, qbox, q;
+  if (MI.inter==='full'){
+    q=quant(1-a/2);
+    main = `( ${fmt(xb-q*SE)} ; ${fmt(xb+q*SE)} )`;
+    qbox = `( ${fmt(-q)} ; ${fmt(q)} )`;
+  } else {
+    q=quant(1-a);
+    main = MI.inter==='inf' ? fmt(xb-q*SE) : fmt(xb+q*SE);
+    qbox = fmt(q);
+  }
+  el.innerHTML = `<div class="big-pair">${box('μ', main)}${box('E', fmt(q*SE))}</div>${box(sym, qbox, 'wide')}`;
+}
+
+function renderMIrec(a,n,d){
+  const el=$('#mi-rec');
+  const kind=$('#mi_ek').value, ev=read('mi_ev');
+  if (ev===null){ el.innerHTML=''; return; }
+  if (Number.isNaN(ev) || ev<=0 || (kind==='pct' && ev>=100)){
+    el.innerHTML = errP(kind==='pct' ? 'La reducción debe estar entre 0 y 100 (%).' : 'E debe ser un número positivo.'); return;
+  }
+  if (!d || typeof d!=='object'){ el.innerHTML=''; return; }
+  const useT=d.useT, s=d.s, full=(MI.inter==='full');
+  const nOK = n!==null && Number.isInteger(n) && n>=(useT?2:1);
+  const pT = (a!==null && validAlpha(a)) ? (full ? 1-a/2 : 1-a) : null;
+
+  // Error objetivo E'
+  let E1=null;
+  if (kind==='pct'){
+    if (a===null || !nOK){ el.innerHTML=''; return; }
+    if (Number.isNaN(a) || !validAlpha(a)){ el.innerHTML=errP('α debe estar entre 0 y 1 (por ejemplo 0,05).'); return; }
+    const q = useT ? tInv(pT,n-1) : zInv(pT);
+    E1 = q*s/Math.sqrt(n)*(1-ev/100);
+  } else {
+    E1 = ev;
+  }
+
+  if (MI.calc==='n'){
+    if (a===null){ el.innerHTML=''; return; }
+    if (Number.isNaN(a) || !validAlpha(a)){ el.innerHTML=errP('α debe estar entre 0 y 1 (por ejemplo 0,05).'); return; }
+    const res = solveN(df => useT && df!==null ? tInv(pT,df) : zInv(pT), s/E1, useT);
+    if (res.err){ el.innerHTML=errP(res.err); return; }
+    const boxes = box('n′', String(res.n)) + (kind==='pct' ? box('E', fmt(E1)) : '');
+    el.innerHTML = `<div class="big-pair">${boxes}</div>${useT ? iterHTML(res,'t') : ''}`;
+  } else {
+    if (!nOK){ el.innerHTML=''; return; }
+    const qn = E1*Math.sqrt(n)/s;
+    const cdf = useT ? tCdf(qn,n-1) : normCdf(qn);
+    const conf = full ? 2*cdf-1 : cdf;
+    el.innerHTML = `<div class="big-pair">${box('1 − α', fmt(conf))}${box('α', fmt(1-conf))}</div>`;
+  }
+}
+
+/* =====================================================================
+   Promedio: test de hipótesis
+   ===================================================================== */
+const MT = { cola:'two', pdisp:'beta' };
+bindSeg('seg-mt-cola', MT, 'cola', updMT);
+bindSeg('seg-mt-p', MT, 'pdisp', updMT);
+bindInputs('#view-mtest input, #view-mtest select', updMT);
+$('#mt_ejemplo').addEventListener('click', () => {
+  $('#mt_a').value='0,05'; $('#mt_n').value='36'; $('#mt_x').value='52,4';
+  $('#mt_dt').value='sd'; $('#mt_dv').value='6';
+  $('#mt_m0').value='50'; $('#mt_m1').value='53';
+  $('#mt_pk').value='beta'; $('#mt_pv').value='0,1';
+  MT.cola='right';
+  updMT();
+});
+
+function updMT(){
+  syncSeg('seg-mt-cola', MT, 'cola'); syncSeg('seg-mt-p', MT, 'pdisp');
+  renderMT(); renderMTn();
+}
+
+function renderMT(){
+  const el=$('#mt-out');
+  const a=read('mt_a'), n=read('mt_n'), xb=read('mt_x'), m0=read('mt_m0'), m1=read('mt_m1');
+  const d=readDisp('mt_dt','mt_dv'), dl=DISP_LABEL[$('#mt_dt').value];
+  let st=coreCheck(n,xb,d,dl);
+  if (m0!==null && Number.isNaN(m0) && (st==='wait' || st===null)) st='μ₀ debe ser un número.';
+  if (m0===null && st===null) st='wait';
+  if (typeof st==='string' && st!=='wait'){ el.innerHTML=errP(st); return; }
+  if (st==='wait' || a===null){ el.innerHTML=''; return; }
+  if (Number.isNaN(a) || !validAlpha(a)){ el.innerHTML=errP('α debe estar entre 0 y 1 (por ejemplo 0,05).'); return; }
+
+  const useT=d.useT, df=n-1, SE=d.s/Math.sqrt(n);
+  const quant = p => useT ? tInv(p,df) : zInv(p);
+  const cdf0 = x => useT ? tCdf((x-m0)/SE, df) : normCdf((x-m0)/SE);
+  const T = (xb-m0)/SE, F0 = useT ? tCdf(T,df) : normCdf(T);
+
+  let crits, reject, pval, H0, H1, region, critBox;
+  if (MT.cola==='two'){
+    const q=quant(1-a/2), c1=m0-q*SE, c2=m0+q*SE;
+    crits=[c1,c2]; reject = xb<c1 || xb>c2; pval = 2*Math.min(F0,1-F0);
+    H0='μ = μ₀'; H1='μ ≠ μ₀';
+    region=`x̄ &lt; ${fmt(c1)} o x̄ &gt; ${fmt(c2)}`;
+    critBox=['x̄ críticos', `${fmt(c1)} ; ${fmt(c2)}`];
+  } else if (MT.cola==='left'){
+    const c=m0-quant(1-a)*SE; crits=[c];
+    reject = xb<c; pval = F0;
+    H0='μ ≥ μ₀'; H1='μ &lt; μ₀';
+    region=`x̄ &lt; ${fmt(c)}`; critBox=['x̄ crítico', fmt(c)];
+  } else {
+    const c=m0+quant(1-a)*SE; crits=[c];
+    reject = xb>c; pval = 1-F0;
+    H0='μ ≤ μ₀'; H1='μ &gt; μ₀';
+    region=`x̄ &gt; ${fmt(c)}`; critBox=['x̄ crítico', fmt(c)];
+  }
+  pval=Math.min(1,pval);
+
+  // Probabilidad β (o 1 − β) si se cargó μ₁
+  let probBox='', m1v=null, betaVal=null;
+  if (m1!==null && !Number.isNaN(m1)){
+    m1v=m1;
+    const cdf1 = x => useT ? tCdf((x-m1)/SE, df) : normCdf((x-m1)/SE);
+    if (MT.cola==='two') betaVal = cdf1(crits[1]) - cdf1(crits[0]);
+    else if (MT.cola==='left') betaVal = 1 - cdf1(crits[0]);
+    else betaVal = cdf1(crits[0]);
+    betaVal=Math.min(1,Math.max(0,betaVal));
+    probBox = box(MT.pdisp==='beta' ? 'β' : '1 − β', fmt(MT.pdisp==='beta' ? betaVal : 1-betaVal));
+  } else if (m1!==null && Number.isNaN(m1)){
+    probBox = errP('μ₁ debe ser un número.');
+  }
+
+  const qUsed = quant(MT.cola==='two' ? 1-a/2 : 1-a);
+  const qNote = `${useT ? 't' : 'z'} utilizado: ${MT.cola==='two' ? '±' : (MT.cola==='left' ? '−' : '')}${fmt(qUsed)}${useT ? ` (v = ${df})` : ''}`;
+  el.innerHTML =
+    `<p class="hyp">H₀: ${H0} &nbsp;·&nbsp; H₁: ${H1} &nbsp;·&nbsp; α = ${fmt(a)}</p>` +
+    `<div class="big-pair">${box(critBox[0], critBox[1])}${betaVal!==null ? probBox : ''}</div>` +
+    (betaVal===null ? probBox : '') +
+    `<p class="notes">Valor de ${qNote}</p>` +
+    `<p class="notes">Zona de rechazo: ${region}</p>` +
+    `<div class="verdict ${reject?'rej':''}">${reject?'Se rechaza H₀':'No se rechaza H₀'}<span>p-valor = ${fmt(pval)}</span></div>` +
+    `<div class="chart-wrap">${chartMean({mu0:m0, mu1:m1v, SE, useT, df, cola:MT.cola, crits, xbar:xb, pdisp:MT.pdisp})}</div>` +
+    `<div class="legend">` +
+      `<span><i style="background:var(--reject);opacity:.45"></i>Zona de rechazo</span>` +
+      `<span><i style="background:var(--ink)"></i>x̄</span>` +
+      `<span><i class="ln"></i>H₀</span>` +
+      (m1v!==null ? `<span><i class="ln h1"></i>H₁</span><span><i style="background:var(--beta);opacity:.4"></i>${MT.pdisp==='beta'?'β':'1 − β'}</span>` : '') +
+    `</div>`;
+}
+
+function renderMTn(){
+  const el=$('#mt-n');
+  const a=read('mt_a'), m0=read('mt_m0'), m1=read('mt_m1'), pv=read('mt_pv'), pk=$('#mt_pk').value;
+  const d=readDisp('mt_dt','mt_dv'), dl=DISP_LABEL[$('#mt_dt').value];
+  if (pv===null){ el.innerHTML=''; return; }
+  if (Number.isNaN(pv) || pv<=0 || pv>=1){ el.innerHTML=errP((pk==='beta'?'β':'1 − β')+' debe estar entre 0 y 1.'); return; }
+  if (d!==null && Number.isNaN(d)){ el.innerHTML=errP(`${dl} debe ser un número positivo.`); return; }
+  if (a===null || m0===null || m1===null || d===null){ el.innerHTML=''; return; }
+  if (Number.isNaN(a) || !validAlpha(a)){ el.innerHTML=errP('α debe estar entre 0 y 1 (por ejemplo 0,05).'); return; }
+  if (Number.isNaN(m0) || Number.isNaN(m1)){ el.innerHTML=errP('μ₀ y μ₁ deben ser números.'); return; }
+  if (m1===m0){ el.innerHTML=errP('μ₁ debe ser distinto de μ₀.'); return; }
+  if (MT.cola==='right' && m1<m0){ el.innerHTML=errP('Para la cola derecha, μ₁ debe ser mayor que μ₀.'); return; }
+  if (MT.cola==='left' && m1>m0){ el.innerHTML=errP('Para la cola izquierda, μ₁ debe ser menor que μ₀.'); return; }
+
+  const beta = pk==='beta' ? pv : 1-pv;
+  const pA = MT.cola==='two' ? 1-a/2 : 1-a, pB = 1-beta;
+  const useT=d.useT, delta=Math.abs(m1-m0);
+  const res = solveN(df => (useT && df!==null) ? tInv(pA,df)+tInv(pB,df) : zInv(pA)+zInv(pB), d.s/delta, useT);
+  if (res.err){ el.innerHTML=errP(res.err); return; }
+  el.innerHTML = `<div class="big-pair">${box('n′', String(res.n))}</div>${useT ? iterHTML(res,'tα + tβ') : ''}`;
+}
+
+function chartMean(o){
+  const W=640, H=296, m={l:16,r:16,t:32,b:64};
+  const iw=W-m.l-m.r, ih=H-m.t-m.b, base=m.t+ih;
+  const se0 = o.SE0!==undefined ? o.SE0 : o.SE, se1 = o.SE1!==undefined ? o.SE1 : o.SE;
+  const mu = w => w ? o.mu1 : o.mu0, se = w => w ? se1 : se0;
+  const pdf = (x,w) => o.useT ? tPdf((x-mu(w))/se(w),o.df)/se(w) : normPdf((x-mu(w))/se(w))/se(w);
+  const q0 = o.useT ? tInv(0.9995,o.df) : zInv(0.9995);
+  const half = Math.min(Math.max(q0,3.5),5)*Math.max(se0,se1);
+  const pts=[o.mu0-half, o.mu0+half, o.xbar, ...o.crits];
+  if (o.mu1!==null) pts.push(o.mu1-half, o.mu1+half);
+  let xmin=Math.min(...pts), xmax=Math.max(...pts);
+  const pad=(xmax-xmin)*0.04; xmin-=pad; xmax+=pad;
+  const sx = x => m.l + (x-xmin)/(xmax-xmin)*iw;
+  const peak = Math.max(pdf(o.mu0,0), o.mu1!==null ? pdf(o.mu1,1) : 0);
+  const ymax = peak*1.12;
+  const sy = y => base - y/ymax*ih;
+  const N=400;
+  const curve = w => {
+    let d='';
+    for (let i=0;i<=N;i++){ const x=xmin+(xmax-xmin)*i/N; d+=(i?'L':'M')+sx(x).toFixed(1)+' '+sy(pdf(x,w)).toFixed(1)+' '; }
+    return d;
+  };
+  const seg = (a,b,w) => {
+    a=Math.max(a,xmin); b=Math.min(b,xmax);
+    if (a>=b) return '';
+    let d=`M${sx(a).toFixed(1)} ${base}`;
+    const M=120;
+    for (let i=0;i<=M;i++){ const x=a+(b-a)*i/M; d+=` L${sx(x).toFixed(1)} ${sy(pdf(x,w)).toFixed(1)}`; }
+    return d+` L${sx(b).toFixed(1)} ${base} Z`;
+  };
+  const rej = w => o.cola==='two' ? seg(xmin,o.crits[0],w)+' '+seg(o.crits[1],xmax,w)
+                  : o.cola==='left' ? seg(xmin,o.crits[0],w) : seg(o.crits[0],xmax,w);
+  const acc = w => o.cola==='two' ? seg(o.crits[0],o.crits[1],w)
+                  : o.cola==='left' ? seg(o.crits[0],xmax,w) : seg(xmin,o.crits[0],w);
+
+  const dg = o.dg!==undefined ? o.dg : (se0>=0.5 ? 2 : (se0>=0.05 ? 3 : 4));
+  const lab0 = o.lab0 || 'μ₀', lab1 = o.lab1 || 'μ₁', xlab = o.xlab || 'x̄';
+  const clampX = (x,pad=34) => Math.min(Math.max(sx(x), m.l+pad), W-m.r-pad);
+  let s = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Distribución del estimador muestral bajo H0 y H1, zona de rechazo y valor observado">`;
+  s += `<path d="${rej(0)}" fill="var(--reject)" fill-opacity="0.35"/>`;
+  if (o.mu1!==null) s += `<path d="${o.pdisp==='beta' ? acc(1) : rej(1)}" fill="var(--beta)" fill-opacity="0.32"/>`;
+  s += `<path d="${curve(0)}" fill="none" stroke="var(--curve)" stroke-width="2.4" stroke-linejoin="round"/>`;
+  if (o.mu1!==null) s += `<path d="${curve(1)}" fill="none" stroke="var(--beta)" stroke-width="2.4" stroke-dasharray="7 5" stroke-linejoin="round"/>`;
+  s += `<line x1="${m.l}" y1="${base}" x2="${W-m.r}" y2="${base}" stroke="var(--muted)" stroke-width="1"/>`;
+  o.crits.forEach(c => {
+    s += `<line x1="${sx(c).toFixed(1)}" y1="${m.t}" x2="${sx(c).toFixed(1)}" y2="${base}" stroke="var(--reject)" stroke-width="1.6" stroke-dasharray="5 4"/>`;
+    s += `<text x="${clampX(c).toFixed(1)}" y="${base+17}" text-anchor="middle" font-size="13" fill="var(--reject)" font-family="var(--sans)">${fmt(c,dg)}</text>`;
+  });
+  // ticks y etiquetas de μ₀ y μ₁ (o p₀ y p₁)
+  // Si los centros quedan cerca, cada etiqueta se abre hacia su lado (la de la izquierda hacia la izquierda y la de la derecha hacia la derecha), sin importar cuál es μ₀ y cuál μ₁
+  const close = o.mu1!==null && Math.abs(sx(o.mu1)-sx(o.mu0))<110;
+  const zeroLeft = o.mu1===null || sx(o.mu0)<=sx(o.mu1);
+  const tick = (v,label,color,anchor) => {
+    const dx = anchor==='end' ? -5 : (anchor==='start' ? 5 : 0);
+    s += `<line x1="${sx(v).toFixed(1)}" y1="${base}" x2="${sx(v).toFixed(1)}" y2="${base+(close?24:5)}" stroke="${color}" stroke-width="1.6"/>`;
+    s += `<text x="${(sx(v)+dx).toFixed(1)}" y="${base+36}" text-anchor="${anchor}" font-size="13" fill="${color}" font-family="var(--sans)">${label} = ${fmt(v,dg)}</text>`;
+  };
+  tick(o.mu0,lab0,'var(--curve)', close ? (zeroLeft ? 'end' : 'start') : 'middle');
+  if (o.mu1!==null) tick(o.mu1,lab1,'var(--beta)', close ? (zeroLeft ? 'start' : 'end') : 'middle');
+  s += `<line x1="${sx(o.xbar).toFixed(1)}" y1="${m.t-4}" x2="${sx(o.xbar).toFixed(1)}" y2="${base}" stroke="var(--ink)" stroke-width="2.6"/>`;
+  s += `<circle cx="${sx(o.xbar).toFixed(1)}" cy="${m.t-4}" r="4" fill="var(--ink)"/>`;
+  s += `<text x="${clampX(o.xbar,44).toFixed(1)}" y="${m.t-12}" text-anchor="middle" font-size="14" font-weight="600" fill="var(--ink)" font-family="var(--sans)">${xlab} = ${fmt(o.xbar,dg)}</text>`;
+  if (o.useT) s += `<text x="${m.l}" y="${H-6}" font-size="12" fill="var(--muted)" font-family="var(--sans)">gl = ${o.df}</text>`;
+  return s + `</svg>`;
+}
+
+/* =====================================================================
+   Proporción: piezas comunes (siempre con Z)
+   ===================================================================== */
+// Acepta decimal (0,22) o fracción (22/100). null = vacío, NaN = inválido
+function readP(id){
+  const v = document.getElementById(id).value.trim().replace(',', '.');
+  if (v === '') return null;
+  if (v.includes('/')){
+    const parts = v.split('/');
+    if (parts.length!==2 || parts[0].trim()==='' || parts[1].trim()==='') return NaN;
+    const a=Number(parts[0]), b=Number(parts[1]);
+    if (!Number.isFinite(a) || !Number.isFinite(b) || b===0) return NaN;
+    return a/b;
+  }
+  const x = Number(v);
+  return Number.isFinite(x) ? x : NaN;
+}
+// Devuelve {err} o {n, ph, derived}; n y ph pueden ser null si falta cargar algo
+function getPhat(nId, tId, vId){
+  const n = read(nId), t = $('#'+tId).value;
+  if (n!==null && (Number.isNaN(n) || !Number.isInteger(n) || n<1)) return { err:'n debe ser un número entero positivo.' };
+  let ph = null, derived = false;
+  if (t==='p'){
+    const p = readP(vId);
+    if (p!==null && (Number.isNaN(p) || p<=0 || p>=1)) return { err:'p̂ debe estar entre 0 y 1 (por ejemplo 0,22 o 22/100).' };
+    ph = p;
+    derived = document.getElementById(vId).value.includes('/');
+  } else {
+    const xv = read(vId);
+    if (xv!==null && (Number.isNaN(xv) || xv<0 || !Number.isInteger(xv))) return { err:'x debe ser un número entero mayor o igual a 0.' };
+    if (xv!==null && n!==null){
+      if (xv>n) return { err:'x no puede ser mayor que n.' };
+      if (xv===0 || xv===n) return { err:'Con x = 0 o x = n, p̂ queda en el borde (0 o 1) y no se puede calcular.' };
+      ph = xv/n;
+    }
+    derived = true;
+  }
+  return { n, ph, derived };
+}
+const phBox = ph => box('p̂', fmt(ph));
+
+/* =====================================================================
+   Proporción: intervalos de confianza
+   ===================================================================== */
+const PI = { inter:'full', calc:'n' };
+bindSeg('seg-pi-int', PI, 'inter', updPI);
+bindSeg('seg-pi-calc', PI, 'calc', updPI);
+$('#pi_pt').addEventListener('change', () => { $('#pi_pv').value=''; });
+bindInputs('#view-pint input, #view-pint select', updPI);
+$('#pi_ejemplo').addEventListener('click', () => {
+  $('#pi_a').value='0,05'; $('#pi_n').value='100';
+  $('#pi_pt').value='p'; $('#pi_pv').value='22/100';
+  $('#pi_ek').value='pct'; $('#pi_ev').value='20';
+  updPI();
+});
+
+function updPI(){
+  syncSeg('seg-pi-int', PI, 'inter'); syncSeg('seg-pi-calc', PI, 'calc');
+  const a = read('pi_a'), g = getPhat('pi_n','pi_pt','pi_pv');
+  renderPI(a, g); renderPIrec(a, g);
+}
+
+function renderPI(a, g){
+  const el=$('#pi-out');
+  if (g.err){ el.innerHTML=errP(g.err); return; }
+  if (g.n===null || g.ph===null || a===null){ el.innerHTML=''; return; }
+  if (Number.isNaN(a) || !validAlpha(a)){ el.innerHTML=errP('α debe estar entre 0 y 1 (por ejemplo 0,05).'); return; }
+
+  const { n, ph } = g, SE = Math.sqrt(ph*(1-ph)/n);
+  let main, qbox, q;
+  if (PI.inter==='full'){
+    q = zInv(1-a/2);
+    main = `( ${fmt(ph-q*SE)} ; ${fmt(ph+q*SE)} )`;
+    qbox = `( ${fmt(-q)} ; ${fmt(q)} )`;
+  } else {
+    q = zInv(1-a);
+    main = PI.inter==='inf' ? fmt(ph-q*SE) : fmt(ph+q*SE);
+    qbox = fmt(q);
+  }
+  el.innerHTML = `<div class="big-pair">${g.derived ? phBox(ph) : ''}${box('p', main)}${box('E', fmt(q*SE))}</div>${box('z', qbox, 'wide')}`;
+}
+
+function renderPIrec(a, g){
+  const el=$('#pi-rec');
+  const kind=$('#pi_ek').value, ev=read('pi_ev');
+  if (ev===null){ el.innerHTML=''; return; }
+  if (Number.isNaN(ev) || ev<=0 || (kind==='pct' && ev>=100)){
+    el.innerHTML = errP(kind==='pct' ? 'La reducción debe estar entre 0 y 100 (%).' : 'E debe ser un número positivo.'); return;
+  }
+  if (g.err){ el.innerHTML=errP(g.err); return; }
+  const full = (PI.inter==='full');
+  const alphaOK = a!==null && !Number.isNaN(a) && validAlpha(a);
+  if (a!==null && !alphaOK){ el.innerHTML=errP('α debe estar entre 0 y 1 (por ejemplo 0,05).'); return; }
+  const pT = alphaOK ? (full ? 1-a/2 : 1-a) : null;
+  const ph = g.ph, n = g.n;
+
+  let E1;
+  if (kind==='pct'){
+    if (pT===null || n===null || ph===null){ el.innerHTML=''; return; }
+    E1 = zInv(pT)*Math.sqrt(ph*(1-ph)/n)*(1-ev/100);
+  } else {
+    E1 = ev;
+  }
+
+  if (PI.calc==='n'){
+    if (pT===null || ph===null){ el.innerHTML=''; return; }
+    const nn = Math.ceil(Math.pow(zInv(pT),2)*ph*(1-ph)/(E1*E1));
+    if (!isFinite(nn) || nn>1e9){ el.innerHTML=errP('El n resultante es demasiado grande.'); return; }
+    el.innerHTML = `<div class="big-pair">${box('n′', String(nn))}${kind==='pct' ? box('E', fmt(E1)) : ''}</div>`;
+  } else {
+    if (n===null || ph===null){ el.innerHTML=''; return; }
+    const qn = E1*Math.sqrt(n)/Math.sqrt(ph*(1-ph));
+    const cdf = normCdf(qn);
+    const conf = full ? 2*cdf-1 : cdf;
+    el.innerHTML = `<div class="big-pair">${box('1 − α', fmt(conf))}${box('α', fmt(1-conf))}</div>`;
+  }
+}
+
+/* =====================================================================
+   Proporción: test de hipótesis
+   ===================================================================== */
+const PT = { cola:'two', pdisp:'beta' };
+bindSeg('seg-pt-cola', PT, 'cola', updPT);
+bindSeg('seg-pt-p', PT, 'pdisp', updPT);
+$('#pt_pt').addEventListener('change', () => { $('#pt_pv').value=''; });
+bindInputs('#view-ptest input, #view-ptest select', updPT);
+$('#pt_ejemplo').addEventListener('click', () => {
+  $('#pt_a').value='0,05'; $('#pt_n').value='100';
+  $('#pt_pt').value='p'; $('#pt_pv').value='58/100';
+  $('#pt_p0').value='0,5'; $('#pt_p1').value='0,6';
+  $('#pt_bk').value='beta'; $('#pt_bv').value='0,1';
+  PT.cola='right';
+  updPT();
+});
+
+function updPT(){
+  syncSeg('seg-pt-cola', PT, 'cola'); syncSeg('seg-pt-p', PT, 'pdisp');
+  renderPT(); renderPTn();
+}
+
+const inUnit = x => x!==null && !Number.isNaN(x) && x>0 && x<1;
+
+function renderPT(){
+  const el=$('#pt-out');
+  const a=read('pt_a'), p0=read('pt_p0'), p1=read('pt_p1');
+  const g=getPhat('pt_n','pt_pt','pt_pv');
+  if (g.err){ el.innerHTML=errP(g.err); return; }
+  if (p0!==null && !inUnit(p0)){ el.innerHTML=errP('p₀ debe estar entre 0 y 1.'); return; }
+  if (g.n===null || g.ph===null || a===null || p0===null){ el.innerHTML=''; return; }
+  if (Number.isNaN(a) || !validAlpha(a)){ el.innerHTML=errP('α debe estar entre 0 y 1 (por ejemplo 0,05).'); return; }
+
+  const { n, ph } = g;
+  const SE0 = Math.sqrt(p0*(1-p0)/n);
+  const T = (ph-p0)/SE0, F0 = normCdf(T);
+
+  let crits, reject, pval, H0, H1, region, critBox;
+  if (PT.cola==='two'){
+    const q=zInv(1-a/2), c1=p0-q*SE0, c2=p0+q*SE0;
+    crits=[c1,c2]; reject = ph<c1 || ph>c2; pval = 2*Math.min(F0,1-F0);
+    H0='p = p₀'; H1='p ≠ p₀';
+    region=`p̂ &lt; ${fmt(c1)} o p̂ &gt; ${fmt(c2)}`;
+    critBox=['p̂ críticos', `${fmt(c1)} ; ${fmt(c2)}`];
+  } else if (PT.cola==='left'){
+    const c=p0-zInv(1-a)*SE0; crits=[c];
+    reject = ph<c; pval = F0;
+    H0='p ≥ p₀'; H1='p &lt; p₀';
+    region=`p̂ &lt; ${fmt(c)}`; critBox=['p̂ crítico', fmt(c)];
+  } else {
+    const c=p0+zInv(1-a)*SE0; crits=[c];
+    reject = ph>c; pval = 1-F0;
+    H0='p ≤ p₀'; H1='p &gt; p₀';
+    region=`p̂ &gt; ${fmt(c)}`; critBox=['p̂ crítico', fmt(c)];
+  }
+  pval=Math.min(1,pval);
+
+  // β (o 1 − β) si se cargó p₁
+  let probBox='', p1v=null, betaVal=null, SE1=SE0;
+  if (p1!==null && !inUnit(p1)){
+    probBox = errP('p₁ debe estar entre 0 y 1.');
+  } else if (p1!==null){
+    p1v=p1; SE1=Math.sqrt(p1*(1-p1)/n);
+    const cdf1 = x => normCdf((x-p1)/SE1);
+    if (PT.cola==='two') betaVal = cdf1(crits[1]) - cdf1(crits[0]);
+    else if (PT.cola==='left') betaVal = 1 - cdf1(crits[0]);
+    else betaVal = cdf1(crits[0]);
+    betaVal=Math.min(1,Math.max(0,betaVal));
+    probBox = box(PT.pdisp==='beta' ? 'β' : '1 − β', fmt(PT.pdisp==='beta' ? betaVal : 1-betaVal));
+  }
+
+  const qUsed = zInv(PT.cola==='two' ? 1-a/2 : 1-a);
+  const qNote = `z utilizado: ${PT.cola==='two' ? '±' : (PT.cola==='left' ? '−' : '')}${fmt(qUsed)}`;
+  el.innerHTML =
+    `<p class="hyp">H₀: ${H0} &nbsp;·&nbsp; H₁: ${H1} &nbsp;·&nbsp; α = ${fmt(a)}</p>` +
+    `<div class="big-pair">${g.derived ? phBox(ph) : ''}${box(critBox[0], critBox[1])}${betaVal!==null ? probBox : ''}</div>` +
+    (betaVal===null ? probBox : '') +
+    `<p class="notes">Valor de ${qNote}</p>` +
+    `<p class="notes">Zona de rechazo: ${region}</p>` +
+    `<div class="verdict ${reject?'rej':''}">${reject?'Se rechaza H₀':'No se rechaza H₀'}<span>p-valor = ${fmt(pval)}</span></div>` +
+    `<div class="chart-wrap">${chartMean({mu0:p0, mu1:p1v, SE0, SE1, useT:false, df:null, cola:PT.cola, crits, xbar:ph, pdisp:PT.pdisp, lab0:'p₀', lab1:'p₁', xlab:'p̂', dg:3})}</div>` +
+    `<div class="legend">` +
+      `<span><i style="background:var(--reject);opacity:.45"></i>Zona de rechazo</span>` +
+      `<span><i style="background:var(--ink)"></i>p̂</span>` +
+      `<span><i class="ln"></i>H₀</span>` +
+      (p1v!==null ? `<span><i class="ln h1"></i>H₁</span><span><i style="background:var(--beta);opacity:.4"></i>${PT.pdisp==='beta'?'β':'1 − β'}</span>` : '') +
+    `</div>`;
+}
+
+function renderPTn(){
+  const el=$('#pt-n');
+  const a=read('pt_a'), p0=read('pt_p0'), p1=read('pt_p1'), bv=read('pt_bv'), bk=$('#pt_bk').value;
+  if (bv===null){ el.innerHTML=''; return; }
+  if (Number.isNaN(bv) || bv<=0 || bv>=1){ el.innerHTML=errP((bk==='beta'?'β':'1 − β')+' debe estar entre 0 y 1.'); return; }
+  if (a===null || p0===null || p1===null){ el.innerHTML=''; return; }
+  if (Number.isNaN(a) || !validAlpha(a)){ el.innerHTML=errP('α debe estar entre 0 y 1 (por ejemplo 0,05).'); return; }
+  if (!inUnit(p0) || !inUnit(p1)){ el.innerHTML=errP('p₀ y p₁ deben estar entre 0 y 1.'); return; }
+  if (p1===p0){ el.innerHTML=errP('p₁ debe ser distinto de p₀.'); return; }
+  if (PT.cola==='right' && p1<p0){ el.innerHTML=errP('Para la cola derecha, p₁ debe ser mayor que p₀.'); return; }
+  if (PT.cola==='left' && p1>p0){ el.innerHTML=errP('Para la cola izquierda, p₁ debe ser menor que p₀.'); return; }
+
+  const beta = bk==='beta' ? bv : 1-bv;
+  const zA = zInv(PT.cola==='two' ? 1-a/2 : 1-a), zB = zInv(1-beta);
+  const num = zA*Math.sqrt(p0*(1-p0)) + zB*Math.sqrt(p1*(1-p1));
+  if (!(num>0)){ el.innerHTML=errP('Con esos valores de α y β no se puede calcular n.'); return; }
+  const nn = Math.ceil(Math.pow(num/Math.abs(p1-p0),2));
+  if (!isFinite(nn) || nn>1e9){ el.innerHTML=errP('El n resultante es demasiado grande.'); return; }
+  el.innerHTML = `<div class="big-pair">${box('n′', String(nn))}</div>`;
+}
+
+/* =====================================================================
+   Pruebas no paramétricas (chi cuadrado)
+   ===================================================================== */
+const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function parseNum(s, frac){
+  s = String(s==null ? '' : s).trim().replace(',', '.');
+  if (s==='') return null;
+  if (frac && s.includes('/')){
+    const p = s.split('/');
+    if (p.length!==2 || p[0].trim()==='' || p[1].trim()==='') return NaN;
+    const a=Number(p[0]), b=Number(p[1]);
+    if (!Number.isFinite(a) || !Number.isFinite(b) || b===0) return NaN;
+    return a/b;
+  }
+  const v = Number(s);
+  return Number.isFinite(v) ? v : NaN;
+}
+const isCount = v => v!==null && !Number.isNaN(v) && v>=0 && Number.isInteger(v);
+const labOf = (arr, i) => { const v = arr[i]!==undefined ? String(arr[i]).trim() : ''; return v!=='' ? esc(v) : String(i+1); };
+const chiLegend = () => `<div class="legend"><span><i style="background:var(--reject);opacity:.45"></i>Zona de rechazo</span><span><i style="background:var(--curve)"></i>χ² calculado</span></div>`;
+const alphaOk = a => a!==null && !Number.isNaN(a) && validAlpha(a);
+const ERR_A = 'α debe estar entre 0 y 1 (por ejemplo 0,05).';
+const ERR_FO = 'Las frecuencias observadas deben ser números enteros mayores o iguales a 0.';
+
+/* ---------- Bondad de ajuste ---------- */
+const G = { k:null, x:[], fo:[], p0:[] };
+CLEAR['view-gof'] = () => { G.k=null; G.x=[]; G.fo=[]; G.p0=[]; };
+$('#g_k').addEventListener('input', gofRebuild);
+$('#g_a').addEventListener('input', gofCompute);
+$('#g_table').addEventListener('input', e => {
+  const t = e.target;
+  if (t && t.dataset && t.dataset.f){ G[t.dataset.f][Number(t.dataset.i)] = t.value; gofTotals(); gofCompute(); }
+});
+$('#g_ejemplo').addEventListener('click', () => {
+  G.x=['1','2','3','4','5','6']; G.fo=['8','12','9','11','6','14']; G.p0=['1/6','1/6','1/6','1/6','1/6','1/6'];
+  $('#g_k').value='6'; $('#g_a').value='0,05';
+  gofRebuild();
+});
+
+function gofRebuild(){
+  const k = read('g_k'), holder = $('#g_table');
+  if (k===null){ G.k=null; holder.innerHTML=''; gofCompute(); return; }
+  if (Number.isNaN(k) || !Number.isInteger(k) || k<2 || k>30){
+    G.k=null; holder.innerHTML=errP('Categorías debe ser un número entero entre 2 y 30.'); gofCompute(); return;
+  }
+  G.k = k;
+  const extra = '<th>p</th>';
+  let body='';
+  for (let i=0;i<k;i++){
+    const xv = G.x[i]!==undefined ? G.x[i] : String(i+1);
+    body += `<tr><td><input data-f="x" data-i="${i}" value="${esc(xv)}" autocomplete="off" aria-label="Categoría ${i+1}"></td>` +
+      `<td><input data-f="fo" data-i="${i}" inputmode="numeric" autocomplete="off" value="${esc(G.fo[i]!==undefined?G.fo[i]:'')}" aria-label="Frecuencia observada ${i+1}"></td>`;
+    body += `<td><input data-f="p0" data-i="${i}" inputmode="text" autocomplete="off" value="${esc(G.p0[i]!==undefined?G.p0[i]:'')}" aria-label="Probabilidad ${i+1}"></td>`;
+    body += `</tr>`;
+  }
+  holder.innerHTML = `<div class="tscroll"><table class="dt"><thead><tr><th>x</th><th>Fo</th>${extra}</tr></thead><tbody>${body}</tbody>` +
+    `<tfoot><tr><th>Total</th><td class="dv" id="g_totfo"></td><td class="dv" id="g_totp"></td></tr></tfoot></table></div>`;
+  gofTotals();
+  gofCompute();
+}
+
+function gofTotals(){
+  const eFo=document.getElementById('g_totfo'), eP=document.getElementById('g_totp');
+  if (!eFo || !eP) return;
+  let sf=0, nf=0, sp=0, np=0;
+  for (let i=0;i<(G.k||0);i++){
+    const f=parseNum(G.fo[i]); if (f!==null && !Number.isNaN(f)){ sf+=f; nf++; }
+    const p=parseNum(G.p0[i], true); if (p!==null && !Number.isNaN(p)){ sp+=p; np++; }
+  }
+  eFo.textContent = nf ? fmtInput(sf) : '';
+  eP.textContent = np ? fmtInput(sp) : '';
+}
+
+function gofCompute(){
+  const out=$('#g_out'), blk=$('#g_block');
+  const show = html => { out.innerHTML = html; blk.hidden = (html===''); };
+  const k = G.k;
+  if (!k){ show(''); return; }
+  const a = read('g_a');
+  const fo=[]; let missing=false;
+  for (let i=0;i<k;i++){
+    const v = parseNum(G.fo[i]);
+    if (v===null){ missing=true; continue; }
+    if (!isCount(v)){ show(errP(ERR_FO)); return; }
+    fo[i]=v;
+  }
+  if (missing || a===null){ show(''); return; }
+  if (!alphaOk(a)){ show(errP(ERR_A)); return; }
+  const N = fo.reduce((s,v)=>s+v,0);
+  if (N<=0){ show(errP('La suma de las frecuencias observadas debe ser mayor que 0.')); return; }
+
+  const pv=[]; let sumP=0;
+  for (let i=0;i<k;i++){
+    const p = parseNum(G.p0[i], true);
+    if (p===null){ show(''); return; }
+    if (Number.isNaN(p) || p<=0 || p>1){ show(errP('Cada p debe ser mayor que 0 y menor o igual que 1 (por ejemplo 0,25 o 1/4).')); return; }
+    pv[i]=p; sumP+=p;
+  }
+  if (Math.abs(sumP-1)>1e-3){ show(errP(`Las probabilidades p deben sumar 1 (ahora suman ${fmt(sumP)}).`)); return; }
+  const fe = pv.map(p => N*p);
+
+  const contrib = fo.map((o,i) => (o-fe[i])*(o-fe[i])/fe[i]);
+  const stat = contrib.reduce((s,v)=>s+v,0);
+  const df = k-1;
+  const crit = chiInv(1-a, df);
+  const pval = Math.min(1, Math.max(0, 1-chiCdf(stat, df)));
+  const reject = stat>crit;
+  const small = fe.some(v => v<5);
+
+  let rows='';
+  for (let i=0;i<k;i++) rows += `<tr><th>${labOf(G.x,i)}</th><td>${fo[i]}</td><td>${fmt(pv[i])}</td><td>${fmt(fe[i])}</td><td>${fmt(contrib[i])}</td></tr>`;
+  rows += `<tr class="tot"><th>Total</th><td>${N}</td><td>${fmt(sumP)}</td><td>${fmt(fe.reduce((s,v)=>s+v,0))}</td><td>${fmt(stat)}</td></tr>`;
+
+  show(
+    `<p class="hyp">H₀) La variable se ajusta al modelo analizado</p>` +
+    `<p class="hyp" style="margin-top:2px">H₁) La variable no se ajusta al modelo analizado</p>` +
+    `<p class="notes">α = ${fmt(a)}</p>` +
+    `<div class="tscroll"><table class="rt"><thead><tr><th>x</th><th>Fo</th><th>p</th><th>Fe = n·p</th><th>(Fo − Fe)² / Fe</th></tr></thead><tbody>${rows}</tbody></table></div>` +
+    (small ? `<p class="notes">Atención: hay frecuencias esperadas menores que 5; conviene agrupar categorías.</p>` : '') +
+    `<div class="big-pair">${box('χ² calculado', fmt(stat))}${box('χ² crítico', fmt(crit))}${box('V', String(df))}</div>` +
+    `<p class="notes">V = x − 1 = ${df}</p>` +
+    `<div class="verdict ${reject?'rej':''}">${reject?'Se rechaza H₀':'No se rechaza H₀'}` +
+      `<span>${reject ? 'La variable no se ajusta al modelo analizado.' : 'No hay evidencia suficiente para afirmar que la variable no se ajusta al modelo analizado.'}</span>` +
+      `<span>p-valor = ${fmt(pval)}</span></div>` +
+    `<div class="chart-wrap">${chartChi(df, stat, 'right', [crit])}</div>` + chiLegend()
+  );
+}
+
+/* ---------- Pruebas de independencia ---------- */
+const I = { r:null, c:null, rl:[], cl:[], cells:[] };
+CLEAR['view-ind'] = () => { I.r=null; I.c=null; I.rl=[]; I.cl=[]; I.cells=[]; };
+const letter = i => String.fromCharCode(65 + (i % 26));
+const labOfL = (arr, i) => { const v = arr[i]!==undefined ? String(arr[i]).trim() : ''; return v!=='' ? esc(v) : letter(i); };
+$('#i_x').addEventListener('input', indRebuild);
+$('#i_y').addEventListener('input', indRebuild);
+$('#i_a').addEventListener('input', indCompute);
+$('#i_table').addEventListener('input', e => {
+  const t = e.target;
+  if (!t || !t.dataset || !t.dataset.f) return;
+  const f = t.dataset.f, i = Number(t.dataset.i), j = Number(t.dataset.j);
+  if (f==='rl') I.rl[i]=t.value;
+  else if (f==='cl') I.cl[j]=t.value;
+  else { if (!I.cells[i]) I.cells[i]=[]; I.cells[i][j]=t.value; }
+  indTotals();
+  indCompute();
+});
+$('#i_ejemplo').addEventListener('click', () => {
+  I.rl=['A','B','C']; I.cl=['A','B','C']; I.cells=[['20','15','25'],['30','25','15'],['10','20','40']];
+  $('#i_x').value='3'; $('#i_y').value='3'; $('#i_a').value='0,05';
+  indRebuild();
+});
+
+function indRebuild(){
+  const r = read('i_x'), c = read('i_y'), holder = $('#i_table');
+  const okDim = v => v!==null && !Number.isNaN(v) && Number.isInteger(v) && v>=2 && v<=12;
+  I.r=null; I.c=null;
+  if (r===null || c===null){
+    holder.innerHTML = ''; indCompute(); return;
+  }
+  if (!okDim(r) || !okDim(c)){
+    holder.innerHTML = errP('F y C deben ser números enteros entre 2 y 12.'); indCompute(); return;
+  }
+  I.r=r; I.c=c;
+  let head = `<tr><th class="corner">F \\ C</th>`;
+  for (let j=0;j<c;j++) head += `<th class="in"><input data-f="cl" data-j="${j}" value="${esc(I.cl[j]!==undefined?I.cl[j]:letter(j))}" autocomplete="off" aria-label="Categoría ${j+1} de C"></th>`;
+  head += `<th>Total</th></tr>`;
+  let body='';
+  for (let i=0;i<r;i++){
+    body += `<tr><th class="in"><input data-f="rl" data-i="${i}" value="${esc(I.rl[i]!==undefined?I.rl[i]:letter(i))}" autocomplete="off" aria-label="Categoría ${i+1} de F"></th>`;
+    for (let j=0;j<c;j++){
+      const v = (I.cells[i] && I.cells[i][j]!==undefined) ? I.cells[i][j] : '';
+      body += `<td><input data-f="c" data-i="${i}" data-j="${j}" inputmode="numeric" autocomplete="off" value="${esc(v)}" aria-label="Frecuencia observada fila ${i+1}, columna ${j+1}"></td>`;
+    }
+    body += `<td class="dv" id="i_rt${i}"></td></tr>`;
+  }
+  body += `<tr><th>Total</th>`;
+  for (let j=0;j<c;j++) body += `<td class="dv" id="i_ct${j}"></td>`;
+  body += `<td class="dv" id="i_gt"></td></tr>`;
+  holder.innerHTML = `<div class="tscroll"><table class="dt"><thead>${head}</thead><tbody>${body}</tbody></table></div>`;
+  indTotals();
+  indCompute();
+}
+
+function indTotals(){
+  const r=I.r, c=I.c; if (!r) return;
+  const rs=Array(r).fill(0), rn=Array(r).fill(0), cs=Array(c).fill(0), cn=Array(c).fill(0); let g=0, gn=0;
+  for (let i=0;i<r;i++) for (let j=0;j<c;j++){
+    const v=parseNum(I.cells[i] ? I.cells[i][j] : '');
+    if (v!==null && !Number.isNaN(v)){ rs[i]+=v; rn[i]++; cs[j]+=v; cn[j]++; g+=v; gn++; }
+  }
+  const put=(id,s,n)=>{ const el=document.getElementById(id); if (el) el.textContent = n ? fmtInput(s) : ''; };
+  for (let i=0;i<r;i++) put('i_rt'+i, rs[i], rn[i]);
+  for (let j=0;j<c;j++) put('i_ct'+j, cs[j], cn[j]);
+  put('i_gt', g, gn);
+}
+
+function indCompute(){
+  const out=$('#i_out'), blk=$('#i_block');
+  const show = html => { out.innerHTML = html; blk.hidden = (html===''); };
+  const r=I.r, c=I.c;
+  if (!r){ show(''); return; }
+  const a = read('i_a');
+  const O=[]; let missing=false;
+  for (let i=0;i<r;i++){
+    O[i]=[];
+    for (let j=0;j<c;j++){
+      const v = parseNum(I.cells[i] ? I.cells[i][j] : '');
+      if (v===null){ missing=true; continue; }
+      if (!isCount(v)){ show(errP(ERR_FO)); return; }
+      O[i][j]=v;
+    }
+  }
+  if (missing || a===null){ show(''); return; }
+  if (!alphaOk(a)){ show(errP(ERR_A)); return; }
+
+  const R = O.map(row => row.reduce((s,v)=>s+v,0));
+  const C = Array.from({length:c}, (_,j) => O.reduce((s,row)=>s+row[j],0));
+  const N = R.reduce((s,v)=>s+v,0);
+  if (N<=0 || R.some(v=>v===0) || C.some(v=>v===0)){
+    show(errP('Hay filas o columnas con total 0: cargá al menos un dato en cada una.')); return;
+  }
+  const Fe = O.map((row,i) => row.map((_,j) => R[i]*C[j]/N));
+  let stat=0, small=false;
+  for (let i=0;i<r;i++) for (let j=0;j<c;j++){ stat += (O[i][j]-Fe[i][j])**2/Fe[i][j]; if (Fe[i][j]<5) small=true; }
+  const df = (r-1)*(c-1);
+  const crit = chiInv(1-a, df);
+  const pval = Math.min(1, Math.max(0, 1-chiCdf(stat, df)));
+  const reject = stat>crit;
+
+  let head = `<tr><th>F \\ C</th>`;
+  for (let j=0;j<c;j++) head += `<th>${labOfL(I.cl,j)}</th>`;
+  head += `<th>Total</th></tr>`;
+  let rows='';
+  for (let i=0;i<r;i++){
+    rows += `<tr><th>${labOfL(I.rl,i)}</th>` + Fe[i].map(v => `<td>${fmt(v)}</td>`).join('') + `<td>${R[i]}</td></tr>`;
+  }
+  rows += `<tr class="tot"><th>Total</th>` + C.map(v => `<td>${v}</td>`).join('') + `<td>${N}</td></tr>`;
+
+  show(
+    `<p class="hyp">H₀) La variable F es independiente de la C</p>` +
+    `<p class="hyp" style="margin-top:2px">H₁) La variable F es dependiente de la C</p>` +
+    `<p class="notes">α = ${fmt(a)}</p>` +
+    `<h3 style="margin-top:16px">Frecuencias esperadas (Fe)</h3>` +
+    `<div class="tscroll"><table class="rt"><thead>${head}</thead><tbody>${rows}</tbody></table></div>` +
+    (small ? `<p class="notes">Atención: hay frecuencias esperadas menores que 5; conviene agrupar categorías.</p>` : '') +
+    `<div class="big-pair">${box('χ² calculado', fmt(stat))}${box('χ² crítico', fmt(crit))}${box('V', String(df))}</div>` +
+    `<p class="notes">V = (F − 1)·(C − 1) = ${df}</p>` +
+    `<div class="verdict ${reject?'rej':''}">${reject?'Se rechaza H₀':'No se rechaza H₀'}` +
+      `<span>${reject ? 'La variable F es dependiente de la C.' : 'No hay evidencia suficiente para afirmar que la variable F depende de la C.'}</span>` +
+      `<span>p-valor = ${fmt(pval)}</span></div>` +
+    `<div class="chart-wrap">${chartChi(df, stat, 'right', [crit])}</div>` + chiLegend()
+  );
+}
+
+/* =====================================================================
+   Comparación de poblaciones
+   ===================================================================== */
+// Distribución F
+function fCdf(x,d1,d2){ return x<=0 ? 0 : betaI(d1*x/(d1*x+d2), d1/2, d2/2); }
+function fPdf(x,d1,d2){
+  if (x<=0) return 0;
+  return Math.exp(lgamma((d1+d2)/2)-lgamma(d1/2)-lgamma(d2/2)+(d1/2)*Math.log(d1/d2)+(d1/2-1)*Math.log(x)-((d1+d2)/2)*Math.log(1+d1*x/d2));
+}
+function fInv(p,d1,d2){
+  let lo=0, hi=1;
+  while (fCdf(hi,d1,d2) < p && hi<1e12) hi*=2;
+  for (let i=0;i<200;i++){ const mid=(lo+hi)/2; if (fCdf(mid,d1,d2) < p) lo=mid; else hi=mid; }
+  return (lo+hi)/2;
+}
+
+// Gráfico de la distribución pivotal (z, t o F) con zona de rechazo y valor calculado
+function chartPiv(o){
+  const W=640, H=260, m={l:16,r:16,t:30,b:40};
+  const iw=W-m.l-m.r, ih=H-m.t-m.b, base=m.t+ih;
+  const pdf = x => o.dist==='F' ? fPdf(x,o.df,o.df2) : (o.dist==='t' ? tPdf(x,o.df) : normPdf(x));
+  const inv = p => o.dist==='F' ? fInv(p,o.df,o.df2) : (o.dist==='t' ? tInv(p,o.df) : zInv(p));
+  let xmin, xmax, off=false, statPos=o.stat;
+  if (o.dist==='F'){
+    const base=Math.max(inv(0.999), ...o.crits.map(c=>c*1.1));
+    xmin=0; xmax=(o.stat*1.1 <= base*1.8) ? Math.max(base, o.stat*1.1) : base;
+    if (o.stat > xmax){ off=true; statPos=xmax*0.96; }
+  } else {
+    const base=Math.max(Math.min(inv(0.9995),8), ...o.crits.map(c=>Math.abs(c)*1.2));
+    const r=(Math.abs(o.stat)*1.15 <= base*1.8) ? Math.max(base, Math.abs(o.stat)*1.15) : base;
+    xmin=-r; xmax=r;
+    if (Math.abs(o.stat) > r){ off=true; statPos=Math.sign(o.stat)*r*0.96; }
+  }
+  const sx = x => m.l+(x-xmin)/(xmax-xmin)*iw;
+  const N=400, xs=[];
+  for (let i=0;i<=N;i++){ let x=xmin+(xmax-xmin)*i/N; if (o.dist==='F' && x<=0) x=xmax/4000; xs.push(x); }
+  let peak=0; xs.forEach((x,i) => { if (i>0) peak=Math.max(peak,pdf(x)); });
+  const ymax = (o.dist==='F' && o.df<=2) ? pdf(Math.max(inv(0.1),xmax/4000))*1.6 : peak*1.12;
+  const sy = y => base - Math.min(y,ymax)/ymax*ih;
+  const curve = xs.map((x,i)=>(i?'L':'M')+sx(x).toFixed(1)+' '+sy(pdf(x)).toFixed(1)).join(' ');
+  const seg = (a,b) => {
+    a=Math.max(a,xmin); b=Math.min(b,xmax);
+    if (a>=b) return '';
+    let d=`M${sx(a).toFixed(1)} ${base}`;
+    const M=120;
+    for (let i=0;i<=M;i++){ const x=a+(b-a)*i/M; d+=` L${sx(x).toFixed(1)} ${sy(pdf(o.dist==='F'?Math.max(x,xmax/4000):x)).toFixed(1)}`; }
+    return d+` L${sx(b).toFixed(1)} ${base} Z`;
+  };
+  const regions = o.cola==='two' ? seg(xmin,o.crits[0])+' '+seg(o.crits[1],xmax)
+                : (o.cola==='left' ? seg(xmin,o.crits[0]) : seg(o.crits[0],xmax));
+  const clampX = (x,pad=34) => Math.min(Math.max(sx(x), m.l+pad), W-m.r-pad);
+  const dfTxt = o.dist==='F' ? `v₁ = ${o.df} ; v₂ = ${o.df2}` : (o.dist==='t' ? `v = ${o.df}` : '');
+  let s = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Distribución ${o.dist} con zona de rechazo y valor calculado">`;
+  s += `<path d="${regions}" fill="var(--reject)" fill-opacity="0.35"/>`;
+  s += `<path d="${curve}" fill="none" stroke="var(--curve)" stroke-width="2.4" stroke-linejoin="round"/>`;
+  s += `<line x1="${m.l}" y1="${base}" x2="${W-m.r}" y2="${base}" stroke="var(--muted)" stroke-width="1"/>`;
+  if (o.dist!=='F') s += `<line x1="${sx(0).toFixed(1)}" y1="${base}" x2="${sx(0).toFixed(1)}" y2="${base+5}" stroke="var(--muted)"/><text x="${sx(0).toFixed(1)}" y="${base+18}" text-anchor="middle" font-size="12" fill="var(--muted)" font-family="var(--sans)">0</text>`;
+  o.crits.forEach(c => {
+    s += `<line x1="${sx(c).toFixed(1)}" y1="${m.t}" x2="${sx(c).toFixed(1)}" y2="${base}" stroke="var(--reject)" stroke-width="1.6" stroke-dasharray="5 4"/>`;
+    s += `<text x="${clampX(c).toFixed(1)}" y="${base+18}" text-anchor="middle" font-size="13" fill="var(--reject)" font-family="var(--sans)">${fmt(c,2)}</text>`;
+  });
+  s += `<line x1="${sx(statPos).toFixed(1)}" y1="${m.t-4}" x2="${sx(statPos).toFixed(1)}" y2="${base}" stroke="var(--curve)" stroke-width="2.6"${off?' stroke-dasharray="7 4"':''}/>`;
+  s += `<circle cx="${sx(statPos).toFixed(1)}" cy="${m.t-4}" r="4" fill="var(--curve)"/>`;
+  s += `<text x="${clampX(statPos,off?56:44).toFixed(1)}" y="${m.t-12}" text-anchor="middle" font-size="14" font-weight="600" fill="var(--curve)" font-family="var(--sans)">${o.name} = ${fmt(o.stat,2)}${off ? (o.stat>0 ? ' →' : ' ←') : ''}</text>`;
+  if (dfTxt) s += `<text x="${m.l}" y="${H-6}" font-size="12" fill="var(--muted)" font-family="var(--sans)">${dfTxt}</text>`;
+  return s + `</svg>`;
+}
+
+const hypOf = (sym, cola) =>
+  cola==='two' ? [`${sym}₁ = ${sym}₂`, `${sym}₁ ≠ ${sym}₂`] :
+  (cola==='left' ? [`${sym}₁ ≥ ${sym}₂`, `${sym}₁ &lt; ${sym}₂`] : [`${sym}₁ ≤ ${sym}₂`, `${sym}₁ &gt; ${sym}₂`]);
+
+// Arma todo el resultado de un test sobre la condición pivotal
+function pivotResult(o){
+  const q = p => o.dist==='F' ? fInv(p,o.df,o.df2) : (o.dist==='t' ? tInv(p,o.df) : zInv(p));
+  const cdf = x => o.dist==='F' ? fCdf(x,o.df,o.df2) : (o.dist==='t' ? tCdf(x,o.df) : normCdf(x));
+  const N = o.name, a = o.a;
+  let crits, reject, pval, region, critBox;
+  const F0 = cdf(o.stat);
+  if (o.cola==='two'){
+    const c1=q(a/2), c2=q(1-a/2); crits=[c1,c2];
+    reject = o.stat<c1 || o.stat>c2; pval = 2*Math.min(F0,1-F0);
+    region = `${N} &lt; ${fmt(c1)} o ${N} &gt; ${fmt(c2)}`;
+    critBox = [`${N} críticos`, `${fmt(c1)} ; ${fmt(c2)}`];
+  } else if (o.cola==='left'){
+    const c=q(a); crits=[c]; reject = o.stat<c; pval = F0;
+    region = `${N} &lt; ${fmt(c)}`; critBox = [`${N} crítico`, fmt(c)];
+  } else {
+    const c=q(1-a); crits=[c]; reject = o.stat>c; pval = 1-F0;
+    region = `${N} &gt; ${fmt(c)}`; critBox = [`${N} crítico`, fmt(c)];
+  }
+  pval = Math.min(1, Math.max(0, pval));
+  const [H0,H1] = hypOf(o.sym, o.cola);
+  return (o.hypHtml || `<p class="hyp">H₀: ${H0} &nbsp;·&nbsp; H₁: ${H1} &nbsp;·&nbsp; α = ${fmt(a)}</p>`) +
+    (o.pre || '') +
+    `<div class="big-pair">${box(`${N} calculado`, fmt(o.stat))}${box(critBox[0], critBox[1])}${o.extras||''}</div>` +
+    (o.note ? `<p class="notes">${o.note}</p>` : '') +
+    `<p class="notes">Zona de rechazo: ${region}</p>` +
+    `<div class="verdict ${reject?'rej':''}">${reject?'Se rechaza H₀':'No se rechaza H₀'}${o.concl ? `<span>${o.concl(reject)}</span>` : ''}<span>p-valor = ${fmt(pval)}</span></div>` +
+    `<div class="chart-wrap">${chartPiv({dist:o.dist, df:o.df, df2:o.df2, stat:o.stat, cola:o.cola, crits, name:N})}</div>` +
+    `<div class="legend"><span><i style="background:var(--reject);opacity:.45"></i>Zona de rechazo</span><span><i style="background:var(--curve)"></i>${N} calculado</span></div>`;
+}
+
+const SUB = { 1:'₁', 2:'₂' };
+const colaButtons = sym =>
+  `<button type="button" data-v="two" aria-pressed="true">Bilateral (${sym}₁ ≠ ${sym}₂)</button>` +
+  `<button type="button" data-v="left" aria-pressed="false">Cola izquierda (${sym}₁ &lt; ${sym}₂)</button>` +
+  `<button type="button" data-v="right" aria-pressed="false">Cola derecha (${sym}₁ &gt; ${sym}₂)</button>`;
+function mountSection(key, title, inner, backTo){
+  document.querySelector('.wrap').insertAdjacentHTML('beforeend',
+    `<section id="view-${key}" hidden><button class="back" type="button">← Volver</button><h2>${title}</h2>${inner}</section>`);
+  views[key] = '#view-'+key;
+  document.querySelector(`#view-${key} .back`).addEventListener('click', () => go(backTo || 'comp'));
+}
+
+/* ---------- Cuatro tests con dos muestras independientes ---------- */
+function cmpBuild(key, kind, title){
+  const sym = kind==='F' ? 'σ' : 'μ';
+  const hasX = kind!=='F';
+  const dl = kind==='Z' ? 'σ' : 'S';
+  const minN = kind==='Z' ? 1 : 2;
+  const row = i =>
+    `<div class="datarow" style="margin-top:14px"><div class="grp">` +
+      `<div class="cellf"><label for="${key}_n${i}">n${SUB[i]}</label><input id="${key}_n${i}" inputmode="numeric" autocomplete="off"></div>` +
+      (hasX ? `<div class="cellf"><label for="${key}_x${i}">x̄${SUB[i]}</label><input id="${key}_x${i}" inputmode="decimal" autocomplete="off"></div>` : '') +
+      `<div class="cellf sel"><select id="${key}_dt${i}" aria-label="Cargar ${dl}${SUB[i]} o su varianza"><option value="s">${dl}${SUB[i]}</option><option value="v">${dl}${SUB[i]}²</option></select>` +
+      `<input id="${key}_dv${i}" inputmode="decimal" autocomplete="off"></div>` +
+    `</div></div>`;
+  mountSection(key, title,
+    `<div class="datapanel">` +
+      `<div class="datarow"><div class="grp"><div class="cellf"><label for="${key}_a">α</label><input id="${key}_a" inputmode="decimal" autocomplete="off"></div></div></div>` +
+      row(1) + row(2) +
+      `<button type="button" class="linkbtn" id="${key}_ej">Cargar un ejemplo</button>` +
+    `</div>` +
+    `<div class="results" aria-live="polite"><div class="block"><h3>Test de hipótesis</h3>` +
+      `<div class="seg" id="seg-${key}">${colaButtons(sym)}</div><div id="${key}_out"></div></div></div>`);
+
+  const st = { cola:'two' };
+  const nErr = i => `n${SUB[i]} debe ser un número entero ${minN===1 ? 'positivo' : 'mayor o igual a 2'}.`;
+  const readN = id => { const n=read(id); if (n===null) return null; return (Number.isNaN(n)||!Number.isInteger(n)||n<minN) ? NaN : n; };
+  const readVar = i => {
+    const x=read(`${key}_dv${i}`); if (x===null) return null;
+    if (Number.isNaN(x) || x<=0) return NaN;
+    return $(`#${key}_dt${i}`).value==='v' ? x : x*x;
+  };
+
+  function upd(){
+    syncSeg('seg-'+key, st, 'cola');
+    const out=$(`#${key}_out`);
+    const a=read(key+'_a'), n1=readN(key+'_n1'), n2=readN(key+'_n2');
+    const x1=hasX ? read(key+'_x1') : 0, x2=hasX ? read(key+'_x2') : 0;
+    const s1=readVar(1), s2=readVar(2);
+    const dlab = i => dl+SUB[i]+($(`#${key}_dt${i}`).value==='v' ? '²' : '');
+    let err=null;
+    if (n1!==null && Number.isNaN(n1)) err=nErr(1);
+    else if (n2!==null && Number.isNaN(n2)) err=nErr(2);
+    else if (hasX && x1!==null && Number.isNaN(x1)) err='x̄₁ debe ser un número.';
+    else if (hasX && x2!==null && Number.isNaN(x2)) err='x̄₂ debe ser un número.';
+    else if (s1!==null && Number.isNaN(s1)) err=`${dlab(1)} debe ser un número positivo.`;
+    else if (s2!==null && Number.isNaN(s2)) err=`${dlab(2)} debe ser un número positivo.`;
+    else if (a!==null && !validAlpha(a)) err=ERR_A;
+    if (err){ out.innerHTML=errP(err); return; }
+    if ([a,n1,n2,x1,x2,s1,s2].some(v => v===null)){ out.innerHTML=''; return; }
+
+    const o = { sym, cola:st.cola, a };
+    if (kind==='F'){
+      Object.assign(o, { name:'F', dist:'F', stat:s1/s2, df:n1-1, df2:n2-1,
+        note:`v₁ = n₁ − 1 = ${n1-1} &nbsp;·&nbsp; v₂ = n₂ − 1 = ${n2-1}` });
+    } else if (kind==='Z'){
+      Object.assign(o, { name:'z', dist:'z', stat:(x1-x2)/Math.sqrt(s1/n1+s2/n2) });
+    } else if (kind==='T1'){
+      const df=n1+n2-2, sa=Math.sqrt(((n1-1)*s1+(n2-1)*s2)/df);
+      Object.assign(o, { name:'t', dist:'t', df, stat:(x1-x2)/(sa*Math.sqrt(1/n1+1/n2)),
+        extras:box('S<sub>a</sub>', fmt(sa)), note:`v = n₁ + n₂ − 2 = ${df}` });
+    } else {
+      const A=s1/n1, B=s2/n2;
+      const vex=Math.pow(A+B,2)/((1/(n1-1))*A*A+(1/(n2-1))*B*B);
+      const vr=Math.max(1, Math.round(vex));
+      Object.assign(o, { name:'t', dist:'t', df:vr, stat:(x1-x2)/Math.sqrt(A+B),
+        extras:box('v', fmt(vex,4)), note:`El crítico se busca con v redondeado = ${vr}` });
+    }
+    out.innerHTML = pivotResult(o);
+  }
+  bindSeg('seg-'+key, st, 'cola', upd);
+  bindInputs(`#view-${key} input, #view-${key} select`, upd);
+  $(`#${key}_ej`).addEventListener('click', () => {
+    const ex = {
+      F:  { a:'0,05', n1:'15', dv1:'4,2', n2:'20', dv2:'3,1' },
+      Z:  { a:'0,05', n1:'40', x1:'52,3', dv1:'6', n2:'35', x2:'49,8', dv2:'5' },
+      T1: { a:'0,05', n1:'12', x1:'24,5', dv1:'3,2', n2:'15', x2:'21,8', dv2:'3,6' },
+      T2: { a:'0,05', n1:'10', x1:'35,2', dv1:'2,1', n2:'14', x2:'32,9', dv2:'4,8' }
+    }[kind];
+    for (const [k,v] of Object.entries(ex)) $(`#${key}_${k}`).value = v;
+    $(`#${key}_dt1`).value='s'; $(`#${key}_dt2`).value='s';
+    upd();
+  });
+  upd();
+}
+
+/* ---------- Promedios con muestras independientes (Z, t con Sa o Welch según los datos) ---------- */
+function cmpBuildI(){
+  const key='cI';
+  const opts = i => `<option value="S">S${SUB[i]}</option><option value="S2">S${SUB[i]}²</option><option value="sig">σ${SUB[i]}</option><option value="sig2">σ${SUB[i]}²</option>`;
+  const row = i =>
+    `<div class="datarow" style="margin-top:14px"><div class="grp">` +
+      `<div class="cellf"><label for="cI_n${i}">n${SUB[i]}</label><input id="cI_n${i}" inputmode="numeric" autocomplete="off"></div>` +
+      `<div class="cellf"><label for="cI_x${i}">x̄${SUB[i]}</label><input id="cI_x${i}" inputmode="decimal" autocomplete="off"></div>` +
+      `<div class="cellf sel"><select id="cI_dt${i}" aria-label="Tipo de dato de dispersión de la muestra ${i}">${opts(i)}</select>` +
+      `<input id="cI_dv${i}" inputmode="decimal" autocomplete="off"></div>` +
+    `</div></div>`;
+  mountSection(key, 'Comparación de promedios con muestras independientes',
+    `<div class="datapanel">` +
+      `<div class="datarow"><div class="grp"><div class="cellf"><label for="cI_a">α</label><input id="cI_a" inputmode="decimal" autocomplete="off"></div></div></div>` +
+      row(1) + row(2) +
+      `<div id="cI_eqwrap" hidden><div class="subhead">Desvíos poblacionales</div>` +
+        `<div class="seg" id="seg-cI-eq">` +
+          `<button type="button" data-v="eq" aria-pressed="true">Iguales (σ₁ = σ₂)</button>` +
+          `<button type="button" data-v="ne" aria-pressed="false">Distintos (σ₁ ≠ σ₂)</button>` +
+        `</div></div>` +
+      `<button type="button" class="linkbtn" id="cI_ej">Cargar un ejemplo</button>` +
+    `</div>` +
+    `<div class="results" aria-live="polite"><div class="block"><h3>Test de hipótesis</h3>` +
+      `<div class="seg" id="seg-cI">${colaButtons('μ')}</div><div id="cI_out"></div></div></div>`);
+
+  const st = { cola:'two', eq:'eq' };
+  const isPop = i => { const t=$(`#cI_dt${i}`).value; return t==='sig' || t==='sig2'; };
+  const dlab = i => { const s=$(`#cI_dt${i}`); return s.options[s.selectedIndex].textContent; };
+  const readN = id => { const n=read(id); if (n===null) return null; return (Number.isNaN(n)||!Number.isInteger(n)||n<1) ? NaN : n; };
+  const readVar = i => {
+    const x=read(`cI_dv${i}`); if (x===null) return null;
+    if (Number.isNaN(x) || x<=0) return NaN;
+    const t=$(`#cI_dt${i}`).value;
+    return (t==='S2' || t==='sig2') ? x : x*x;
+  };
+
+  function upd(){
+    syncSeg('seg-cI', st, 'cola'); syncSeg('seg-cI-eq', st, 'eq');
+    const bothS = !isPop(1) && !isPop(2), bothPop = isPop(1) && isPop(2);
+    $('#cI_eqwrap').hidden = !bothS;
+    const out=$('#cI_out');
+    const a=read('cI_a'), n1=readN('cI_n1'), n2=readN('cI_n2'), x1=read('cI_x1'), x2=read('cI_x2');
+    const s1=readVar(1), s2=readVar(2);
+    let err=null;
+    if (n1!==null && Number.isNaN(n1)) err='n₁ debe ser un número entero positivo.';
+    else if (n2!==null && Number.isNaN(n2)) err='n₂ debe ser un número entero positivo.';
+    else if (x1!==null && Number.isNaN(x1)) err='x̄₁ debe ser un número.';
+    else if (x2!==null && Number.isNaN(x2)) err='x̄₂ debe ser un número.';
+    else if (s1!==null && Number.isNaN(s1)) err=`${dlab(1)} debe ser un número positivo.`;
+    else if (s2!==null && Number.isNaN(s2)) err=`${dlab(2)} debe ser un número positivo.`;
+    else if (a!==null && !validAlpha(a)) err=ERR_A;
+    if (err){ out.innerHTML=errP(err); return; }
+    if ([a,n1,n2,x1,x2,s1,s2].some(v => v===null)){ out.innerHTML=''; return; }
+    if (!bothS && !bothPop){ out.innerHTML=errP('Cargá los dos desvíos como poblacionales (σ) o los dos como muestrales (S).'); return; }
+    if (bothS && (n1<2 || n2<2)){ out.innerHTML=errP('Con desvíos muestrales, n₁ y n₂ deben ser mayores o iguales a 2.'); return; }
+
+    const o = { sym:'μ', cola:st.cola, a };
+    if (bothPop){
+      Object.assign(o, { name:'z', dist:'z', stat:(x1-x2)/Math.sqrt(s1/n1+s2/n2),
+        pre:`<p class="notes">Test utilizado: Z (desvíos poblacionales conocidos)</p>` });
+    } else if (st.eq==='eq'){
+      const df=n1+n2-2, sa=Math.sqrt(((n1-1)*s1+(n2-1)*s2)/df);
+      Object.assign(o, { name:'t', dist:'t', df, stat:(x1-x2)/(sa*Math.sqrt(1/n1+1/n2)),
+        pre:`<p class="notes">Test utilizado: t con desvíos poblacionales iguales</p>`,
+        extras:box('S<sub>a</sub>', fmt(sa)), note:`v = n₁ + n₂ − 2 = ${df}` });
+    } else {
+      const A=s1/n1, B=s2/n2;
+      const vex=Math.pow(A+B,2)/((1/(n1-1))*A*A+(1/(n2-1))*B*B);
+      const vr=Math.max(1, Math.round(vex));
+      Object.assign(o, { name:'t', dist:'t', df:vr, stat:(x1-x2)/Math.sqrt(A+B),
+        pre:`<p class="notes">Test utilizado: t de Welch (desvíos poblacionales distintos)</p>`,
+        extras:box('v', fmt(vex,4)), note:`El crítico se busca con v redondeado = ${vr}` });
+    }
+    out.innerHTML = pivotResult(o);
+  }
+  bindSeg('seg-cI', st, 'cola', upd);
+  bindSeg('seg-cI-eq', st, 'eq', upd);
+  bindInputs(`#view-${key} input, #view-${key} select`, upd);
+  $('#cI_ej').addEventListener('click', () => {
+    st.eq='ne';
+    const ex={ a:'0,05', n1:'10', x1:'35,2', dv1:'2,1', n2:'14', x2:'32,9', dv2:'4,8' };
+    for (const [k,v] of Object.entries(ex)) $(`#cI_${k}`).value=v;
+    $('#cI_dt1').value='S'; $('#cI_dt2').value='S';
+    upd();
+  });
+  upd();
+}
+
+/* ---------- Muestras apareadas ---------- */
+function cmpBuildP(){
+  const key='cP';
+  mountSection(key, 'Comparación de promedios con muestras dependientes',
+    `<div class="datapanel">` +
+      `<div class="datarow"><div class="grp">` +
+        `<div class="cellf"><label for="cP_a">α</label><input id="cP_a" inputmode="decimal" autocomplete="off"></div>` +
+        `<div class="cellf"><label for="cP_n">n</label><input id="cP_n" inputmode="numeric" autocomplete="off"></div>` +
+      `</div></div>` +
+      `<div id="cP_table"></div>` +
+      `<button type="button" class="linkbtn" id="cP_ej">Cargar un ejemplo</button>` +
+    `</div>` +
+    `<div class="results" aria-live="polite"><div class="block"><h3>Test de hipótesis</h3>` +
+      `<div class="seg" id="seg-cP">${colaButtons('μ')}</div><div id="cP_out"></div></div></div>`);
+
+  const P = { n:null, a:[], b:[], cola:'two' };
+  CLEAR['view-cP'] = () => { P.a=[]; P.b=[]; P.n=null; };
+  const dText = j => {
+    const a=parseNum(P.a[j]), b=parseNum(P.b[j]);
+    return (a!==null && b!==null && !Number.isNaN(a) && !Number.isNaN(b)) ? fmtInput(a-b) : '';
+  };
+  function refreshD(j){ const c=document.getElementById('cP_d'+j); if (c) c.textContent = dText(j); }
+
+  function rebuild(){
+    const n=read('cP_n'), holder=$('#cP_table');
+    P.n=null;
+    if (n===null){ holder.innerHTML=''; upd(); return; }
+    if (Number.isNaN(n) || !Number.isInteger(n) || n<2 || n>30){
+      holder.innerHTML=errP('n debe ser un número entero entre 2 y 30.'); upd(); return;
+    }
+    P.n=n;
+    let head=`<tr><th class="corner"></th>`, r1=`<tr><th>Muestra 1</th>`, r2=`<tr><th>Muestra 2</th>`, r3=`<tr><th>d = 1 − 2</th>`;
+    for (let j=0;j<n;j++){
+      head += `<th>${j+1}</th>`;
+      r1 += `<td><input data-r="a" data-j="${j}" inputmode="decimal" autocomplete="off" value="${esc(P.a[j]!==undefined?P.a[j]:'')}" aria-label="Muestra 1, individuo ${j+1}"></td>`;
+      r2 += `<td><input data-r="b" data-j="${j}" inputmode="decimal" autocomplete="off" value="${esc(P.b[j]!==undefined?P.b[j]:'')}" aria-label="Muestra 2, individuo ${j+1}"></td>`;
+      r3 += `<td class="dv" id="cP_d${j}">${dText(j)}</td>`;
+    }
+    holder.innerHTML = `<div class="tscroll"><table class="dt"><thead>${head}</tr></thead><tbody>${r1}</tr>${r2}</tr>${r3}</tr></tbody></table></div>`;
+    upd();
+  }
+
+  function upd(){
+    syncSeg('seg-cP', P, 'cola');
+    const out=$('#cP_out'), a=read('cP_a');
+    if (a!==null && (Number.isNaN(a) || !validAlpha(a))){ out.innerHTML=errP(ERR_A); return; }
+    if (!P.n || a===null){ out.innerHTML=''; return; }
+    const d=[]; let missing=false;
+    for (let j=0;j<P.n;j++){
+      const x=parseNum(P.a[j]), y=parseNum(P.b[j]);
+      if ((x!==null && Number.isNaN(x)) || (y!==null && Number.isNaN(y))){ out.innerHTML=errP('Los datos deben ser números.'); return; }
+      if (x===null || y===null){ missing=true; continue; }
+      d[j]=x-y;
+    }
+    if (missing){ out.innerHTML=''; return; }
+    const n=P.n, dbar=d.reduce((s,v)=>s+v,0)/n;
+    const sd=Math.sqrt(d.reduce((s,v)=>s+(v-dbar)*(v-dbar),0)/(n-1));
+    if (!(sd>0)){ out.innerHTML=errP('Todas las diferencias son iguales (S<sub>d</sub> = 0): no se puede calcular t.'); return; }
+    out.innerHTML = pivotResult({ sym:'μ', cola:P.cola, a, name:'t', dist:'t', df:n-1, stat:dbar/(sd/Math.sqrt(n)),
+      extras: box('d̄', fmt(dbar)) + box('S<sub>d</sub>', fmt(sd)), note:`v = n − 1 = ${n-1}` });
+  }
+
+  bindSeg('seg-cP', P, 'cola', upd);
+  $('#cP_a').addEventListener('input', upd);
+  $('#cP_n').addEventListener('input', rebuild);
+  $('#cP_table').addEventListener('input', e => {
+    const t=e.target;
+    if (!t || !t.dataset || !t.dataset.r) return;
+    const j=Number(t.dataset.j);
+    P[t.dataset.r][j]=t.value; refreshD(j); upd();
+  });
+  $('#cP_ej').addEventListener('click', () => {
+    P.a=['12','15','11','14','16','13','12','15']; P.b=['10','14','12','11','13','12','10','13'];
+    $('#cP_a').value='0,05'; $('#cP_n').value='8';
+    rebuild();
+  });
+  upd();
+}
+
+cmpBuild('cF','F','Comparación de desvíos poblacionales');
+cmpBuildI();
+cmpBuildP();
+
+/* =====================================================================
+   Regresión lineal simple
+   ===================================================================== */
+const boxT = (k,val,cls,tag) => `<div class="big ${cls||''}"><div class="k">${k}</div><div class="v">${val}</div>${tag ? `<div class="tag">${tag}</div>` : ''}</div>`;
+
+function regShell(p, withSummary){
+  return `<div class="results" aria-live="polite">` +
+    (withSummary ? `<div class="block" hidden><h3>Resultados de la muestra</h3><div id="${p}_sum"></div></div>` : '') +
+    `<div class="block" hidden><h3>Ajuste lineal</h3><div id="${p}_fit"></div></div>` +
+    `<div class="block" hidden><h3>Test de significancia</h3><div id="${p}_test"></div></div>` +
+    `<div class="block" hidden><h3>Intervalos de confianza</h3><div id="${p}_ic"></div></div>` +
+  `</div>`;
+}
+function regPut(p, id, html){
+  const el=document.getElementById(`${p}_${id}`);
+  if (!el) return;
+  el.innerHTML = html;
+  el.closest('.block').hidden = (html==='');
+}
+// Interpretación de R según los criterios pedidos
+function classifyR(R){
+  if (R <= -0.7) return { cls:'ok', tag:'Relación fuerte e inversa' };
+  if (R >= 0.7) return { cls:'ok', tag:'Relación fuerte y directa' };
+  if (R <= -0.0001) return { cls:'bad', tag:'Relación inversa y débil' };
+  if (R >= 0.0001) return { cls:'bad', tag:'Relación directa y débil' };
+  return { cls:'bad', tag:'Sin relación lineal' };
+}
+const REG_EMPTY = { n:null,a:null,b:null,R:null,R2:null,Se:null,Sb:null,xbar:null,Sxx:null,aI:null,aT:null,x0:null };
+
+function regRender(p, D, withSummary){
+  const { n,a,b,R,R2,Se,Sb,xbar,Sxx,aI,aT,x0 } = D;
+  // resumen de lo calculado (solo carga individual)
+  if (withSummary){
+    const all = [n,a,b,R,R2,Se,Sb,xbar,Sxx].every(v => v!==null);
+    regPut(p,'sum', all ?
+      `<div class="big-grid">${box('R',fmt(R))}${box('R²',fmt(R2))}${box('S<sub>e</sub>',fmt(Se))}${box('a',fmt(a))}${box('b',fmt(b))}${box('S<sub>b</sub>',fmt(Sb))}${box('x̄',fmt(xbar))}${box('S<sub>xx</sub>',fmt(Sxx))}</div>` : '');
+  }
+  // recta, R² y R
+  let fit='';
+  if (a!==null && b!==null) fit += `<p class="hyp" style="font-size:1.3rem;margin-top:4px">ŷ = ${fmt(a)} ${b<0?'−':'+'} ${fmt(Math.abs(b))}·x</p>`;
+  const bx=[];
+  if (R2!==null) bx.push(boxT('R²', fmt(R2), R2>=0.5 ? 'ok' : 'bad', R2>=0.5 ? 'Buen Ajuste' : 'No posee un buen ajuste'));
+  if (R!==null){ const c=classifyR(R); bx.push(boxT('R', fmt(R), c.cls, c.tag)); }
+  if (bx.length) fit += `<div class="big-pair">${bx.join('')}</div>`;
+  regPut(p,'fit', fit);
+
+  // test de significancia (bilateral, v = n − 2)
+  let test='';
+  if (b!==null && Sb!==null && n!==null && aT!==null){
+    const df=n-2;
+    test = pivotResult({ sym:'β', cola:'two', a:aT, name:'t', dist:'t', df, stat:b/Sb,
+      hypHtml:`<p class="hyp">H₀) β = 0 no existe relación entre las variables</p>` +
+              `<p class="hyp" style="margin-top:2px">H₁) β ≠ 0 existe relación entre las variables</p>` +
+              `<p class="notes">α = ${fmt(aT)}</p>`,
+      note:`v = n − 2 = ${df}`,
+      concl: rej => rej ? 'Existe relación lineal entre las variables.' : 'No hay evidencia suficiente para afirmar que exista relación lineal entre las variables.' });
+  }
+  regPut(p,'test', test);
+
+  // intervalos de confianza (solo completos)
+  let ic='', tUsed=null;
+  if (n!==null && aI!==null){
+    const df=n-2, t=tInv(1-aI/2, df); tUsed=`Valor de t utilizado: ±${fmt(t)} (v = ${df})`;
+    if (b!==null && Sb!==null){
+      ic += `<div class="subhead" style="margin-top:12px">Intervalo para el coeficiente de regresión poblacional</div>` +
+            box('β', `( ${fmt(b-t*Sb)} ; ${fmt(b+t*Sb)} )`, 'wide');
+    }
+    if (a!==null && b!==null && xbar!==null && Sxx!==null && Se!==null && x0!==null){
+      const y0=a+b*x0, q=(x0-xbar)*(x0-xbar)/Sxx;
+      const Sy=Se*Math.sqrt(1/n+q), Syc=Se*Math.sqrt(1+1/n+q);
+      ic += `<div class="subhead">Intervalo para la recta promedio de regresión</div>` +
+            `<div class="big-pair">${box('ŷ', fmt(y0))}${box('S<sub>ŷ</sub>', fmt(Sy))}</div>` +
+            box('μ<sub>y</sub>', `( ${fmt(y0-t*Sy)} ; ${fmt(y0+t*Sy)} )`, 'wide') +
+            `<div class="subhead">Intervalo de predicción</div>` +
+            `<div class="big-pair">${box('S<sub>yc</sub>', fmt(Syc))}</div>` +
+            box('y', `( ${fmt(y0-t*Syc)} ; ${fmt(y0+t*Syc)} )`, 'wide');
+    }
+    if (ic) ic += `<p class="notes">${tUsed}</p>`;
+  }
+  regPut(p,'ic', ic);
+}
+
+const alphaErr = (a, lab) => (a!==null && (Number.isNaN(a) || !validAlpha(a))) ? `${lab} debe estar entre 0 y 1 (por ejemplo 0,05).` : null;
+
+/* ---------- Carga de datos individuales ---------- */
+function regBuildI(){
+  const key='rI';
+  mountSection(key, 'Carga de datos individuales',
+    `<div class="datapanel"><div class="datarow">` +
+      `<div class="grp">` +
+        `<div class="cellf"><label for="rI_aI">α<sub>I</sub></label><input id="rI_aI" inputmode="decimal" autocomplete="off"></div>` +
+        `<div class="cellf"><label for="rI_aT">α<sub>T</sub></label><input id="rI_aT" inputmode="decimal" autocomplete="off"></div>` +
+        `<div class="cellf"><label for="rI_n">n</label><input id="rI_n" inputmode="numeric" autocomplete="off"></div>` +
+        `<div class="cellf"><label for="rI_x0">X₀</label><input id="rI_x0" inputmode="decimal" autocomplete="off"></div>` +
+      `</div>` +
+    `</div><div id="rI_table"></div>` +
+    `<button type="button" class="linkbtn" id="rI_ej">Cargar un ejemplo</button></div>` +
+    `<div id="rI_err"></div>` + regShell(key,true), 'reg');
+
+  const S = { n:null, x:[], y:[] };
+  CLEAR['view-rI'] = () => { S.x=[]; S.y=[]; S.n=null; };
+  const holder = $('#rI_table'), errEl = $('#rI_err');
+
+  function rebuild(){
+    const n=read('rI_n');
+    S.n=null;
+    if (n===null){ holder.innerHTML=''; upd(); return; }
+    if (Number.isNaN(n) || !Number.isInteger(n) || n<3 || n>50){
+      holder.innerHTML=errP('n debe ser un número entero entre 3 y 50.'); upd(); return;
+    }
+    S.n=n;
+    let rows='';
+    for (let i=0;i<n;i++){
+      rows += `<tr><td><input data-c="x" data-i="${i}" inputmode="decimal" autocomplete="off" value="${esc(S.x[i]!==undefined?S.x[i]:'')}" aria-label="x del par ${i+1}"></td>` +
+              `<td><input data-c="y" data-i="${i}" inputmode="decimal" autocomplete="off" value="${esc(S.y[i]!==undefined?S.y[i]:'')}" aria-label="y del par ${i+1}"></td></tr>`;
+    }
+    holder.innerHTML = `<div class="tscroll"><table class="dt"><thead><tr><th>x</th><th>y</th></tr></thead><tbody>${rows}</tbody></table></div>`;
+    upd();
+  }
+
+  function upd(){
+    const aI=read('rI_aI'), aT=read('rI_aT'), x0=read('rI_x0');
+    let e = alphaErr(aI,'α<sub>I</sub>') || alphaErr(aT,'α<sub>T</sub>') || ((x0!==null && Number.isNaN(x0)) ? 'X₀ debe ser un número.' : null);
+    if (e){ errEl.innerHTML=errP(e); regRender(key, REG_EMPTY, true); return; }
+    errEl.innerHTML='';
+    if (!S.n){ regRender(key, REG_EMPTY, true); return; }
+    const xs=[], ys=[]; let missing=false;
+    for (let i=0;i<S.n;i++){
+      const x=parseNum(S.x[i]), y=parseNum(S.y[i]);
+      if ((x!==null && Number.isNaN(x)) || (y!==null && Number.isNaN(y))){ errEl.innerHTML=errP('Los datos deben ser números.'); regRender(key, REG_EMPTY, true); return; }
+      if (x===null || y===null){ missing=true; continue; }
+      xs.push(x); ys.push(y);
+    }
+    if (missing){ regRender(key, REG_EMPTY, true); return; }
+    const n=S.n, xbar=xs.reduce((s,v)=>s+v,0)/n, ybar=ys.reduce((s,v)=>s+v,0)/n;
+    let Sxx=0, Syy=0, Sxy=0;
+    for (let i=0;i<n;i++){ Sxx+=(xs[i]-xbar)**2; Syy+=(ys[i]-ybar)**2; Sxy+=(xs[i]-xbar)*(ys[i]-ybar); }
+    if (!(Sxx>0)){ errEl.innerHTML=errP('Todos los valores de x son iguales: no se puede ajustar la recta.'); regRender(key, REG_EMPTY, true); return; }
+    if (!(Syy>0)){ errEl.innerHTML=errP('Todos los valores de y son iguales: no se puede calcular R.'); regRender(key, REG_EMPTY, true); return; }
+    const b=Sxy/Sxx, a=ybar-b*xbar, R=Sxy/Math.sqrt(Sxx*Syy);
+    const SSE=Math.max(0, Syy-b*Sxy), Se=Math.sqrt(SSE/(n-2)), Sb=Se/Math.sqrt(Sxx);
+    if (!(Se>1e-12*Math.max(1,Math.abs(ybar)))){ errEl.innerHTML=errP('El ajuste es perfecto (S<sub>e</sub> = 0): no se puede calcular t.'); regRender(key, REG_EMPTY, true); return; }
+    regRender(key, { n,a,b,R,R2:R*R,Se,Sb,xbar,Sxx,aI,aT,x0 }, true);
+  }
+
+  $('#rI_n').addEventListener('input', rebuild);
+  bindInputs('#rI_aI, #rI_aT, #rI_x0', upd);
+  holder.addEventListener('input', e => {
+    const t=e.target;
+    if (t && t.dataset && t.dataset.c){ S[t.dataset.c][Number(t.dataset.i)] = t.value; upd(); }
+  });
+  // Pegar desde Excel: columnas x e y a partir de la celda elegida
+  holder.addEventListener('paste', e => {
+    const t=e.target;
+    if (!t || !t.dataset || !t.dataset.c) return;
+    const cd = e.clipboardData || window.clipboardData;
+    const text = cd ? cd.getData('text') : '';
+    if (!/[\t\n\r;]/.test(text.trim())) return;
+    e.preventDefault();
+    const c0 = t.dataset.c==='x' ? 0 : 1, i0 = Number(t.dataset.i);
+    text.trim().split(/\r?\n/).forEach((line, r) => {
+      line.split(/\t|;/).forEach((v, k) => {
+        const col=c0+k, i=i0+r;
+        if (col>1 || i>=S.n) return;
+        const f = col===0 ? 'x' : 'y';
+        S[f][i]=v.trim();
+        const inp = holder.querySelector(`input[data-c="${f}"][data-i="${i}"]`);
+        if (inp) inp.value=v.trim();
+      });
+    });
+    upd();
+  });
+  $('#rI_ej').addEventListener('click', () => {
+    S.x=['12','15','18','20','23','25','28','30','33','35'];
+    S.y=['40','44','47','52','54','60','63','66','70','73'];
+    $('#rI_aI').value='0,05'; $('#rI_aT').value='0,05'; $('#rI_n').value='10'; $('#rI_x0').value='27';
+    rebuild();
+  });
+  regRender(key, REG_EMPTY, true);
+}
+
+/* ---------- Carga de datos procesados ---------- */
+function regBuildP(){
+  const key='rP';
+  const cell = (id, label) => `<div class="cellf"><label for="rP_${id}">${label}</label><input id="rP_${id}" inputmode="decimal" autocomplete="off"></div>`;
+  mountSection(key, 'Carga de datos procesados',
+    `<div class="datapanel">` +
+      `<div class="datarow"><div class="grp">${cell('aI','α<sub>I</sub>')}${cell('aT','α<sub>T</sub>')}${cell('n','n')}${cell('x0','X₀')}</div></div>` +
+      `<div class="datarow" style="margin-top:14px"><div class="grp">${cell('R','R')}${cell('R2','R²')}${cell('Se','S<sub>e</sub>')}${cell('a','a')}</div></div>` +
+      `<div class="datarow" style="margin-top:14px"><div class="grp">${cell('b','b')}${cell('Sb','S<sub>b</sub>')}${cell('xbar','x̄')}${cell('Sxx','S<sub>xx</sub>')}</div></div>` +
+      `<button type="button" class="linkbtn" id="rP_ej">Cargar un ejemplo</button>` +
+    `</div>` +
+    `<div id="rP_err"></div>` + regShell(key,false), 'reg');
+
+  const errEl=$('#rP_err');
+  function upd(){
+    const F = {};
+    for (const k of ['aI','aT','n','x0','R','R2','Se','a','b','Sb','xbar','Sxx']) F[k]=read('rP_'+k);
+    const bad = k => F[k]!==null && Number.isNaN(F[k]);
+    const names = { aI:'α<sub>I</sub>', aT:'α<sub>T</sub>', n:'n', x0:'X₀', R:'R', R2:'R²', Se:'S<sub>e</sub>', a:'a', b:'b', Sb:'S<sub>b</sub>', xbar:'x̄', Sxx:'S<sub>xx</sub>' };
+    let e=null;
+    for (const k of Object.keys(names)){ if (bad(k)){ e=`${names[k]} debe ser un número.`; break; } }
+    if (!e) e = alphaErr(F.aI,'α<sub>I</sub>') || alphaErr(F.aT,'α<sub>T</sub>');
+    if (!e && F.n!==null && (!Number.isInteger(F.n) || F.n<3)) e='n debe ser un número entero mayor o igual a 3.';
+    if (!e && F.R!==null && Math.abs(F.R)>1) e='R debe estar entre −1 y 1.';
+    if (!e && F.R2!==null && (F.R2<0 || F.R2>1)) e='R² debe estar entre 0 y 1.';
+    if (!e) for (const k of ['Se','Sb','Sxx']) if (F[k]!==null && !(F[k]>0)){ e=`${names[k]} debe ser un número positivo.`; break; }
+    if (e){ errEl.innerHTML=errP(e); regRender(key, REG_EMPTY, false); return; }
+    errEl.innerHTML='';
+    // Si falta alguno, se completa a partir de los otros datos cargados
+    let { R, R2, Sb } = F;
+    if (R2===null && R!==null) R2 = R*R;
+    if (R===null && R2!==null && F.b!==null) R = (F.b<0 ? -1 : 1)*Math.sqrt(R2);
+    if (Sb===null && F.Se!==null && F.Sxx!==null) Sb = F.Se/Math.sqrt(F.Sxx);
+    regRender(key, { n:F.n, a:F.a, b:F.b, R, R2, Se:F.Se, Sb, xbar:F.xbar, Sxx:F.Sxx, aI:F.aI, aT:F.aT, x0:F.x0 }, false);
+  }
+  bindInputs(`#view-${key} input`, upd);
+  $('#rP_ej').addEventListener('click', () => {
+    const ex = { aI:'0,05', aT:'0,05', n:'10', x0:'27', R:'0,9968', R2:'0,9936', Se:'0,9593', a:'22,0120', b:'1,4597', Sb:'0,0416', xbar:'23,9', Sxx:'532,9' };
+    for (const [k,v] of Object.entries(ex)) $('#rP_'+k).value=v;
+    upd();
+  });
+  regRender(key, REG_EMPTY, false);
+}
+
+regBuildI();
+regBuildP();
+
+/* =====================================================================
+   Desvío / varianza (chi cuadrado)
+   ===================================================================== */
+const VS = { inter:'full', cola:'two' };
+bindSeg('seg-int', VS, 'inter', updVar);
+bindSeg('seg-cola', VS, 'cola', updVar);
+
+bindInputs('#view-var input, #view-var select', updVar);
+
+$('#ejemplo').addEventListener('click', () => {
+  $('#sig_t').value='sd'; $('#S_t').value='sd';
+  $('#aI').value='0,05'; $('#aT').value='0,05'; $('#n').value='20';
+  $('#sig0').value='4'; $('#S').value='5,2';
+  updVar();
+});
+
+function getVar(selId, inId){
+  const x = read(inId);
+  if (x===null) return null;
+  if (Number.isNaN(x) || x<=0) return NaN;
+  return $('#'+selId).value==='var' ? x : x*x;
+}
+
+function updVar(){
+  syncSeg('seg-int', VS, 'inter'); syncSeg('seg-cola', VS, 'cola');
+  const aI = read('aI'), aT = read('aT'), nIn = read('n');
+  const sig02 = getVar('sig_t','sig0');
+  const S2 = getVar('S_t','S');
+
+  let sampleErr = null;
+  if (nIn!==null && (Number.isNaN(nIn) || !Number.isInteger(nIn) || nIn<2)) sampleErr = 'n debe ser un número entero mayor o igual a 2.';
+  else if (S2!==null && Number.isNaN(S2)) sampleErr = ($('#S_t').value==='var' ? 'S²' : 'S') + ' debe ser un número positivo.';
+  else if (nIn===null || S2===null) sampleErr = 'wait';
+  const gl = (sampleErr===null) ? nIn-1 : null;
+
+  renderVarInt(aI, S2, gl, sampleErr);
+  renderVarTest(aT, sig02, S2, gl, sampleErr);
+}
+
+function renderVarInt(aI, S2, gl, sampleErr){
+  const el = $('#out-int');
+  if (aI===null || sampleErr==='wait'){ el.innerHTML=''; return; }
+  if (Number.isNaN(aI) || !validAlpha(aI)){ el.innerHTML = errP('α<sub>I</sub> debe estar entre 0 y 1 (por ejemplo 0,05).'); return; }
+  if (sampleErr){ el.innerHTML = errP(sampleErr); return; }
+
+  const ss = gl*S2;
+  let pair, chi;
+  if (VS.inter==='full'){
+    const ql=chiInv(aI/2,gl), qu=chiInv(1-aI/2,gl);
+    const lo=ss/qu, hi=ss/ql;
+    pair = box('σ²', `( ${fmt(lo)} ; ${fmt(hi)} )`) + box('σ', `( ${fmt(Math.sqrt(lo))} ; ${fmt(Math.sqrt(hi))} )`);
+    chi = box('χ²', `( ${fmt(ql)} ; ${fmt(qu)} )`, 'wide');
+  } else if (VS.inter==='inf'){
+    const q=chiInv(1-aI,gl), lo=ss/q;
+    pair = box('σ²', fmt(lo)) + box('σ', fmt(Math.sqrt(lo)));
+    chi = box('χ²', fmt(q), 'wide');
+  } else {
+    const q=chiInv(aI,gl), hi=ss/q;
+    pair = box('σ²', fmt(hi)) + box('σ', fmt(Math.sqrt(hi)));
+    chi = box('χ²', fmt(q), 'wide');
+  }
+  el.innerHTML = `<div class="big-pair">${pair}</div>${chi}`;
+}
+
+function renderVarTest(aT, sig02, S2, gl, sampleErr){
+  const el = $('#out-test');
+  if (aT===null || sig02===null || sampleErr==='wait'){ el.innerHTML=''; return; }
+  if (Number.isNaN(aT) || !validAlpha(aT)){ el.innerHTML = errP('α<sub>T</sub> debe estar entre 0 y 1 (por ejemplo 0,05).'); return; }
+  if (Number.isNaN(sig02)){ el.innerHTML = errP(($('#sig_t').value==='var' ? 'σ²' : 'σ') + ' debe ser un número positivo.'); return; }
+  if (sampleErr){ el.innerHTML = errP(sampleErr); return; }
+
+  const stat = gl*S2/sig02;
+  const F = chiCdf(stat, gl);
+  let crits, reject, pval, H0, H1, region, critBox;
+  if (VS.cola==='two'){
+    const c1=chiInv(aT/2,gl), c2=chiInv(1-aT/2,gl);
+    crits=[c1,c2];
+    reject = stat<c1 || stat>c2; pval = 2*Math.min(F,1-F);
+    H0='σ = σ₀'; H1='σ ≠ σ₀';
+    region = `χ² &lt; ${fmt(c1)} o χ² &gt; ${fmt(c2)}`;
+    critBox = ['χ² críticos', `${fmt(c1)} ; ${fmt(c2)}`];
+  } else if (VS.cola==='left'){
+    const c=chiInv(aT,gl); crits=[c];
+    reject = stat<c; pval = F;
+    H0='σ ≥ σ₀'; H1='σ &lt; σ₀';
+    region = `χ² &lt; ${fmt(c)}`;
+    critBox = ['χ² crítico', fmt(c)];
+  } else {
+    const c=chiInv(1-aT,gl); crits=[c];
+    reject = stat>c; pval = 1-F;
+    H0='σ ≤ σ₀'; H1='σ &gt; σ₀';
+    region = `χ² &gt; ${fmt(c)}`;
+    critBox = ['χ² crítico', fmt(c)];
+  }
+  pval = Math.min(1, pval);
+  el.innerHTML =
+    `<p class="hyp">H₀: ${H0} &nbsp;·&nbsp; H₁: ${H1} &nbsp;·&nbsp; α = ${fmt(aT)}</p>` +
+    `<div class="big-pair">${box('χ² calculado', fmt(stat))}${box(critBox[0], critBox[1])}</div>` +
+    `<p class="notes">Zona de rechazo: ${region}</p>` +
+    `<div class="verdict ${reject?'rej':''}">${reject?'Se rechaza H₀':'No se rechaza H₀'}<span>p-valor = ${fmt(pval)}</span></div>` +
+    `<div class="chart-wrap">${chartChi(gl, stat, VS.cola, crits)}</div>` +
+    `<div class="legend"><span><i style="background:var(--reject);opacity:.45"></i>Zona de rechazo</span><span><i style="background:var(--curve)"></i>χ² calculado</span></div>`;
+}
+
+function chartChi(k, stat, cola, crits){
+  const W=640, H=260, m={l:16,r:16,t:30,b:40};
+  const iw=W-m.l-m.r, ih=H-m.t-m.b, base=m.t+ih;
+  const lows=[chiInv(0.0005,k), stat, ...crits], highs=[chiInv(0.9995,k), stat, ...crits];
+  const xmin=Math.max(0, Math.min(...lows)*0.9);
+  const xmax=Math.max(...highs)*1.08;
+  const sx = x => m.l + (x-xmin)/(xmax-xmin)*iw;
+  const N=320, pts=[];
+  for (let i=0;i<=N;i++){
+    let x = xmin + (xmax-xmin)*i/N;
+    if (x<=0) x = xmax/4000;
+    pts.push([x, chiPdf(x,k)]);
+  }
+  const ymax = Math.max(...pts.map(p=>p[1]))*1.1;
+  const sy = y => base - y/ymax*ih;
+  const curve = pts.map((p,i)=>(i?'L':'M')+sx(p[0]).toFixed(1)+' '+sy(p[1]).toFixed(1)).join(' ');
+  const seg = (a,b) => {
+    a=Math.max(a,xmin); b=Math.min(b,xmax);
+    if (a>=b) return '';
+    let d=`M${sx(a).toFixed(1)} ${base}`;
+    const M=100;
+    for (let i=0;i<=M;i++){ const x=a+(b-a)*i/M; d+=` L${sx(x).toFixed(1)} ${sy(chiPdf(Math.max(x,xmax/4000),k)).toFixed(1)}`; }
+    return d+` L${sx(b).toFixed(1)} ${base} Z`;
+  };
+  let regions='';
+  if (cola==='two') regions = seg(xmin,crits[0]) + ' ' + seg(crits[1],xmax);
+  else if (cola==='left') regions = seg(xmin,crits[0]);
+  else regions = seg(crits[0],xmax);
+
+  const clampX = (x,pad=34) => Math.min(Math.max(sx(x), m.l+pad), W-m.r-pad);
+  let s = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Densidad chi cuadrado con ${k} grados de libertad, zona de rechazo y chi cuadrado calculado">`;
+  s += `<path d="${regions}" fill="var(--reject)" fill-opacity="0.35"/>`;
+  s += `<path d="${curve}" fill="none" stroke="var(--curve)" stroke-width="2.4" stroke-linejoin="round"/>`;
+  s += `<line x1="${m.l}" y1="${base}" x2="${W-m.r}" y2="${base}" stroke="var(--muted)" stroke-width="1"/>`;
+  crits.forEach(c => {
+    s += `<line x1="${sx(c).toFixed(1)}" y1="${m.t}" x2="${sx(c).toFixed(1)}" y2="${base}" stroke="var(--reject)" stroke-width="1.6" stroke-dasharray="5 4"/>`;
+    s += `<text x="${clampX(c).toFixed(1)}" y="${base+18}" text-anchor="middle" font-size="13" fill="var(--reject)" font-family="var(--sans)">${fmt(c,2)}</text>`;
+  });
+  s += `<line x1="${sx(stat).toFixed(1)}" y1="${m.t-4}" x2="${sx(stat).toFixed(1)}" y2="${base}" stroke="var(--curve)" stroke-width="2.6"/>`;
+  s += `<circle cx="${sx(stat).toFixed(1)}" cy="${m.t-4}" r="4" fill="var(--curve)"/>`;
+  s += `<text x="${clampX(stat,44).toFixed(1)}" y="${m.t-12}" text-anchor="middle" font-size="14" font-weight="600" fill="var(--curve)" font-family="var(--sans)">χ² = ${fmt(stat,2)}</text>`;
+  s += `<text x="${m.l}" y="${H-6}" font-size="12" fill="var(--muted)" font-family="var(--sans)">gl = ${k}</text>`;
+  return s + `</svg>`;
+}
+
+// Estado inicial
+syncSeg('seg-int', VS, 'inter'); syncSeg('seg-cola', VS, 'cola');
+updVar(); updMI(); updMT(); updPI(); updPT();
+
+/* =====================================================================
+   Logo, notación p̂ y x̄, selectores y botón "Borrar todo"
+   ===================================================================== */
+const LOGO_SRC = 'data:image/webp;base64,UklGRkYdAABXRUJQVlA4IDodAABwgQCdASoEAVsBPjEYikMiIaEUabTwIAMEpu4XBuABlfne/Q7FeT/Rf5X/D/tx/Pffltj9k/DP5D/MzwM6681jyD9U/1v9w/Ib6Sekn+w/6T2BP09/2P96/IX6zehrzB/sD+yvux/9X9Wvdb/Yv9j+MHyAf1H/Af+z2pv/H7Lv+H/8HsH/zz/Femd+4nwp/1j/cftv8C/7Gf/f2APQA6g/s5/he3v+4/kz4lvb99qd4Y1Mvk/3F/Af3j9z/Oo/HT0h4Av43/Ov8Z+XP4w8yGAX6q/4L8pfQS1LPC//B/KP6AP51/U/+B5On+V8jr7r/0vYC/ov9v/4vpy/8H+b/NP24/nf+L/7n+P+BD+a/1n/c/4H92/87/////90v//93fo5fuSXuFAOaBQGDKAc0CgMGT9M8unhPA8J6cz+aBmXcFkBSvt54SXyHOFO3CJSYz20BQ1X3gaVIEqW49i5Icm6OYpPqhOJS2XJcHM0sk95Lwaf/Wbt44AKebbDV1wv46w9804tWArdBQv8tRjxqrjy4NOPFXedtWYcC2zR5lVl9KsGyU9HhLpol+QEeVmZVAAXpWSlV47Vmlxh5H1oPhJpBY7pyjseJdzYt0HHG/PP1qEyMQ9JmH1nvLi7HwhbG762Lb2EPO3dhgIdyF0xw/bkn0IyOHo/zoRg2Nn/J80boj2EuUaTSQaK0TaLe+JXX8F6WyomrE4szGJIf4Fq/x2M8WVOWPnXbpG0luK1wcmAOEtiySyYNCNposR3z/sqjB0XQhl2/qXYyry3sKIGKq2arMTWWCtwk43J5Dnut0YeGwZq3mwxXHnPI+7o0xIW+jrcSHl1T/lj1z8W9Nhht+A9/Ezxsg1a5+dfCGr64DBlAOZqsoT/ncTnVyv9CumBZwoBjQ6gbAfLuNfZtWYBWfCk8sL4OktZtAUQI5Ui5YaVP23lmCqUaCWrif6V1A/KzkkgSgvkm0gNr9bW4Y+cWfu1kpAnre4vdW+W6IwA0vfKb8+4xaO9Wr4cI1nc7kmOJZkyOvkzqG/aKLoNY2rJmUYiceUApMmyvjTE0sQunFCoKmwGIqE3QetVT3e/Od2Rv+Ebg7G5wLWxwlGJGLaXnBR+erQYSd8JpAA03EVookFGJbuI4tUHTe3M/QGbxWosNz1R0zxk0r3717SBgA72izro9QFUs9Cg/EP1VaOcXZ4lA1dC0qXkZfsHnFAKVUwPK6INZ2tUCuPKCWBF/kgbTFTHYhsOZUVSfBnttowFsfx8DY+faY+zo8WN1k6Il4SfIxrD0wBu5LaCmHS5gZq7YikO+QqGa+qWlBm4WmSJm1g4P5kQWmk9mHXhgygHNAn8UZDmdlXmYU/7pg3B73xyLzdoFAYMoB6R1aqjhQDmgUBgygHM/QAA/vuvIAAAaLbX1eocHiW8HqfnxINCvKMBS4IR/3eAiMU3LDejtdbvy+nCQo3aKUPf/4YoAsrjoUOyL1e+DkeaBmTHIVSIuRDah7sCdQ3fzjfhIJ2hgr6S4ZCun8AD8AxXGtXpoYCkN+gdzRl2U2toM6EnL90P1hI2vYyzxhVcm58cS+W1FNp7YnlgtzqkhAdIKWjleGLtfhd2NNFmr2C91fiEio9gBDPuUv/o0B6KQKZ2kN/T5hd3RC7EvTc5gLxeTUiERDb7q0/6Wp4hryYuErWXq3QeL8LrwLAhjDNLphyG7Jd0KmyddQIjRx2aml1hOjAnh2MrTEIViUWR2s9S/IsE6UoLdDiWiBKfi7Gx0WDdy6x08t14uqLsDVBhc8nIKCjNW+qz13NjXrofc3RihQ2fKwzBy6BUMR6wgCViXLHh018uQq+H5GQbv0+NlIvhuNhPWHoj3lPgTKR/+GN7Mnco31J5gv9jE39yu+amtdvsRgrhjT1Owjx7wFCl5ffgT9lF/s81qdCj//SlFh44kCrxc/Dng/mUQrK9KP3/tNOixLY7fJh7Js0F9+oYjai6+HL0WHs2zolLttIAd/GHBH+IlfXeHLQjp259LWENIWU5R7hfnnmCF9fZzCb+KxW5zJn1RPIv1XHS3Jz3Nc/mc7hVpVsid6gJiDQ5UMslkq1pvWObCvMOzbyO0PO4Wa253NGf+jYOI1PCCRYJZ2oU8Wgr5EpbqeTy5pk0qE/nMAXAef+FSnPfy5YLiyKaMyqF81tWrYn32aWWiY132tjNiK9Qpkpn49jpFqI2W5kmr3RvddNLvM+Y8yGvCyjpcsvcRED8b7Pj7ql+jwY9nFbIOcOelO1kWnxtiiiptLaUVfIBFYB7l9TYL35Lzzhijt/NzUfIphgAdsePjqJtM0YWbqsc6FdS6LcWPazOz4AG9ck9M7/JL159cxxio87FHdv9U307CL59C/c5K7OF3iyU2DlaSFAry/hiVDIOTvrFnAq4cvh3KhGqk6e3nDbl6mmpOZRs5AQxTWHAn44TDkVntkEwOenbV19AxMBGPymleSxSZLgdD1zKuzpdZSrcVFLHAAhToRvYWCQ701UG0+0axfY8uy0x7n/8JrEZXqHUlt5EAmGaM7QQXoPpfXO2zb1UaX/ubP2KnrN7dMKWE8SK0K/0KS4j2vNHfKC17fUbZvpdvQcByV9HinXq28Jk//G5OFejSrVSKzJNNELWp19ogqCjgRdGqZEcRAmi73ANkoGhwmmtiTUhhLUcoIGU6+zxRGIDymeLIqzPwzErAO31ISg+yUou8U25Wy5DnLF8sHCMvVGBSdUtyWj/7B+J2F6Bz5ehu+gfUfomGN/wikwWZxpepmpy4OU5FbFPBjzdSIFYuuDb4aMsAaJnP8bePvcOA1pjHwQglE+W7ClrXH1r7zzpMhyDY9LizIVOhOok4R3jIbwJCIYoOlvINBJtba8n2uo8nOitdQoV1fHpkbRZPqbZKwxbw11Qv372LGlbnsGbJKRIYwoyZEuuts/EGsTUjWLlpgx42RCaraKaIPy0iy2LHP4ndVSgNJ6AgLYF6D8votjD9bR41DVybppodSoxV1oQl6eIqmpGC5RTXqAdiQhiV+u1SNXUocn48hx7geoXfRvanSNoQIe1M3B7lLecbrKHhH4XIFDWz46h/1cpK8BFOkwyVC3gl5Z+Sr72yUJDC3jvcLpbLwWmcAcPoasrlrv8CZp3uZbi6qbBHkfa9s2m5pmv4oo8uShjpKwjY8gEwnAtZZm5l3fniF9P6/GS1T063uN8fX7d0YRZDdiEHrGGqIOXHqLlr0RLgQJA8ens7r4Ltx4wpPj/2ne0YktjKWwNJXKY3TfCTwfRQix3C3mjiXoNaoUfC1iE/Ds5hBl8DC648xqeyD6EjlGgzqtapocdOyg8tTfOSQZ6KdnDug9Z4C+oBq015FOxTQDjxtc/3mPIWgHA52A1SpftVoFq/9qPAbjX1ValJ/xCv85SvLebxKeNnqhaqon/WKY38KVUZoR1O8DDWwf37pVU2EW7yWHtm5uePHmNt8C7hXNXzRTKLx7MdQo7cNWnpiRsubKAiJfBc5W7jz9FSJ97vpA3G1owwwH4ZlfYWfIbMhXyevRFnPlC8LxtO3G4GLG/ulXkFPEgM5e1qfJce8PpGBU9kpfq77O0MkvSplIwfy3J///0geevwMj4V9P0ji4rU41DhYXdW+IQLMzQXlXIYSn7BtalmVLF9nzRVZrd/nlH2ydlOjbJqwKviIDXib5QU+JeXJvtNWDQ+/imkcAnHMPFl++hEaIAeH4dxGH8yYnZvMdw+bXDruatwX2UZf8WH1Q1ujaMZ0Lz9GvuWYobjz70XMDaJfI+W8prZKf98YO8XERgyS9Isod81z4rPyw2TuIZ494TLOmO78c/0xJ6wkdElidaDYaw1a5vciId8fQ+zgk/xugehxfY4dBHF3JzHlLR8cUOFxI2Gv0OwhcoenYjOw2vpDuYISxIvVm1YOohkEz92+HEcCiu58Rtg4PStXyshS2Zaxkl2BKu3R9bAAcOmu3fHkIKB2GQbt6aAd/z87XZsUIWEyg7lqFWICRcqcOTXi+sJUcU6TS52PFvepmeCGxnDHBL8a5UTUdpI6ioIGkVpf0ojCjWliWUK+6ZkvoXqPiK90qOHhwNnOLgzIR/8s1rIu3vwKdPfUqSdZYnfV6acbmEngnmXv5rHMZghKlXuN3PrM2Sr5PLXZOUKQvLebjRV2PtLp5fHQgzx1aYvVScuHkehyip6opcpBQCe5OkNGr8iJpUeF5d30mAZy4JuHXgF9DQsyqzyejJnyHWMYpGtOdt8kCydmhagKejpNifpizA06PcQScvqr3EYd7DrLgRPq94FIJ65PWg1TJt1dlnVnATfIQ1Nt0In1vBrZZRgHpyE/10pcj2zIT/sFADrT6ofDa7rVp3tkoftsHmYVbbd4SS7NQCZA2q3ux3/lHzbRE7Gh2tgy7joMZ69ulmKGNF664iWMxWnl4z7L3oPdg3pogbL/MJxzfUHenvNCe/OhakGpAw7yK/83ZZkwxb3ZJAyf54+vaqqe2rCGg8Ev6sgXTpsNQfHZqTlittwljVIbRalZzakahvkIpdyvy7boct1CZz8rIIaGBFrQ8NSborlPK4YJy5ZVGYIfvUANW2kk/hTfrv1wp9Azlz5lECunqFUMW/w0r1nq3hZAthf3B7Q8SY9QjMUBuhcAgJ4SGpzhBqE3G1x5tE6moVSTN+2TsKKeKxcyn6nsaQnmfwjqxe6pxBWYjPrN4QfMD1BaJVGNP+GsrY2J8wLZYadxFAwRn5wE9W+Hv/yaq86Y+GzxXoc7ngd1nrX5wTK5/chEsep5+igiTuGfNCBE6ORHHzb0M7E2qzyXpUV6vTC75vftu1Pe1XsnSKcRs0B0S+reKIdsY5H6HBO1hkF6URXfv1Hd58Cu79hQlNtGCaP03IRqE7b/1Hlt60shTElZe78oXcoC7caOOu9BZOuaoeQKhpfyndc0PQzEcpFgyMrRv93mVpnboUD9D7E1tmIHAF6naZNh2VQe+j8kLa0DlHBuDB7v+4tDYRqBbwf0nV5bbENsXU75mFrV/mMm5JqatizzDK27jYSYQ9jg77/YibJUpVX+2YUZ7/sNua6/qkBdqqwlK3OAkuJE941ywSlUeW44Ra39ok26huTfsLfFtmdeyGno01zEWhOgwGDA3372tf/VkqrRHxDfVLeMAnZ4ssRIsjxcDVJbxnMIlLvb+K0wtm3/ng0Yhxw9C17J9ZJd71xg1t+sp8ZnF38iSQ4pQ06n5Wk9KiazJfc9wDN4GzV7rwa14hjr/OK/3qv5rxb0RZSluvYsHHdeVk+44lUyVHDMdLaM9sMaB7zjZmtlQTxdrCSp2K60TfqCzVRRolmKIrUc96Eifl49sTq5hrnGmWY3TQroA5lEUIDxslHILHBUwUAvFruB0e5d7H2adKTz/o2R7wI7KIsab6fbHw75NeibLwOeVZpetT4gi/SVneae+J3bni/LrZEQWUOzo3wDEHWcESIRbApnfFkDs8WQAVeKpgSJaUEwnLuYIjlqPAbsM8F+JeXL6uWWxYEAFLVNQ8jEn4NqpkZTc2sfAhG/4QPyhILU5VuI3NSzupAPXQ9Z5zVIHX4NHuhB4ncyHFCow+CEpx6Yd6Xw/NhUePzqRz08wU5z1nKG+YNJWgmW3UIpUNKzHEjQZ3lF/mE7u6s0diDS72UIs4z5WHi6WRK1UG0SUDYXfp/4TbgkVxti6MmMDmAvL/LvuFtu1I87XuPStlzEZvIRgoiUONWfLTG6UGW7qzDoDGIFmthPEzRs4E0G+QOy3UOEREGqzhX2Z9sBEfLnNDthyHs3lChuiKytCXlaCJbJZqWqe6C8AtbEj+m+/44fXY1gyk/n5Y1Ha3pvPCI9j1+dmHwPLL3r1UULWn6VUSEASLPk4dVBVHagXOjQVAuoBKJ0wNMCAYBFeMuyNugQvKGXLv86Qd68KRpzJJafs9EcEvv8Ngoj9ljy/kCKGeW9dxieZUwmrUuOm5TuIBL1a8ZDP9U3/9GxSSQGjUlOLEGH9PL7fh8fdgfe7GPeWwAbefAfP4yugSLN2WEeG88BiewKjEVr98iCQU9oUcpOk0wbQZUZeJrvNIe5N8gaHN2dhKxmsZBVhOKqjxbCAl1a+cccFW/aBWZkHKFSsTpYVIfImoQRPH8zACKnam7/DwbjxehG8QCjmKWhcWob2H/Fy5R0421Qqw5KBee74yAwA5A69liTs2dg0ylYNqRZj5YWTbCgtPTProCb6XYCE5xmcCyMlny+0uq7DoC2O7+Q/wCETEm/5/2SeOg2AteD6ZSFwlIioWiAYnThfCdD3HQAw/odzkKuouvyqz4wL5sPhIHVMnOQPNn2oG1GOY5bImOD/xTVAiKnABMI9zFRM+WrXl4YffMkcBxV4dtuaeYMWqNOb2IC0FIp1rSXwcDRf0rZuUYs6MmIuMaRJGH3SAkVzjxA3nNWYy8omV2uwVkUZ0AGvUKMaydoGcFwnhDH0WhrV9CY9+9AurLynQlrgNO5mL/pipfa3l7Kh3IVC8m6VsSzzWCjXi3cvWUdjrQ3/V8JiwG9qkx3+L3h334FYN6ztQzaYWZZrMGDqLQu8S7jOseA38ptMEHvTSiK9DWpg4OYkH430jxdikLR+mk//CkBjYhPE/wsL2u+O+Ht0zo9Hq8xX3PMDNrORleX7+pM1xcMC51wFVtkfcTgm5sIgUH97EZeKm1WirZHe0qn8f1wfbSjKUaXXsocmOpAKsJo+5UgcnKp5CB9I8OjOinKV+vf9STcna75lXQ9XMXjMYW+ONsIpTl8jDwBtnngiYLELzmhWOE6MaeyuAeDr6P726+gDmCEmrQkgUOMsrsyl4yzuhVpj8yM97BdwYWYdBB/qFFwwTxaVOJwvlgNE10eeSWCaJRw92TGe6PpCc+fSfk9UZfAr9a5NsbIdl3u2fp+UEco9w+NOeoDyCXv9/6uztNTSCTGh17b48N9El8Z2zCC6URr4yOoZ8gfFnIRQZp5s9QEbbYBC1Jk+I/6n0jk5D+d6SgvrSGel5w+J5YsI2bg9rNbOrmpo2+yKg7+TfkNK/1XhNY066+C5uXYP8dbbWX11BXBKmeVmEP1MiTKaZpv039dBSoRh/tjmMPsN50kxeV23w5AYWjHps0Lgrv1dOqs2qfrRy7T5qjEhEdSqQxhv4pOiuRsHj4CXK36yVWntx0z3Wmtdrh5Ee8hotEIMb4FWZjmp0/xoVM40n+IDPgFkYfa60vdxg1IS+GwvnIeOEmJ/Y+/B+qkUjWfKyGj8AoayWt+Y7EZmzTcaToWEggBu2kVgfsDqoh5K+rsv7msPJyJpW0fK6kBDLokJ6gTzrfzF4nL4b34a2S42bSSQEEqtbN86ZuQrf25mgCl3OHJHNTn8SWCqJ0JmnYwVSrLc9xcaSwlP682+zWTgXElfPtpy3EZ6xB9RTLMId5pp2e2WYWcEcen8hTW9/axRdIg94miu10gYqA2NYWjIZyzL1lIkDjRNnpUK/u4yMEDQ/8/oRH8NK0PKaNIsZa087nX/QUgI0aSOEfsRSYZ7E8uKfn4dQzJsLRr3W/gj05ITdsYbw3S1n0jDsxpuhNyqJ0fBbT6NxLr05vuTJZIwOA2hY9eLN9wYBCOIAkuhvmeR0r7TD+JAni6n3n89zlSxiMyAQSHcvtkj9O/WTWhLTwcURqSwvr8L1QE4FEHmqzxdxPz7rOs68474u1G6PHaYxtpAszdhXfvhFzCfyKT17seRysKfXpa8vD2KK6JIFAeKzEKPkBm46r8fYkBw+X8eAx/Pc6vipTuvll6yg1w2mvRB7fkMBaNqiUoeuUy4R5NFA20J4dc45xDe3Y8nr9mKXsHWzpQHM8/ITHxNtmBAebAtRV8CKW5zqJPiGd1E9URxxfiZ3JwLf5HKDp1NvDoR3Mf8D5meevr4CuQPfv9LG//8kj45/hQ76XjhGXDp/zvOE/gWBWocOmIbbioRJ78nLZMkuWM07trC90cO8FdE8ZQDx7+QkYd9y0Yn0/jtH73P95QYnBH2KO7Thl23o2RnZhK8ZAi+MIGvatGat3KaaydIJB8rVj8/idUKsOVJkqR8kd1+r0A7TyxTHKPi7W6yrhdPjxE+A37riYZqNUhNtklCysST8Ubj7OStD49L+ZTIyb9Nu5TfFMcKVDYainSX94u1LUCsT85YoUBU92BJDTfDfzGeo2ApotNEQkWSePBftPKr1YmE6CRdXqAbPiJTZa7FstzEyxE3jJr/5iNSWmWt/t4d5zbFOUY+1pg5QBoQt39QeNyWnMKhnr74uZJGo/wI4RBmRDHym//LpYgUpXpQvbz3tvlULvpjTnE/ktZbMN33lh/K5su3j4SB2fT1vYhehzhr2/nGSOHJqgbl6DGf6lFvySr9xxeJROSZxmoh/un4HiVkyS7LuJdnxu4Q+xofnEUA6TW4eK/MlgoJHFS67OPpnGD1JM6rTjUcGxCYVq7dc14uBsFM9OqJbxjMD1soXg7+p0OnSraghhJiPNQd/l2hes1PyQHO1Fs46nQlObMy9s5t5WXRqxkodEJoQH+wsUIwWcvT25CeaNq2oU/L4W7YGrcz+rzLRazBcn14GtwpkCEWwAqFkVQDeVK3y+j8tzDMijmOSjLo/qCf7mnK1WX8mN/sX3TcxpQxVPnHN2KaqipkWriWwp5tjomy6BhlCAoHxUy5b1DwhcKU2jfxKf2UFkDx6Yd4uu/LCvjWnecUL4f1aApdEuV8aJfLVIVge2Avj2kn7AiHvmUmxpLCe45x7AT5Ya94XygsOxagothudV3e9bf5KDHbgOJnBVn1ODF8L89Kb5XMSVi3coILxQmdJ/Yufuv3a89+qOf9DkQmNXv+OP5EE4pR8T5/2eRZU9EbYmeT6x16zfLFe3LgOEgxpJFZUDesLDs9WAfNgZ1+kBp6sI2M6FOJ990ZIVQkZVJuFcJgBnHF9nuBmZNq323AxkNgrfHtD3oyhq7BqlJP4rLbSL/q72yZakBBUm4Y0Gz/ilSNMIVMMY68cvo3+ZqNV/qbr2pHteYv71wPKjSw0LlHncw8rxdM51hMDQn5sNHXeWRRZITlFkiUjpvyzkrI+X7Qt+PKaqZJhxrCtAL+L1WnSIVZzcadzXsz26ihHJnM8X5PPLNciCJS+wJNsGpPfryYm71vv7W+KkMVa59vbtfVeAV8L904qj/SyfI3xvpb3nJSGfw+uuLt2Nonp3dMDdmxjP3MQM7ZbJD6ZMz/4AHpNdv1lEy5nvi09N6CXEWtsKjranT+3mV7hkMgjbzw+7ZeLqYEMSdYpI+/2aH2f+TOBKDnZvzt05ZjAIKR1y2wD+lRTwqklAQwYPbn8CuOarbsfpc2slVHRueV7g7+rKo3mhsg3UZKLKVnO5R25mIhC2nqM8lWotKHoMqNWdSfkL4UtjXitwSnmc+Ju4oSPPpwG3FLywEWLr/v4xQGmSoHtzBdeFB9zs3phiNRiXtu/4s5O01h3o2+/XRkYWG82FFCWy42xsbYFXT3JTYZN7OJsR7vihJ/T6qEXbAeeloYHTbKK3DD/OyT0OG0Ke/ZgID1dP/aOfyrnWBF9UepKT+XgbX1YcfBer00nxhlEKJr6Lty/oY1prCYtNqP/gll82yWG2cp7bbMBbvetIqWujBMJrA6GsgHVhcFOL/WaEfl1wKayYm7jEMkHA1RwmhoE2F8aW5zyUJbjJ1GR6BPGKJtRIxRCjYdZCCmXKtSZnVcLw4QpEGHWJlRsy6v+b/fiM4tGaJJxxxHGxXwvOYzbLxCNpnr8Uh8g3sJay1tlk8t2VROTN0f6NWo1BqZdCXVRA8RcIr57hf/HEfhYw5z8eIasiNyy1VIi3K8bmI/D7+zmbqQxVetbELCO/wEKn6k6Y9OREXB2jykgNYXL4a48mrtceP5FrvFStxmtVIVqnI7ZgFr1zA6U8MBVMEfO8Xag8KSIo+ac4m3Arr6ohcDAeX9zOEhIkVpktBH2ucrg5zWWdNP6HBP3SouAaDBVUBV4AAAAAAA=';
+document.querySelectorAll('img[data-logo]').forEach(img => { img.src = LOGO_SRC; });
+
+// p̂ y x̄: se reemplazan las marcas combinadas por una versión dibujada con CSS
+const ACC_RE = /x\u0304|p\u0302/;
+const accentHTML = s => esc(s)
+  .replace(/x\u0304/g, '<span class="xb" role="img" aria-label="x barra">x</span>')
+  .replace(/p\u0302/g, '<span class="ph" role="img" aria-label="p sombrero">p</span>');
+function decorateNode(root){
+  const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, { acceptNode: n => {
+    const p = n.parentNode;
+    if (!p || !ACC_RE.test(n.nodeValue)) return NodeFilter.FILTER_REJECT;
+    if (/^(SCRIPT|STYLE|OPTION|TEXTAREA)$/.test(p.nodeName)) return NodeFilter.FILTER_REJECT;
+    if (p.closest && p.closest('svg')) return NodeFilter.FILTER_REJECT;
+    return NodeFilter.FILTER_ACCEPT;
+  }});
+  const found = [];
+  while (walker.nextNode()) found.push(walker.currentNode);
+  found.forEach(n => { const tmp = document.createElement('span'); tmp.innerHTML = accentHTML(n.nodeValue); n.replaceWith(...tmp.childNodes); });
+}
+new MutationObserver(list => {
+  list.forEach(m => m.addedNodes.forEach(n => {
+    if (n.nodeType===1) decorateNode(n);
+    else if (n.nodeType===3 && n.parentNode && n.parentNode.nodeType===1) decorateNode(n.parentNode);
+  }));
+}).observe(document.body, { childList:true, subtree:true });
+decorateNode(document.body);
+
+// Los desplegables muestran su opción actual con la misma notación (el texto nativo del select queda oculto)
+function refreshFace(sel){
+  const f = sel.parentNode && sel.parentNode.querySelector('.selface');
+  if (f && sel.options[sel.selectedIndex]) f.innerHTML = accentHTML(sel.options[sel.selectedIndex].textContent);
+}
+['value','selectedIndex'].forEach(prop => {
+  const d = Object.getOwnPropertyDescriptor(HTMLSelectElement.prototype, prop);
+  Object.defineProperty(HTMLSelectElement.prototype, prop, { configurable:true, get(){ return d.get.call(this); }, set(v){ d.set.call(this, v); refreshFace(this); } });
+});
+document.querySelectorAll('.cellf.sel select').forEach(sel => {
+  const f = document.createElement('div'); f.className = 'selface'; f.setAttribute('aria-hidden','true');
+  sel.after(f); refreshFace(sel);
+  sel.addEventListener('change', () => refreshFace(sel));
+});
+
+// Botón "Borrar todo" en cada solapa de ingreso de datos
+function clearView(sec){
+  if (CLEAR[sec.id]) CLEAR[sec.id]();
+  sec.querySelectorAll('input').forEach(i => { i.value = ''; });
+  sec.querySelectorAll('select').forEach(s => {
+    const d = Array.from(s.options).findIndex(o => o.defaultSelected);
+    s.selectedIndex = d >= 0 ? d : 0;
+  });
+  sec.querySelectorAll('input, select').forEach(el => {
+    if (el.closest('table.dt')) return;
+    el.dispatchEvent(new Event('input', { bubbles:true }));
+    el.dispatchEvent(new Event('change', { bubbles:true }));
+  });
+}
+document.querySelectorAll('.datapanel').forEach(panel => {
+  const sec = panel.closest('section'); if (!sec) return;
+  const b = document.createElement('button');
+  b.type = 'button'; b.className = 'linkbtn clearbtn'; b.textContent = 'Borrar todo';
+  b.addEventListener('click', () => clearView(sec));
+  const ej = panel.querySelector('.linkbtn');
+  if (ej) ej.after(b); else panel.append(b);
+});
+</script>
+</body>
+</html>
